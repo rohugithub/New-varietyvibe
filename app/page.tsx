@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import Link from "next/link";
 import  AnimatedCategories  from "@/components/animated-categories";
 import { HeroSection } from "@/components/hero-section";
+import  FeatuedSection from "@/components/features-section";
 
 export default function HomePage() {
   return (
@@ -54,6 +55,8 @@ export default function HomePage() {
             <CategoryCarousel category="appliances" showAll />
           </div>
         </section>
+
+        {/* Featured IT Products */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
@@ -67,6 +70,9 @@ export default function HomePage() {
             <CategoryCarousel category="it-product" showAll />
           </div>
         </section>
+
+        {/* Featured Section */}
+        <FeatuedSection/>
       </main>
 
       <Footer />

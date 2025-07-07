@@ -97,7 +97,7 @@ export function CategoryForm({ category, isEdit = false }: CategoryFormProps) {
     setLoading(true)
 
     try {
-      const url = isEdit ? `/api/admin/categories/${category?._id}` : "/api/categories"
+      const url = isEdit ? `/api/admin/categories/${category?._id}` : "/api/admin/categories"
       const method = isEdit ? "PUT" : "POST"
 
       const submitData = {
