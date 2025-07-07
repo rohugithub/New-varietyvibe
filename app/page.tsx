@@ -1,0 +1,75 @@
+import { Header } from "@/components/Header";
+import { CategoryCarousel } from "@/components/CategoryCarousel";
+import { HotDealsSection } from "@/components/HotDealsSection";
+import { Footer } from "@/components/Footer";
+import Link from "next/link";
+import  AnimatedCategories  from "@/components/animated-categories";
+import { HeroSection } from "@/components/hero-section";
+
+export default function HomePage() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+
+      <HeroSection/>
+
+      <main>
+        {/* Hero Section */}
+
+        {/* Animated Categories Section */}
+       <AnimatedCategories />
+
+        {/* Hot Deals Section */}
+        {/* <HotDealsSection /> */}
+
+        {/* Categories Section */}
+        
+
+        {/* Featured Electronics */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-[#0042adef] mb-4">
+                Electronics
+              </h2>
+              <p className="text-gray-600">
+                Explore our range of TVs, audio systems, and smart devices
+              </p>
+            </div>
+            <CategoryCarousel category="electronics" showAll />
+          </div>
+        </section>
+
+        {/* Featured Home Appliances */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-orange-500 mb-4">
+                Home Appliances
+              </h2>
+              <p className="text-gray-600">
+                Discover kitchen and home appliances to make your life easier
+              </p>
+            </div>
+            <CategoryCarousel category="appliances" showAll />
+          </div>
+        </section>
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-orange-500 mb-4">
+                IT Products
+              </h2>
+              <p className="text-gray-600">
+                Discover best solutions for your IT needs
+              </p>
+            </div>
+            <CategoryCarousel category="it-product" showAll />
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
