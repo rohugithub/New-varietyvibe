@@ -111,10 +111,7 @@ export default function AnimatedCategories() {
       <div className="container px-2 md:px-6">
         {/* Static Header Section */}
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
-          {/* <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-sm font-medium text-blue-800 mb-4">
-            <Sparkles className="h-4 w-4 mr-2" />   
-            Explore Our Categories
-          </div> */}
+         
 
           <div className="space-y-4">
             <h2 className="text-xl md:text-4xl font-medium text-[#efa46edb] tracking-tighter ">
@@ -145,7 +142,7 @@ export default function AnimatedCategories() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <Link href={`/products/${category.slug}`}>
+              <Link href={`/${category.slug}`}>
                 <div className="relative overflow-hidden rounded-3xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500">
                   {/* Trending badge */}
                   {category.trending && (

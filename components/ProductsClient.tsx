@@ -1,92 +1,101 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Filter, Grid, List } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
-import { ProductCard } from "./ProductCard"
+import { useState, useEffect } from "react";
+import { Filter, Grid, List } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { ProductCard } from "./ProductCard";
 
 interface ProductsClientProps {
-  initialProducts: any[]
-  categories: any[]
-  brands: any[]
-  currentCategory?: string
+  initialProducts: any[];
+  categories: any[];
+  brands: any[];
+  currentCategory?: string;
 }
 
-export function ProductsClient({ initialProducts, categories, brands, currentCategory }: ProductsClientProps) {
-  const [products, setProducts] = useState(initialProducts)
-  const [loading, setLoading] = useState(false)
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+export function ProductsClient({
+  initialProducts,
+  categories,
+  brands,
+  currentCategory,
+}: ProductsClientProps) {
+  const [products, setProducts] = useState(initialProducts);
+  const [loading, setLoading] = useState(false);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [filters, setFilters] = useState({
     categories: currentCategory ? [currentCategory] : ([] as string[]),
     brands: [] as string[],
     priceRange: [0, 100000] as number[],
-  })
+  });
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 12,
     total: initialProducts.length,
     pages: Math.ceil(initialProducts.length / 12),
-  })
+  });
 
   // Update the applyFilters function to include pagination
   const applyFilters = async (page = 1) => {
-    setLoading(true)
+    setLoading(true);
 
-    const params = new URLSearchParams()
-    params.append("page", page.toString())
-    params.append("limit", pagination.limit.toString())
+    const params = new URLSearchParams();
+    params.append("page", page.toString());
+    params.append("limit", pagination.limit.toString());
 
     if (filters.categories.length > 0) {
-      params.append("category", filters.categories.join(","))
+      params.append("category", filters.categories.join(","));
     }
 
     if (filters.brands.length > 0) {
-      params.append("brand", filters.brands.join(","))
+      params.append("brand", filters.brands.join(","));
     }
 
     if (filters.priceRange[0] > 0) {
-      params.append("minPrice", filters.priceRange[0].toString())
+      params.append("minPrice", filters.priceRange[0].toString());
     }
 
     if (filters.priceRange[1] < 100000) {
-      params.append("maxPrice", filters.priceRange[1].toString())
+      params.append("maxPrice", filters.priceRange[1].toString());
     }
 
     try {
-      const response = await fetch(`/api/products?${params.toString()}`)
+      const response = await fetch(`/api/products?${params.toString()}`);
       if (response.ok) {
-        const data = await response.json()
-        setProducts(data.products)
-        setPagination(data.pagination)
+        const data = await response.json();
+        setProducts(data.products);
+        setPagination(data.pagination);
       }
     } catch (error) {
-      console.error("Failed to fetch filtered products:", error)
+      console.error("Failed to fetch filtered products:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
-  const handleCategoryChange = (categoryId: string, checked: boolean) => {
+  const handleCategoryChange = (categorySlug: string, checked: boolean) => {
     setFilters((prev) => ({
       ...prev,
-      categories: checked ? [...prev.categories, categoryId] : prev.categories.filter((id) => id !== categoryId),
-    }))
-  }
+      categories: checked
+        ? [...prev.categories, categorySlug]
+        : prev.categories.filter((slug) => slug !== categorySlug),
+    }));
+  };
 
   const handleBrandChange = (brandId: string, checked: boolean) => {
     setFilters((prev) => ({
       ...prev,
-      brands: checked ? [...prev.brands, brandId] : prev.brands.filter((id) => id !== brandId),
-    }))
-  }
+      brands: checked
+        ? [...prev.brands, brandId]
+        : prev.brands.filter((id) => id !== brandId),
+    }));
+  };
 
   useEffect(() => {
-    applyFilters()
-  }, [filters])
+    applyFilters();
+  }, [filters]);
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -130,13 +139,21 @@ export function ProductsClient({ initialProducts, categories, brands, currentCat
                   <h3 className="font-medium mb-3">Categories</h3>
                   <div className="space-y-2">
                     {categories.map((category) => (
-                      <div key={category._id} className="flex items-center space-x-2">
+                      <div
+                        key={category.slug}
+                        className="flex items-center space-x-2"
+                      >
                         <Checkbox
-                          id={category._id}
-                          checked={filters.categories.includes(category._id)}
-                          onCheckedChange={(checked) => handleCategoryChange(category._id, checked as boolean)}
+                          id={category.slug}
+                          checked={filters.categories.includes(category.slug)}
+                          onCheckedChange={(checked) =>
+                            handleCategoryChange(
+                              category.slug,
+                              checked as boolean
+                            )
+                          }
                         />
-                        <Label htmlFor={category._id} className="text-sm">
+                        <Label htmlFor={category.slug} className="text-sm">
                           {category.name}
                         </Label>
                       </div>
@@ -149,11 +166,16 @@ export function ProductsClient({ initialProducts, categories, brands, currentCat
                   <h3 className="font-medium mb-3">Brands</h3>
                   <div className="space-y-2">
                     {brands.map((brand) => (
-                      <div key={brand._id} className="flex items-center space-x-2">
+                      <div
+                        key={brand._id}
+                        className="flex items-center space-x-2"
+                      >
                         <Checkbox
                           id={brand._id}
                           checked={filters.brands.includes(brand._id)}
-                          onCheckedChange={(checked) => handleBrandChange(brand._id, checked as boolean)}
+                          onCheckedChange={(checked) =>
+                            handleBrandChange(brand._id, checked as boolean)
+                          }
                         />
                         <Label htmlFor={brand._id} className="text-sm">
                           {brand.name}
@@ -169,7 +191,9 @@ export function ProductsClient({ initialProducts, categories, brands, currentCat
                   <div className="space-y-4">
                     <Slider
                       value={filters.priceRange}
-                      onValueChange={(value) => setFilters((prev) => ({ ...prev, priceRange: value }))}
+                      onValueChange={(value) =>
+                        setFilters((prev) => ({ ...prev, priceRange: value }))
+                      }
                       max={100000}
                       step={1000}
                       className="w-full"
@@ -181,7 +205,11 @@ export function ProductsClient({ initialProducts, categories, brands, currentCat
                   </div>
                 </div>
 
-                <Button className="w-full bg-[#0042adef] hover:bg-[#0042ad]" onClick={applyFilters} disabled={loading}>
+                <Button
+                  className="w-full bg-[#0042adef] hover:bg-[#0042ad]"
+                  onClick={applyFilters}
+                  disabled={loading}
+                >
                   {loading ? "Applying..." : "Apply Filters"}
                 </Button>
               </CardContent>
@@ -196,12 +224,16 @@ export function ProductsClient({ initialProducts, categories, brands, currentCat
               </div>
             ) : products.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-500">No products found matching your criteria</p>
+                <p className="text-gray-500">
+                  No products found matching your criteria
+                </p>
               </div>
             ) : (
               <div
                 className={`grid gap-6 ${
-                  viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"
+                  viewMode === "grid"
+                    ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                    : "grid-cols-1"
                 }`}
               >
                 {products.map((product) => (
@@ -244,5 +276,5 @@ export function ProductsClient({ initialProducts, categories, brands, currentCat
         )}
       </div>
     </main>
-  )
+  );
 }

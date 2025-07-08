@@ -74,7 +74,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
             initialProducts={data.products}
             categories={filters.categories}
             brands={filters.brands}
-            currentCategory={data.category._id}
+            currentCategory={data.category.slug} // ✅ SLUG not _id
           />
         </div>
       </main>
@@ -82,6 +82,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     </div>
   )
 }
+
 
 export async function generateStaticParams() {
   await connectDB()
