@@ -1,30 +1,23 @@
-import { Header } from "@/components/Header";
 import { CategoryCarousel } from "@/components/CategoryCarousel";
-import { HotDealsSection } from "@/components/HotDealsSection";
-import { Footer } from "@/components/Footer";
-import Link from "next/link";
-import  AnimatedCategories  from "@/components/animated-categories";
+import AnimatedCategories from "@/components/animated-categories";
 import { HeroSection } from "@/components/hero-section";
-import  FeatuedSection from "@/components/features-section";
+import FeatuedSection from "@/components/features-section";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-
-      <HeroSection/>
+      <HeroSection />
 
       <main>
         {/* Hero Section */}
 
         {/* Animated Categories Section */}
-       <AnimatedCategories />
+        <AnimatedCategories />
 
         {/* Hot Deals Section */}
         {/* <HotDealsSection /> */}
 
         {/* Categories Section */}
-        
 
         {/* Featured Electronics */}
         <section className="py-16 bg-white">
@@ -72,10 +65,8 @@ export default function HomePage() {
         </section>
 
         {/* Featured Section */}
-        <FeatuedSection/>
+        <FeatuedSection />
       </main>
-
-      <Footer />
     </div>
   );
 }

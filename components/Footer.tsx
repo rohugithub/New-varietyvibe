@@ -31,15 +31,15 @@ export function Footer() {
               <div className="space-y-2 text-blue-100">
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 96808 49577</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <span>support@inoxstore.com</span>
+                  <span>info@inoxsecure.com</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
-                  <span>Mumbai, Maharashtra</span>
+                  <MapPin className="h-10 w-10" />
+                  <span>Harshita Electronics Mart, Shop No. 03, Shree Ram Market Agra Road, Jaipur  302031 (Rajasthan)</span>
                 </div>
               </div>
 
@@ -85,10 +85,12 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                </li>
+                {/* <li>
                   <Link href="/hot-deals" className="hover:text-orange-400 transition-colors">
                     🔥 Hot Deals
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -148,11 +150,11 @@ export function Footer() {
                     Terms & Conditions
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/warranty" className="hover:text-orange-400 transition-colors">
                     Warranty
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>

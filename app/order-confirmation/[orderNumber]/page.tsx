@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
+
 import { CheckCircle, Package, Truck, Calendar } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -36,7 +35,6 @@ export default async function OrderConfirmationPage({ params }: OrderConfirmatio
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
@@ -137,7 +135,6 @@ export default async function OrderConfirmationPage({ params }: OrderConfirmatio
         </div>
       </main>
 
-      <Footer />
     </div>
   )
 }

@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
 import { ProductDetailClient } from "@/components/ProductDetailClient"
 import { connectDB } from "@/lib/mongodb"
 import { Product } from "@/models/Product"
@@ -50,9 +48,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      
       <ProductDetailClient product={product} relatedProducts={relatedProducts} />
-      <Footer />
+      
     </div>
   )
 }

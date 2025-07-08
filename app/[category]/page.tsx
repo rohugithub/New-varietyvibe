@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
+
 import { ProductsClient } from "@/components/ProductsClient"
 import { connectDB } from "@/lib/mongodb"
 import { Product } from "@/models/Product"
@@ -63,7 +62,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+   
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
@@ -78,7 +77,6 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
           />
         </div>
       </main>
-      <Footer />
     </div>
   )
 }

@@ -3,8 +3,6 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
 import { useCart } from "@/contexts/CartContext"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -108,7 +106,6 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
@@ -305,7 +302,6 @@ export default function CheckoutPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   )
 }

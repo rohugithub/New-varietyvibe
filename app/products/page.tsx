@@ -1,5 +1,4 @@
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
+
 import { ProductsClient } from "@/components/ProductsClient"
 import { connectDB } from "@/lib/mongodb"
 import { Product } from "@/models/Product"
@@ -42,9 +41,9 @@ export default async function ProductsPage({ searchParams }: { searchParams: any
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+
       <ProductsClient initialProducts={products} categories={filters.categories} brands={filters.brands} />
-      <Footer />
+
     </div>
   )
 }
