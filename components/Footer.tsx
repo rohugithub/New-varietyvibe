@@ -4,21 +4,14 @@ import Link from "next/link"
 import { Facebook, Instagram, Twitter, Linkedin, Globe2, Phone, Mail, MapPin } from "lucide-react"
 import Logo from "@/public/logo/Inoxsecurelogowhite.png";
 import Image from "next/image";
+import PhonePe from "@/public/Payment-icons/PhonePe.png";
+import Cash from "@/public/Payment-icons/cash.png";
+import Upi from "@/public/Payment-icons/upi.png";
+import Paytm from "@/public/Payment-icons/Paytm.png";
 
 export function Footer() {
   return (
     <footer className="w-full bg-gray-900 text-white">
-      {/* Animated Categories Section */}
-      {/* <div className="bg-gray-50">
-        <AnimatedCategories
-          title="Explore Our Categories"
-          subtitle="Find exactly what you're looking for in our organized product categories"
-          variant="compact"
-          maxCategories={3}
-          className="bg-gray-50"
-        />
-      </div> */}
-
       {/* Main Footer Content */}
       <div className="bg-[#0042adef]">
         <div className="container mx-auto px-4 md:px-16 py-8 md:py-16">
@@ -189,16 +182,27 @@ export function Footer() {
             <div className="text-sm sm:text-md text-blue-100 text-center">© 2025 INOX Store. All rights reserved.</div>
 
             {/* Right section - Payment methods */}
-            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-4 text-center sm:text-left">
-              <span className="text-sm sm:text-md whitespace-nowrap mt-3 text-blue-100">100% Secure Payments</span>
-              <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                {["PhonePe", "Cash", "UPI", "Paytm"].map((method, i) => (
-                  <div key={i} className="bg-white rounded h-10 w-20 flex items-center justify-center">
-                    <div className="text-xs font-semibold text-gray-700 text-center">{method}</div>
-                  </div>
-                ))}
-              </div>
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-2  sm:gap-4 text-white text-center sm:text-left">
+            <span className="text-sm sm:text-md whitespace-nowrap mt-3 text-white">
+              100% Secure Payments
+            </span>
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+              {[Paytm, Cash, Upi, PhonePe].map((src, i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded h-10 w-20 flex items-center justify-center"
+                >
+                  <Image
+                    src={src}
+                    alt={`Payment ${i}`}
+                    width={80}
+                    height={40}
+                    className="object-contain"
+                  />
+                </div>
+              ))}
             </div>
+          </div>
           </div>
         </div>
       </div>
