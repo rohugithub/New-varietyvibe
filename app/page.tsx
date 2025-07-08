@@ -67,7 +67,7 @@ export default function HomePage() {
                 Discover best solutions for your IT needs
               </p>
             </div>
-            <CategoryCarousel category="it-product" showAll />
+            <CategoryCarousel category="it-products" showAll />
           </div>
         </section>
 
