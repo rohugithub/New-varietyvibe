@@ -370,7 +370,7 @@ export default function FAQClientPage() {
               Speak directly with our team
             </p>
             <Button variant="outline" className="w-full">
-              <a href="tel:+911234567890">Call Now</a>
+              <a href="tel:+91 9680849577">Call Now</a>
             </Button>
           </div>
           <div className="bg-purple-50 p-6 rounded-lg text-center">
