@@ -1,15 +1,31 @@
 import nodemailer from "nodemailer"
 import path from "path"
 
-console.log(process.env.SMTP_HOST, process.env.SMTP_PORT, process.env.SMTP_USER, process.env.SMTP_PASS)
+const smtpHost = process.env.SMTP_HOST
+const smtpPort = Number(process.env.SMTP_PORT)
+const smtpUser = process.env.SMTP_USER
+const smtpPass = process.env.SMTP_PASS
 
-// SMTP Transporter setup
+// Safe environment variable logging (only in development)
+if (process.env.NODE_ENV === "development") {
+  console.log("SMTP config:", smtpHost, smtpPort, smtpUser)
+}
+
+// Validate SMTP config
+if (!smtpHost || !smtpPort || !smtpUser || !smtpPass) {
+  throw new Error("Missing SMTP environment variables.")
+}
+if (isNaN(smtpPort)) {
+  throw new Error("SMTP_PORT must be a valid number.")
+}
+
+// Setup transporter
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
+  host: smtpHost,
+  port: smtpPort,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: smtpUser,
+    pass: smtpPass,
   },
 })
 
@@ -56,8 +72,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
   `
       : ""
 
-  const html = `
-    <!DOCTYPE html>
+  const html = `<!DOCTYPE html>
     <html>
     <head>
       <meta charset="utf-8">
@@ -77,7 +92,6 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
       <h2 style="color: #0042adef;">Order Confirmation</h2>
       
       <p>Dear ${data.customerName},</p>
-      
       <p>Thank you for your order! We're excited to confirm that we've received your order and it's being processed.</p>
       
       <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
@@ -119,28 +133,32 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
       </div>
 
       <p>If you have any questions about your order, please contact us at support@inoxstore.com or +91 98765 43210.</p>
-      
       <p>Thank you for choosing INOX Store!</p>
-      
+
       <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
         <p>INOX Store – Premium Electronics & Appliances</p>
         <p>Mumbai, Maharashtra | support@inoxstore.com</p>
       </div>
     </body>
-    </html>
-  `
+    </html>`
 
-  await transporter.sendMail({
-    from: '"INOX Store" <noreply@inoxstore.com>',
-    to: data.to,
-    subject: `Order Confirmation - ${data.orderNumber}`,
-    html,
-    attachments: [
-      {
-        filename: "logo.png",
-        path: path.join(process.cwd(), "public", "logo", "Inoxsecurelogowhite.png"),
-        cid: "inoxlogo", // Use this cid in the <img src="cid:inoxlogo" />
-      },
-    ],
-  })
+  try {
+    await transporter.sendMail({
+      from: '"INOX Store" <info@inoxsecure.com>',
+      to: data.to,
+      subject: `Order Confirmation - ${data.orderNumber}`,
+      html,
+      attachments: [
+        {
+          filename: "logo.png",
+          path: path.join(process.cwd(), "public", "logo", "Inoxsecurelogowhite.png"),
+          cid: "inoxlogo",
+        },
+      ],
+    })
+    console.log("✅ Order confirmation email sent to:", data.to)
+  } catch (error) {
+    console.error("❌ Failed to send order confirmation email:", error)
+    throw error
+  }
 }
