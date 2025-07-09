@@ -52,14 +52,14 @@ export function Header() {
           
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between text-sm text-black">
-            <div className="flex items-center gap-1">
+            {/* <div className="flex items-center gap-1">
               <MapPin className="h-5 w-5" />
               <span>Delivery to:</span>
               <button className="flex items-center font-medium underline">
                 Your Location
                 <ChevronDown className="ml-1 h-4 w-4" />
               </button>
-            </div>
+            </div> */}
             <div className="hidden md:block">
               <span className="font-medium">Get products delivered in minutes!</span>
             </div>

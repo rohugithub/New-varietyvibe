@@ -1,11 +1,15 @@
 import nodemailer from "nodemailer"
+import path from "path"
 
+console.log(process.env.SMTP_HOST, process.env.SMTP_PORT, process.env.SMTP_USER, process.env.SMTP_PASS)
+
+// SMTP Transporter setup
 const transporter = nodemailer.createTransport({
-  host: process.env.MAILTRAP_HOST || "sandbox.smtp.mailtrap.io",
-  port: Number.parseInt(process.env.MAILTRAP_PORT || "2525"),
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
   auth: {
-    user: process.env.MAILTRAP_USER,
-    pass: process.env.MAILTRAP_PASS,
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
 })
 
@@ -35,7 +39,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
       <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: center;">${item.quantity}</td>
       <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: right;">₹${item.price.toLocaleString()}</td>
     </tr>
-  `,
+  `
     )
     .join("")
 
@@ -61,6 +65,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
     </head>
     <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
       <div style="text-align: center; margin-bottom: 30px;">
+        <img src="cid:inoxlogo" alt="INOX Logo" style="max-width: 180px; margin-bottom: 10px;" />
         <div style="background-color: #0042adef; color: white; padding: 20px; border-radius: 8px;">
           <h1 style="margin: 0; font-size: 28px;">
             <span style="background-color: white; color: #0042adef; padding: 5px 10px; border-radius: 4px; margin-right: 10px;">INOX</span>
@@ -106,19 +111,19 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
       <div style="background-color: #e8f4fd; padding: 20px; border-radius: 8px; margin: 20px 0;">
         <h3 style="color: #0042adef; margin-top: 0;">What's Next?</h3>
         <ul style="margin: 0; padding-left: 20px;">
-          <li>We'll process your order within 1-2 business days</li>
+          <li>We'll process your order within 1–2 business days</li>
           <li>You'll receive a shipping confirmation with tracking details</li>
-          <li>Your order will be delivered within 3-7 business days</li>
+          <li>Your order will be delivered within 3–7 business days</li>
           <li>Pay cash when you receive your order</li>
         </ul>
       </div>
 
-      <p>If you have any questions about your order, please don't hesitate to contact us at support@inoxstore.com or +91 98765 43210.</p>
+      <p>If you have any questions about your order, please contact us at support@inoxstore.com or +91 98765 43210.</p>
       
       <p>Thank you for choosing INOX Store!</p>
       
       <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
-        <p>INOX Store - Premium Electronics & Appliances</p>
+        <p>INOX Store – Premium Electronics & Appliances</p>
         <p>Mumbai, Maharashtra | support@inoxstore.com</p>
       </div>
     </body>
@@ -130,5 +135,12 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
     to: data.to,
     subject: `Order Confirmation - ${data.orderNumber}`,
     html,
+    attachments: [
+      {
+        filename: "logo.png",
+        path: path.join(process.cwd(), "public", "logo", "Inoxsecurelogowhite.png"),
+        cid: "inoxlogo", // Use this cid in the <img src="cid:inoxlogo" />
+      },
+    ],
   })
 }

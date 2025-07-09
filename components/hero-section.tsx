@@ -10,19 +10,19 @@ const heroSlides = [
     id: 1,
     image: "/hero/hero1.png", // Fixed: Remove "./public" and use just "/"
     alt: "Machine Zone Electronics Sale",
-    link: "",
+    link: "/products",
   },
   {
     id: 2,
     image: "/hero/hero2.png", // Fixed: Remove "./public" and use just "/"
     alt: "Fashion Frenzy Collection",
-    link: "",
+    link: "/products",
   },
   {
     id: 3,
     image: "/hero/hero3.png", // Fixed: Remove "./public" and use just "/"
     alt: "Home Furnishing Paradise",
-    link: "",
+    link: "/products",
   },
 ];
 
