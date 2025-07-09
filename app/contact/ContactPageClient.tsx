@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,7 +29,6 @@ export default function ContactPageClient() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -45,22 +43,23 @@ export default function ContactPageClient() {
   };
 
   return (
-    <div>
+    <div className="w-full">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-transparent">
-        <div className="flex flex-col items-center text-center mb-16 px-10 py-10 w-full text-white">
+      <div className="w-full bg-gradient-to-r bg-blue-500">
+        <div className="flex flex-col items-center text-center mb-16 px-6 md:px-10 py-10 w-full text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
-          <p className="text-lg text-white max-w-3xl">
+          <p className="text-lg text-white max-w-4xl">
             Have questions or need assistance? Our team is here to help. Reach
-            out to us through any of the channels below.Stay informed with the
+            out to us through any of the channels below. Stay informed with the
             latest security tips, product reviews, and industry insights from
             our security experts.
           </p>
         </div>
       </div>
 
-      <div className="container px-20 py-10">
+      <div className="w-full px-6 md:px-20 py-10">
         <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {/* Call Us */}
           <div className="bg-primary/5 p-6 rounded-lg flex flex-col items-center text-center">
             <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
               <Phone className="h-6 w-6 text-primary" />
@@ -77,6 +76,7 @@ export default function ContactPageClient() {
             </a>
           </div>
 
+          {/* Email Us */}
           <div className="bg-primary/5 p-6 rounded-lg flex flex-col items-center text-center">
             <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
               <Mail className="h-6 w-6 text-primary" />
@@ -93,6 +93,7 @@ export default function ContactPageClient() {
             </a>
           </div>
 
+          {/* Visit Us */}
           <div className="bg-primary/5 p-6 rounded-lg flex flex-col items-center text-center">
             <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
               <MapPin className="h-6 w-6 text-primary" />
@@ -102,16 +103,16 @@ export default function ContactPageClient() {
             <address className="not-italic text-primary font-medium">
               Harshita Electronics Mart, Shop No. 03,
               <br />
-               Shree Ram Market Agra Road,
+              Shree Ram Market Agra Road,
               <br />
               Jaipur - 302031 (Rajasthan)
             </address>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 gap-12 mb-16 w-full">
           {/* Contact Form */}
-          <div>
+          <div className="w-full">
             <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
             {isSubmitted ? (
               <div className="bg-green-50 border border-green-200 text-green-700 p-6 rounded-lg">
@@ -221,11 +222,11 @@ export default function ContactPageClient() {
           </div>
 
           {/* Map and Business Hours */}
-          <div>
+          <div className="w-full">
             <h2 className="text-2xl font-bold mb-6">Find Us</h2>
             <div className="relative h-[300px] w-full mb-8 rounded-lg overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.84916296526!2d77.6309395!3d12.9539974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1656612141548!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113843.23621488883!2d75.7138881!3d26.9124336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db30ddcdd9983%3A0x4d842a2f0e68b8f3!2sJaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1720526100000!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

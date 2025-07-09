@@ -28,7 +28,7 @@ export default function FeatureSection() {
           <div className="space-y-2">
             <h3 className="text-xl font-bold">Free Delivery</h3>
             <p className="text-gray-500 dark:text-gray-400">
-              Free delivery on orders above ₹499. Get your products delivered to
+              Free delivery on orders above ₹19999. Get your products delivered to
               your doorstep without any extra cost.
             </p>
           </div>
