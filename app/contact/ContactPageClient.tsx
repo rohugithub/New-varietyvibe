@@ -45,7 +45,7 @@ export default function ContactPageClient() {
   };
 
   return (
-    <div >
+    <div>
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-transparent">
         <div className="flex flex-col items-center text-center mb-16 px-10 py-10 w-full text-white">
@@ -70,10 +70,10 @@ export default function ContactPageClient() {
               Our customer support team is available 24/7
             </p>
             <a
-              href="tel:+911234567890"
+              href="tel:+91 9680849577"
               className="text-primary font-medium hover:underline"
             >
-              +91 1234 567 890
+              +91 9680849577
             </a>
           </div>
 
@@ -100,9 +100,11 @@ export default function ContactPageClient() {
             <h3 className="text-xl font-bold mb-2">Visit Us</h3>
             <p className="text-gray-600 mb-4">Our headquarters location</p>
             <address className="not-italic text-primary font-medium">
-              123 Security Plaza, Tech Park
+              Harshita Electronics Mart, Shop No. 03,
               <br />
-              Bangalore, Karnataka 560001
+               Shree Ram Market Agra Road,
+              <br />
+              Jaipur - 302031 (Rajasthan)
             </address>
           </div>
         </div>
@@ -259,7 +261,6 @@ export default function ContactPageClient() {
             </div>
           </div>
         </div>
-      
       </div>
     </div>
   );

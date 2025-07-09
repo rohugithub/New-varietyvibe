@@ -291,16 +291,17 @@ export default function TermsPage() {
                 href="mailto:legal@inoxsecure.com"
                 className="text-primary hover:underline"
               >
-                legal@inoxsecure.com
+                support@inoxsecure.com
+
               </a>{" "}
               or write to us at:
             </p>
             <address className="not-italic mt-2">
-              Inox Secure Pvt. Ltd.
+          Harshita Electronics Mart, 
               <br />
-              123 Security Plaza, Tech Park
+              Shop No. 03, Shree Ram Market Agra Road,
               <br />
-              Bangalore, Karnataka 560001
+             Jaipur - 302031 (Rajasthan)
               <br />
               India
             </address>
