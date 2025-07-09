@@ -8,37 +8,43 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const heroSlides = [
   {
     id: 1,
-    image: "/256.jpg",
+    image: "/Artboard 1.png",
     alt: "Machine Zone Electronics Sale",
     link: "/products",
   },
   {
     id: 2,
-    image: "/256.jpg",
+    image: "/Artboard 4.png",
     alt: "Fashion Frenzy Collection",
     link: "/products",
   },
   {
     id: 3,
-    image: "/256.jpg",
+    image: "/Artboard 5.png",
     alt: "Home Furnishing Paradise",
     link: "/products",
   },
   {
     id: 4,
-    image: "/256.jpg",
+    image: "/Artboard 6.png",
     alt: "New Collection",
     link: "/products",
   },
   {
     id: 5,
-    image: "/256.jpg",
+    image: "/Services (1).png",
+    alt: "Tech Deals",
+    link: "/products",
+  },
+   {
+    id: 6,
+    image: "/Services (2).png",
     alt: "Tech Deals",
     link: "/products",
   },
 ];
 
-const itemsPerView = 3;
+const itemsPerView = 4;
 
 export function ElectronicsBannerSection() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -66,21 +72,24 @@ export function ElectronicsBannerSection() {
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{
-            transform: `translateX(-${currentPage * 100}%)`,
-            width: `${Math.ceil(heroSlides.length / itemsPerView) * 100}%`,
+            transform: `translateX(-${(100 / itemsPerView) * currentPage}%)`,
+            width: `${(heroSlides.length / itemsPerView) * 100}%`,
           }}
         >
           {heroSlides.map((slide) => (
             <div
               key={slide.id}
-              className="w-full sm:w-1/2 lg:w-1/3 px-2 flex-shrink-0"
+              className="w-full sm:w-1/3 px-2 flex-shrink-0"
+              style={{ height: "24rem" }} // h-96 = 384px
             >
-              <Link href={slide.link} className="block w-full h-64 relative">
+              <Link href={slide.link} className="block w-full h-full relative">
                 <Image
                   src={slide.image}
                   alt={slide.alt}
                   fill
-                  className="rounded-lg object-cover"
+                  className="rounded-lg"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  priority
                 />
               </Link>
             </div>
@@ -104,7 +113,7 @@ export function ElectronicsBannerSection() {
 
       {/* Dots Indicator */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-        {Array.from({ length: maxPage + 1 }).map((_, index) => (
+        {Array.from({ length: maxPage + 4 }).map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentPage(index)}
