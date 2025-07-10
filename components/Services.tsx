@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Shield, ChevronRight, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 interface Service {
   id: string
@@ -139,53 +140,72 @@ const featuredServices: Service[] = [
 
 export default function HomeServicesSection() {
   return (
-    <section className="py-16 bg-gray-50">
+    <>
+
+       <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
+        {/* heading */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-orange-500 mb-4">Professional Services</h2>
+          <h2 className="text-3xl font-bold text-orange-500 mb-4">
+            Professional Services
+          </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover trusted professionals for all your service needs. Verified experts, transparent pricing, and
-            guaranteed satisfaction at your doorstep.
+            Discover trusted professionals for all your service needs. Verified
+            experts, transparent pricing, and guaranteed satisfaction at your
+            doorstep.
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {featuredServices.slice(0, 8).map((service) => (
-            <Card key={service.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        {/* grid 1‑4 cols */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+          {featuredServices.map((s) => (
+            <Card
+              key={s.id}
+              className="group hover:shadow-lg transition-transform duration-300 hover:-translate-y-1"
+            >
               <CardContent className="p-0">
-                <div className="relative">
-                  <img
-                    src={service.image || "/placeholder.svg?height=200&width=300"}
-                    alt={service.name}
-                    className="w-full h-48 object-cover rounded-t-lg"
+                {/* image wrapper keeps 4:3 ratio */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-t-lg">
+                  <Image
+                    src={s.image}
+                    alt={s.name}
+                    fill
+                    className="object-contain" /* full image, no crop */
+                    sizes="(min-width:1280px) 25vw,
+                           (min-width:1024px) 33vw,
+                           (min-width:640px) 50vw,
+                           100vw"
+                    priority={s.id === featuredServices[0].id}
                   />
-                  {service.popular && <Badge className="absolute top-3 left-3 bg-blue-800 text-white">Popular</Badge>}
-                  {service.verified && (
-                    <div className="absolute top-3 right-3 bg-green-500 text-white p-1 rounded-full">
+                  {s.popular && (
+                    <Badge className="absolute top-3 left-3 bg-blue-800 text-white">
+                      Popular
+                    </Badge>
+                  )}
+                  {s.verified && (
+                    <span className="absolute top-3 right-3 bg-green-600 text-white p-1 rounded-full">
                       <Shield className="h-4 w-4" />
-                    </div>
+                    </span>
                   )}
                 </div>
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-semibold group-hover:text-blue-800 transition-colors line-clamp-2">
-                      {service.name}
-                    </h3>
-                  </div>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">{service.description}</p>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-xl font-bold text-blue-800">
-                        ₹{service.startingPrice.toLocaleString()}
-                      </span>
-                      <span className="text-gray-500 text-sm ml-1">onwards</span>
-                    </div>
-                    <Button
-                      size="sm"
-                      className="group-hover:bg-blue-800 group-hover:text-white transition-colors bg-blue-800 text-white"
-                    >
-                      Book Now
+
+                {/* text + price */}
+                <div className="p-5 space-y-3">
+                  <h3 className="text-lg font-semibold line-clamp-2">
+                    {s.name}
+                  </h3>
+                  <p className="text-gray-600 text-sm line-clamp-2">
+                    {s.description}
+                  </p>
+
+                  <div className="flex items-center justify-between pt-2">
+                    <span className="text-xl font-bold text-blue-800">
+                      ₹{s.startingPrice.toLocaleString()}
+                      <span className="text-sm text-gray-500 ml-1">onwards</span>
+                    </span>
+
+                    <Button size="sm" className="bg-blue-800 hover:bg-blue-900">
+                      Book&nbsp;Now
                       <ChevronRight className="h-4 w-4 ml-1" />
                     </Button>
                   </div>
@@ -195,13 +215,10 @@ export default function HomeServicesSection() {
           ))}
         </div>
 
-        {/* View More Button */}
+        {/* view more */}
         <div className="text-center">
           <Link href="/services">
-            <Button
-              size="lg"
-              className="bg-blue-800 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg"
-            >
+            <Button className="bg-blue-800 hover:bg-blue-900 px-8 py-3 text-white rounded-lg shadow-md">
               View More Services
               <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
@@ -209,5 +226,7 @@ export default function HomeServicesSection() {
         </div>
       </div>
     </section>
+
+    </>
   )
 }

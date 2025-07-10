@@ -79,7 +79,7 @@ export function Header() {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              {/* Mobile Menu */}
+              {/* Mobile Menu
               <div className="md:hidden">
                 <Button
                   variant="ghost"
@@ -92,7 +92,7 @@ export function Header() {
                     <Menu className="h-8 w-8 text-gray-700" />
                   )}
                 </Button>
-              </div>
+              </div> */}
 
               {/* Logo */}
               <Link href="/" className="flex items-center space-x-2">
