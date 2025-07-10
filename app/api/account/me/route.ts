@@ -2,9 +2,10 @@
 import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { User } from "@/models/User"
-
+import { connectDB } from "@/lib/mongodb"
 export async function GET() {
   // You would typically fetch from DB based on auth token/session
+  await connectDB()
   const session = await getServerSession()
   
 
@@ -21,5 +22,4 @@ export async function GET() {
 
 
 
-  return NextResponse.json(user)
-}
+  }

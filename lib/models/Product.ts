@@ -140,12 +140,12 @@ const ProductSchema = new mongoose.Schema(
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
-      required: false, // Make it optional
+      required: false,
     },
     brand: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Brand",
-      required: false, // Make it optional
+      required: false,
     },
     collections: [
       {
@@ -180,7 +180,7 @@ const ProductSchema = new mongoose.Schema(
     isHotDeal: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   {
     timestamps: true,
@@ -197,6 +197,7 @@ ProductSchema.pre("save", function (next) {
   }
   next()
 })
+
 // Generate slug from title
 ProductSchema.pre("save", function (next) {
   if (this.isModified("title") && !this.slug) {
@@ -207,4 +208,5 @@ ProductSchema.pre("save", function (next) {
   }
   next()
 })
+
 export const Product = mongoose.models.Product || mongoose.model("Product", ProductSchema)

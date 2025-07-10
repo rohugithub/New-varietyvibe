@@ -116,12 +116,12 @@ export default function BrandsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {brands.map((brand) => (
+              {brands.map((brand:any) => (
                 <TableRow key={brand._id}>
                   <TableCell>
-                    {brand.icon ? (
+                    {brand.logo ? (
                       <Image
-                        src={brand.icon || "/placeholder.svg"}
+                        src={brand.logo || "/placeholder.svg"}
                         alt={brand.name}
                         width={32}
                         height={32}

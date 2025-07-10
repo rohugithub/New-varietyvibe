@@ -1,22 +1,29 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { type NextRequest } from "next/server"
 import { connectDB } from "@/lib/mongodb"
-import { Product } from "@/lib/models/Product"
+import { Product } from "@/models/Product"
+import "@/models/Product"
+import "@/models/Category"
+import "@/models/Brand"
 import * as XLSX from "xlsx"
 
 export async function GET(request: NextRequest) {
   try {
     await connectDB()
 
-    const products = await Product.find().populate("category", "name").populate("brand", "name").sort({ createdAt: -1 })
+    const products = await Product.find()
+      .populate("category", "name")
+      .populate("brand", "name")
+      .sort({ createdAt: -1 })
+      .lean() // improves performance and avoids Mongoose document overhead
 
     // Transform products to Excel format
     const excelData = products.map((product) => {
-      const firstVariant = product.variants[0] || {}
+      const firstVariant = Array.isArray(product.variants) ? product.variants[0] || {} : {}
 
       // Convert images array to comma-separated string
       const formatImages = (images: any[]) => {
         if (!images || !Array.isArray(images)) return ""
-        return images.map((img) => img.url || img).join(", ")
+        return images.map((img) => img?.url || img).join(", ")
       }
 
       return {
@@ -26,7 +33,7 @@ export async function GET(request: NextRequest) {
         Status: product.status,
         "Product Type": product.productType,
         Vendor: product.vendor,
-        Tags: product.tags.join(", "),
+        Tags: Array.isArray(product.tags) ? product.tags.join(", ") : "",
         Category: product.category?.name || "",
         Brand: product.brand?.name || "",
         "SEO Title": product.seoTitle,
@@ -66,15 +73,17 @@ export async function GET(request: NextRequest) {
     // Generate buffer
     const buffer = XLSX.write(workbook, { type: "buffer", bookType: "xlsx" })
 
-    // Return file
-    return new NextResponse(buffer, {
+    // Return file response
+    return new Response(buffer, {
       headers: {
         "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "Content-Disposition": `attachment; filename="products-export-${new Date().toISOString().split("T")[0]}.xlsx"`,
+        "Content-Disposition": `attachment; filename="products-export-${new Date()
+          .toISOString()
+          .split("T")[0]}.xlsx"`,
       },
     })
   } catch (error) {
     console.error("Export error:", error)
-    return NextResponse.json({ error: "Failed to export products" }, { status: 500 })
+    return Response.json({ error: "Failed to export products" }, { status: 500 })
   }
 }

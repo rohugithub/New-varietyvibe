@@ -53,7 +53,8 @@ export function BrandForm({ brand, isEdit = false }: BrandFormProps) {
 
       if (response.ok) {
         const data = await response.json()
-        setFormData((prev) => ({ ...prev, icon: data.url }))
+        console.log(data)
+        setFormData((prev) => ({ ...prev, logo: data.url }))
         toast({
           title: "Success",
           description: "Icon uploaded successfully",
@@ -77,7 +78,7 @@ export function BrandForm({ brand, isEdit = false }: BrandFormProps) {
     setLoading(true)
 
     try {
-      const url = isEdit ? `/api/admin/brands/${brand?._id}` : "/api/brands"
+      const url = isEdit ? `/api/admin/brands/${brand?._id}` : "/api/admin/brands"
       const method = isEdit ? "PUT" : "POST"
 
       const response = await fetch(url, {
@@ -141,11 +142,11 @@ export function BrandForm({ brand, isEdit = false }: BrandFormProps) {
           <div className="space-y-2">
             <Label>Brand Icon</Label>
             <div className="flex items-center gap-4">
-              {formData.icon ? (
+              {formData.logo? (
                 <div className="relative">
                   <Image
-                    src={formData.icon || "/placeholder.svg"}
-                    alt="Brand icon"
+                    src={formData.logo || "/placeholder.svg"}
+                    alt="Brand logo"
                     width={64}
                     height={64}
                     className="rounded-md border"

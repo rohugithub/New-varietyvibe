@@ -111,7 +111,7 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [categoriesRes, brandsRes] = await Promise.all([fetch("/api/admin/categories"), fetch("/api/brands")])
+        const [categoriesRes, brandsRes] = await Promise.all([fetch("/api/admin/categories"), fetch("/api/admin/brands")])
 
         if (categoriesRes.ok) {
           const categoriesData = await categoriesRes.json()

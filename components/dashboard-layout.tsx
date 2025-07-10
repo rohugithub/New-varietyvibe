@@ -45,6 +45,16 @@ const menuItems = [
     url: "/dashboard/categories",
     icon: Tag,
   },
+  {
+    title: "Coupons",
+    url: "/dashboard/coupons",
+    icon: Tag,
+  },
+  {
+    title: "Orders",
+    url: "/dashboard/orders",
+    icon: Tag,
+  },
 ]
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {

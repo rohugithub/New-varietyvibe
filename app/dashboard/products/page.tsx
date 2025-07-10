@@ -126,7 +126,7 @@ export default function ProductsPage() {
       </div>
 
       {/* Import/Export Section */}
-      <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle>Import & Export</CardTitle>
           <CardDescription>Import products from Excel files or export your current products to Excel</CardDescription>
@@ -134,7 +134,7 @@ export default function ProductsPage() {
         <CardContent>
           <ProductImportExport />
         </CardContent>
-      </Card>
+      </Card> */}
 
       <Card>
         <CardHeader>
