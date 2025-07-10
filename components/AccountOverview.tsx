@@ -1,6 +1,6 @@
 "use client"
 
-import { useSession } from "next-auth/react"
+import { useEffect, useState } from "react"
 import { Package, Star, Heart } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -17,7 +17,35 @@ interface AccountOverviewProps {
 }
 
 export function AccountOverview({ userStats }: AccountOverviewProps) {
-  const { data: session } = useSession()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch("/api/account/me")
+      const data = await res.json()
+      setName(data.name)
+      setEmail(data.email)
+      setPhone(data.phone || "")
+    }
+
+    fetchUser()
+  }, [])
+
+  const handleSave = async () => {
+    const res = await fetch("/api/account/update", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, phone }),
+    })
+
+    if (res.ok) {
+      alert("Profile updated!")
+    } else {
+      alert("Failed to update profile.")
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -30,26 +58,22 @@ export function AccountOverview({ userStats }: AccountOverviewProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <Label htmlFor="fullName">Full Name</Label>
-              <Input id="fullName" defaultValue={session?.user?.name || ""} className="mt-1" />
+              <Input id="fullName" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div>
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" defaultValue={session?.user?.email || ""} className="mt-1" />
+              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div>
               <Label htmlFor="phone">Phone Number</Label>
-              <Input id="phone" defaultValue="+91 98765 43210" className="mt-1" />
-            </div>
-            <div>
-              <Label htmlFor="dob">Date of Birth</Label>
-              <Input id="dob" type="date" placeholder="dd-mm-yyyy" className="mt-1" />
+              <Input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
             </div>
           </div>
-          <Button className="bg-[#0042adef] hover:bg-[#0042ad]">Save Changes</Button>
+          <Button className="bg-[#0042adef]" onClick={handleSave}>Save Changes</Button>
         </CardContent>
       </Card>
 
-      {/* Stats Cards */}
+      {/* Stats Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="text-center">
           <CardContent className="p-6">
@@ -58,7 +82,6 @@ export function AccountOverview({ userStats }: AccountOverviewProps) {
             <div className="text-gray-600">Total Orders</div>
           </CardContent>
         </Card>
-
         <Card className="text-center">
           <CardContent className="p-6">
             <Star className="h-12 w-12 mx-auto mb-4 text-yellow-500" />
@@ -66,7 +89,6 @@ export function AccountOverview({ userStats }: AccountOverviewProps) {
             <div className="text-gray-600">Loyalty Points</div>
           </CardContent>
         </Card>
-
         <Card className="text-center">
           <CardContent className="p-6">
             <Heart className="h-12 w-12 mx-auto mb-4 text-red-500" />

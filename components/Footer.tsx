@@ -13,7 +13,7 @@ export function Footer() {
   return (
     <footer className="w-full bg-gray-900 text-white">
       {/* Main Footer Content */}
-      <div className="bg-[#0042adef]">
+      <div className="bg-[#0042ad]">
         <div className="container mx-auto px-4 md:px-16 py-8 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Company Info */}

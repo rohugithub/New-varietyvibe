@@ -15,7 +15,7 @@ import { AccountAddresses } from "./AccountAddresses"
 import { AccountPayment } from "./AccountPayment"
 import { AccountWishlist } from "./AccountWishlist"
 import { AccountSettings } from "./AccountSettings"
-
+import { signOut } from "next-auth/react"
 interface AccountLayoutProps {
   children?: React.ReactNode
 }
@@ -99,6 +99,7 @@ export function AccountLayout({ children }: AccountLayoutProps) {
                   <span className="text-gray-600">Loyalty Points</span>
                   <span className="font-semibold text-[#0042adef]">{userStats.loyaltyPoints}</span>
                 </div>
+                <button className="w-full mt-4 bg-red-500 hover:bg-red-600 text-white py-2 rounded" onClick={() => signOut({ callbackUrl: "/"} )}>Log Out</button>
               </div>
             </div>
           </div>

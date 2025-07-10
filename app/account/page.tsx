@@ -21,7 +21,7 @@ export default function AccountPage() {
     <div className="min-h-screen bg-gray-50">
      
       <AccountLayout>
-        <AccountOverview />
+        <AccountOverview userStats={{ totalOrders: 0, totalSpent: 0, loyaltyPoints: 0, memberSince: "" }} />
       </AccountLayout>
     </div>
   )

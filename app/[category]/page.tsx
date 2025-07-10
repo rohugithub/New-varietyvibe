@@ -18,7 +18,7 @@ async function getCategoryProducts(categorySlug: string, searchParams: any) {
 
   // Find category by name (case insensitive)
   const category = await Category.findOne({
-    name: { $regex: new RegExp(`^${categorySlug}$`, "i") },
+    slug: { $regex: new RegExp(`^${categorySlug}$`, "i") },
   })
 
   if (!category) {

@@ -30,6 +30,11 @@ export default function CheckoutPage() {
   })
   const [couponCode, setCouponCode] = useState("")
   const [discount, setDiscount] = useState(0)
+  const [appliedCoupon, setAppliedCoupon] = useState<{
+  code: string;
+  discount: number;
+  description: string;
+} | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -38,69 +43,84 @@ export default function CheckoutPage() {
     })
   }
 
-  const applyCoupon = async () => {
-    if (!couponCode.trim()) return
+ const applyCoupon = async () => {
+  if (!couponCode.trim()) return
 
-    try {
-      const response = await fetch("/api/coupons/apply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          code: couponCode,
-          cartTotal: cartState.total,
-        }),
+  try {
+    const response = await fetch("/api/coupons/validate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        code: couponCode,
+        cartTotal: cartState.total,
+      }),
+    })
+
+    const data = await response.json()
+
+    if (response.ok) {
+      setDiscount(data.discount)
+      setAppliedCoupon({
+        code: couponCode,
+        discount: data.discount,
+        description: data.coupon.description,
       })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setDiscount(data.discount)
-        // Show success message
-      } else {
-        // Show error message
-        console.error(data.error)
-        setDiscount(0)
-      }
-    } catch (error) {
-      console.error("Failed to apply coupon:", error)
+    } else {
       setDiscount(0)
+      setAppliedCoupon(null)
+      // Show error message to user
+      alert(data.error || "Invalid coupon code")
     }
+  } catch (error) {
+    console.error("Failed to apply coupon:", error)
+    setDiscount(0)
+    setAppliedCoupon(null)
   }
+}
 
   const handlePlaceOrder = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsProcessing(true)
+  e.preventDefault()
+  setIsProcessing(true)
 
-    try {
-      const orderData = {
-        items: cartState.items,
-        total: cartState.total - discount,
-        subtotal: cartState.total,
-        discount,
-        coupon_code: couponCode,
-        shipping_address: formData,
-        billing_address: formData,
-        payment_method: "cod",
-        user_email: formData.email,
-      }
-
-      const response = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData),
-      })
-
-      if (response.ok) {
-        const order = await response.json()
-        clearCart()
-        router.push(`/order-confirmation/${order.order_number}`)
-      }
-    } catch (error) {
-      console.error("Order placement failed:", error)
-    } finally {
-      setIsProcessing(false)
+  try {
+    const orderData = {
+      items: cartState.items,
+      total: cartState.total - discount,
+      subtotal: cartState.total,
+      discount,
+      coupon_code: appliedCoupon?.code || null,
+      shipping_address: formData,
+      billing_address: formData,
+      payment_method: "cod",
+      user_email: formData.email,
     }
+
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderData),
+    })
+
+    if (response.ok) {
+      // Update coupon usage count if coupon was applied
+      if (appliedCoupon) {
+        await fetch("/api/coupons/record-usage", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code: appliedCoupon.code }),
+        })
+      }
+      
+      const order = await response.json()
+      clearCart()
+      router.push(`/order-confirmation/${order.order_number}`)
+    }
+  } catch (error) {
+    console.error("Order placement failed:", error)
+  } finally {
+    setIsProcessing(false)
   }
+}
 
   const finalTotal = cartState.total - discount
 

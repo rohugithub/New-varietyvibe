@@ -39,10 +39,6 @@ export async function POST(request: NextRequest) {
       discount = Math.min(coupon.discount_value, cartTotal)
     }
 
-    // Update usage count
-    await Coupon.findByIdAndUpdate(coupon._id, {
-      $inc: { usage_count: 1 },
-    })
 
     return NextResponse.json({
       valid: true,
