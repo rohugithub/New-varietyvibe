@@ -2,6 +2,8 @@ import { CategoryCarousel } from "@/components/CategoryCarousel";
 import AnimatedCategories from "@/components/animated-categories";
 import { HeroSection } from "@/components/hero-section";
 import FeatuedSection from "@/components/features-section";
+import HomeServicesSection from "@/components/Services";
+import { ElectronicsBannerSection } from "@/components/Electronics-banner";
 
 export default function HomePage() {
   return (
@@ -34,6 +36,7 @@ export default function HomePage() {
           </div>
         </section>
 
+        <ElectronicsBannerSection />
         {/* Featured Home Appliances */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
@@ -61,6 +64,24 @@ export default function HomePage() {
               </p>
             </div>
             <CategoryCarousel category="it-products" showAll />
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <HomeServicesSection />
+
+        {/* Trending */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-[#0042adef] mb-4">
+                Trending
+              </h2>
+              <p className="text-gray-600">
+                Explore our range of TVs, audio systems, and smart devices
+              </p>
+            </div>
+            <CategoryCarousel category="electronics" showAll />
           </div>
         </section>
 

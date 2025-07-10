@@ -8,19 +8,65 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const heroSlides = [
   {
     id: 1,
-    image: "/hero/hero1.png", // Fixed: Remove "./public" and use just "/"
+    image: "/hero/hero1.png", 
     alt: "Machine Zone Electronics Sale",
     link: "/products",
   },
   {
     id: 2,
-    image: "/hero/hero2.png", // Fixed: Remove "./public" and use just "/"
+    image: "/hero/hero2.png", 
     alt: "Fashion Frenzy Collection",
     link: "/products",
   },
   {
     id: 3,
-    image: "/hero/hero3.png", // Fixed: Remove "./public" and use just "/"
+    image: "/hero/hero3.png",
+    alt: "Home Furnishing Paradise",
+    link: "/products",
+  },
+   {
+    id: 4,
+    image: "/Services (1).png",
+    alt: "Home Furnishing Paradise",
+    link: "/products",
+  },
+   {
+    id: 5,
+    image: "/Services (4).png",
+    alt: "Home Furnishing Paradise",
+    link: "/products",
+  },
+  {
+    id: 6,
+    image: "/Services (2).png",
+    alt: "Home Furnishing Paradise",
+    link: "/products",
+  },
+   {
+    id: 7,
+    image: "/Services (3).png",
+    alt: "Home Furnishing Paradise",
+    link: "/products",
+  },
+   {
+    id: 8,
+    image: "/Artboard 1.png",
+    alt: "Home Furnishing Paradise",
+    link: "/products",
+  },
+   {
+    id: 9,
+    image: "/Artboard 2.png",
+    alt: "Home Furnishing Paradise",
+    link: "/products",
+  }, {
+    id: 10,
+    image: "/Artboard 3.png",
+    alt: "Home Furnishing Paradise",
+    link: "/products",
+  }, {
+    id: 11,
+    image: "/Artboard 4.png",
     alt: "Home Furnishing Paradise",
     link: "/products",
   },
@@ -32,7 +78,7 @@ export function HeroSection() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000); // Auto-advance every 5 seconds
+    }, 5000); 
 
     return () => clearInterval(timer);
   }, []);
