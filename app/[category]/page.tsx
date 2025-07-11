@@ -66,17 +66,17 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     switch (category.toLowerCase()) {
       case "electronics":
         return {
-          desktop: "/s(4).png",
+          desktop: "/electronics.png",
           mobile: "/mobile/electronics.png",
         };
       case "appliances":
         return {
-          desktop: "/s(2).png",
+          desktop: "/appliance.png",
           mobile: "/mobile/appliances.png",
         };
       case "it-products":
         return {
-          desktop: "/s(3).png",
+          desktop: "/itproduct.png",
           mobile: "/mobile/itproduct.png",
         };
       default:
@@ -104,7 +104,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
             // sizes="(min-width: 640px) 100vw"
             // width={1915}
             // height={500}
-            className="object-contain"   // 👈 no cropping
+            className="object-cover"   // 👈 no cropping
             priority
           />
         </figure>
