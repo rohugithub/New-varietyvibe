@@ -43,7 +43,7 @@ export function BrandForm({ brand, isEdit = false }: BrandFormProps) {
   const handleFileUpload = async (file: File) => {
     setUploading(true)
     try {
-      const formData = new FormData()
+      const formData:any = new FormData()
       formData.append("file", file)
 
       const response = await fetch("/api/admin/upload", {
@@ -53,7 +53,7 @@ export function BrandForm({ brand, isEdit = false }: BrandFormProps) {
 
       if (response.ok) {
         const data = await response.json()
-        console.log(data)
+        
         setFormData((prev) => ({ ...prev, logo: data.url }))
         toast({
           title: "Success",

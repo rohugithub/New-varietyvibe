@@ -6,10 +6,6 @@ const smtpPort = Number(process.env.SMTP_PORT)
 const smtpUser = process.env.SMTP_USER
 const smtpPass = process.env.SMTP_PASS
 
-// Safe environment variable logging (only in development)
-if (process.env.NODE_ENV === "development") {
-  console.log("SMTP config:", smtpHost, smtpPort, smtpUser)
-}
 
 // Validate SMTP config
 if (!smtpHost || !smtpPort || !smtpUser || !smtpPass) {
