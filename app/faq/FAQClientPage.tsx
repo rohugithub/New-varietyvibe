@@ -262,7 +262,7 @@ export default function FAQClientPage() {
           <h2 className="text-2xl font-bold mb-6 text-center">
             Browse by Category
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 px-2">
             {categories.map((category) => (
               <button
                 key={category.name}

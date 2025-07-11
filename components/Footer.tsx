@@ -53,7 +53,7 @@ export function Footer() {
                   <span>support@inoxsecure.com</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-10 w-10" />
+                  <MapPin className="h-6 w-6" />
                   <span>
                     Harshita Electronics Mart, Shop No. 03, Shree Ram Market
                     Agra Road, Jaipur 302031 (Rajasthan)

@@ -7,10 +7,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 /* desktop images */
 const heroSlides = [
-  { id: 1,  image: "/hero/hero1.png",  mobile: "/mobile/Mobile (1).png",  alt: "Machine Zone",   link: "/products" },
-  { id: 2,  image: "/hero/hero2.png",  mobile: "/mobile/Mobile (2).png",  alt: "Fashion Frenzy", link: "/products" },
-  { id: 3,  image: "/hero/hero3.png",  mobile: "/mobile/Mobile (3).png",  alt: "Home Furnish",   link: "/products" },
-// reuse if only 10 mobile imgs
+  { id: 1, image: "/hero/hero1.png", mobile: "/mobile/Mobile (1).png", alt: "Machine Zone", link: "/products" },
+  { id: 2, image: "/hero/hero2.png", mobile: "/mobile/Mobile (2).png", alt: "Fashion Frenzy", link: "/products" },
+  { id: 3, image: "/hero/hero3.png", mobile: "/mobile/Mobile (3).png", alt: "Home Furnish", link: "/products" },
+  // reuse if only 10 mobile imgs
 ];
 
 /* helper: detect mobile */
@@ -38,9 +38,9 @@ export function HeroSection() {
     return () => clearInterval(t);
   }, [len]);
 
-  const next  = () => setCurrent((p) => (p + 1) % len);
-  const prev  = () => setCurrent((p) => (p - 1 + len) % len);
-  const goto  = (i: number) => setCurrent(i);
+  const next = () => setCurrent((p) => (p + 1) % len);
+  const prev = () => setCurrent((p) => (p - 1 + len) % len);
+  const goto = (i: number) => setCurrent(i);
 
   return (
     <section className="relative overflow-hidden w-full">
@@ -48,11 +48,10 @@ export function HeroSection() {
         {heroSlides.map((s, i) => (
           <div
             key={s.id}
-            className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-              i === current ? "translate-x-0 z-10"
-              : i < current ? "-translate-x-full z-0"
-              : "translate-x-full z-0"
-            }`}
+            className={`absolute inset-0 transition-transform duration-700 ease-in-out ${i === current ? "translate-x-0 z-10"
+                : i < current ? "-translate-x-full z-0"
+                  : "translate-x-full z-0"
+              }`}
           >
             <Link href={s.link} className="block w-full h-full">
               <Image
@@ -60,18 +59,19 @@ export function HeroSection() {
                 alt={s.alt}
                 fill
                 priority={i === 0}
-                className="object-cover w-full h-full"
+                className="object-cover object-center w-full h-full"  // ⬅️ was object-cover
               />
+
             </Link>
           </div>
         ))}
       </div>
 
       {/* arrows */}
-      <button onClick={prev}  className="absolute left-4  top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white border rounded-full p-3 shadow-lg z-20">
-        <ChevronLeft  className="h-6 w-6 text-gray-800" />
+      <button onClick={prev} className="absolute left-4  top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white border rounded-full p-3 shadow-lg z-20">
+        <ChevronLeft className="h-6 w-6 text-gray-800" />
       </button>
-      <button onClick={next}  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white border rounded-full p-3 shadow-lg z-20">
+      <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white border rounded-full p-3 shadow-lg z-20">
         <ChevronRight className="h-6 w-6 text-gray-800" />
       </button>
 

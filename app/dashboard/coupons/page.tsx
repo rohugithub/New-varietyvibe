@@ -199,7 +199,7 @@ export default function CouponsPage() {
             <CardTitle className="text-2xl">Coupons</CardTitle>
             <CardDescription>Create and manage discount coupons for your store</CardDescription>
           </div>
-          <Button className=" bg-teal-600 text-white   hover:bg-teal-500 hover:text-white transition" onClick={() => router.push("/dashboard/coupons/new")}>
+          <Button className=" bg-blue-600 text-white   hover:bg-blue-500 hover:text-white transition" onClick={() => router.push("/dashboard/coupons/new")}>
             <Plus className="mr-2 h-4 w-4 " /> Add New Coupon
           </Button>
         </CardHeader>

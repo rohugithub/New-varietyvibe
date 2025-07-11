@@ -5,6 +5,7 @@ import { connectDB } from "@/lib/mongodb"
 import { Product } from "@/models/Product"
 import { Category } from "@/models/Category"
 import { Brand } from "@/models/Brand"
+import Image from "next/image"
 
 interface CategoryPageProps {
   params: {
@@ -60,14 +61,74 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
   const filters = await getFilters()
 
+  // after getting category data
+  const getBannerSrc = (category: string) => {
+    switch (category.toLowerCase()) {
+      case "electronics":
+        return {
+          desktop: "/s(4).png",
+          mobile: "/mobile/electronics.png",
+        };
+      case "appliances":
+        return {
+          desktop: "/s(2).png",
+          mobile: "/mobile/appliances.png",
+        };
+      case "it-products":
+        return {
+          desktop: "/s(3).png",
+          mobile: "/mobile/itproduct.png",
+        };
+      default:
+        return {
+          desktop: "/s(3).png",
+          mobile: "/mobile/all-product.png",
+        };
+    }
+  };
+
+  const { desktop: bannerSrc, mobile: mobileBannerSrc } = getBannerSrc(data.category.slug);
+
+
   return (
-    <div className="min-h-screen bg-gray-50">
-   
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold capitalize">{data.category.name}</h1>
-            <p className="text-gray-600">{data.category.description}</p>
+    <div className="min-h-screen bg-yellow-50">
+
+      <section className="mx-auto">
+        {/* big screen */}
+
+        <figure className="relative aspect-[4/1] overflow-hidden shadow hidden sm:block">
+          <Image
+            src={bannerSrc}
+            alt={data.category.name}
+            fill
+            // sizes="(min-width: 640px) 100vw"
+            // width={1915}
+            // height={500}
+            className="object-contain"   // 👈 no cropping
+            priority
+          />
+        </figure>
+
+
+        {/* small screen */}
+        <figure className="relative aspect-[3/2] overflow-hidden shadow sm:hidden">
+          <Image
+            src={mobileBannerSrc}
+            alt={data.category.name}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+        </figure>
+      </section>
+
+
+      <main className="">
+        <div className="container mx-auto py-4">
+          <div className="mb-4">
+            <h1 className="text-3xl font-bold capitalize hidden sm:hidden">{data.category.name}</h1>
+            <p className="text-gray-600 hidden sm:hidden">{data.category.description}</p>
           </div>
           <ProductsClient
             initialProducts={data.products}
@@ -77,6 +138,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
           />
         </div>
       </main>
+
     </div>
   )
 }

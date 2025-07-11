@@ -1,18 +1,17 @@
-import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { ShowFooter } from "@/components/ShowFooter"; // ⬅️ new
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: " Grow your business on inoxsecure ",
+  title: "Grow your business on inoxsecure",
   description:
-    "It is a local search engine platform. You can also search for business and skilled artisans around you from here and you can also buy items used daily",
+    "It is a local search‑engine platform. You can search for businesses and skilled artisans around you and buy daily‑use items.",
   generator: "v0.dev",
 };
 
@@ -28,7 +27,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Toaster />
-          <Footer />
+          <ShowFooter />   {/* Footer hidden on /dashboard routes */}
         </Providers>
       </body>
     </html>
