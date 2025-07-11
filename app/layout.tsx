@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   title: "Grow your business on inoxsecure",
   description:
     "It is a local search‑engine platform. You can search for businesses and skilled artisans around you and buy daily‑use items.",
-  generator: "v0.dev",
+  icons: {
+    icon: "/fav.ico",
+  },
 };
 
 export default function RootLayout({
