@@ -7,9 +7,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 /* desktop images */
 const heroSlides = [
-  { id: 1, image: "/hero/hero1.png", mobile: "/mobile/Mobile (1).png", alt: "Machine Zone", link: "/products" },
-  { id: 2, image: "/hero/hero2.png", mobile: "/mobile/Mobile (2).png", alt: "Fashion Frenzy", link: "/products" },
-  { id: 3, image: "/hero/hero3.png", mobile: "/mobile/Mobile (3).png", alt: "Home Furnish", link: "/products" },
+  { id: 1, image: "/1.png", mobile: "/mobile/Mobile (1).png", alt: "Machine Zone", link: "/products" },
+  { id: 2, image: "/2.png", mobile: "/mobile/Mobile (2).png", alt: "Fashion Frenzy", link: "/products" },
+  { id: 3, image: "/3.png", mobile: "/mobile/Mobile (3).png", alt: "Home Furnish", link: "/products" },
   // reuse if only 10 mobile imgs
 ];
 

@@ -256,7 +256,7 @@ export default function FAQClientPage() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto">
+      <div className="container mx-auto">
         {/* Category Filter */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-6 text-center">
