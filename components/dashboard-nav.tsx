@@ -72,11 +72,11 @@ const items = [
   //   href: "/dashboard/emails",
   //   icon: MailOpen,
   // },
-  // {
-  //   title:"Contact Us",
-  //   href: "/dashboard/contact",
-  //   icon: PanelTop ,
-  // },
+  {
+    title:"Contact Us",
+    href: "/dashboard/contact",
+    icon: PanelTop ,
+  },
   // {
   //   title:"Shipping Page",
   //   href: "/dashboard/shipping",
