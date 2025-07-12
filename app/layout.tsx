@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/toaster";
-import { Header } from "@/components/Header";
 import { ShowFooter } from "@/components/ShowFooter"; // ⬅️ new
+import { ShowHeader } from "@/components/ShowHeader"; // ⬅️ new
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Header />
+          <ShowHeader />
           {children}
           <Toaster />
           <ShowFooter />   {/* Footer hidden on /dashboard routes */}

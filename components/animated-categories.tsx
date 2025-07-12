@@ -57,7 +57,7 @@ export default function AnimatedCategories() {
         "Vacuum Cleaner",
       ],
       color: "#10B981",
-      gradient: "from-green-500 to-teal-600",
+      gradient: "from-green-500 to-blue-600",
       icon: <TrendingUp className="h-6 w-6" />,
     },
     {

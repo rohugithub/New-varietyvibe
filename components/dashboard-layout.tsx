@@ -1,131 +1,63 @@
-"use client"
-
-import type React from "react"
-
-import { useSession, signOut } from "next-auth/react"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
-import {
-  SidebarProvider,
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarInset,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { Button } from "@/components/ui/button"
-import { LayoutDashboard, Package, Tag, LogOut, User } from "lucide-react"
-import Link from "next/link"
-
-const menuItems = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Products",
-    url: "/dashboard/products",
-    icon: Package,
-  },
-  {
-    title: "Brands",
-    url: "/dashboard/brands",
-    icon: Package,
-  },
-  {
-    title: "Categories",
-    url: "/dashboard/categories",
-    icon: Tag,
-  },
-  {
-    title: "Coupons",
-    url: "/dashboard/coupons",
-    icon: Tag,
-  },
-  {
-    title: "Orders",
-    url: "/dashboard/orders",
-    icon: Tag,
-  },
-]
-
-export function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const { data: session, status } = useSession()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login")
-    }
-  }, [status, router])
-
-  if (status === "loading") {
-    return <div>Loading...</div>
-  }
+import type React from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { MobileSidebar } from "@/components/mobile-sidebar";
+import { ModeToggle } from "@/components/mode-toggle";
+import { UserNav } from "@/components/user-nav";
+import { ResizableSidebar } from "@/components/resizable-sidebar";
+import { SidebarProvider } from "@/components/sidebar-context";
+import Link from "next/link";
+import Image from "next/image";
+import Logo from "@/public/Logo/Inoxsecurelogowhite.png";
+export default async function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await getServerSession();
 
   if (!session) {
-    return null
+    redirect("/login");
   }
 
   return (
     <SidebarProvider>
-      <Sidebar>
-        <SidebarHeader>
-          <div className="flex items-center gap-2 px-4 py-2">
-            <Package className="h-6 w-6" />
-            <span className="font-semibold">Ecommerce Admin</span>
+      <div className="flex min-h-screen flex-col">
+        <header className="sticky top-0 z-40 border-b bg-background">
+          <div className="flex h-16 items-center justify-between px-4 bg-blue-600">
+            <div className="flex items-center gap-2 ">
+              <MobileSidebar />
+              <Link href="/dashboard" className="hidden sm:inline-block">
+                <Image
+                  src={Logo}
+                  alt="Logo"
+                  width={96} // 16 * 4 (Tailwind's rem base)
+                  height={96}
+                />
+              </Link>
+              {/* <Link href="/dashboard">
+                <span className="hidden font-bold sm:inline-block">
+                  Admin Dashboard
+                </span>
+              </Link> */}
+            </div>
+            <div className="flex items-center gap-2">
+              <ModeToggle />
+              <UserNav user={session.user} />
+            </div>
           </div>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>Navigation</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {menuItems.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <Link href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        </SidebarContent>
-        <SidebarFooter>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <div className="flex items-center gap-2 px-2 py-1">
-                <User className="h-4 w-4" />
-                <span className="text-sm">{session.user?.email}</span>
-              </div>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <Button variant="ghost" className="w-full justify-start" onClick={() => signOut()}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Sign Out
-              </Button>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarFooter>
-      </Sidebar>
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
         </header>
-        <main className="flex-1 p-6">{children}</main>
-      </SidebarInset>
+
+        <div className="flex flex-1 min-h-0">
+          {/* Sticky Sidebar */}
+          <div className="sticky top-16 h-[calc(100vh-4rem)] z-30">
+            <ResizableSidebar />
+          </div>
+
+          {/* Scrollable Main Content */}
+          <main className="flex-1 overflow-hidden">{children}</main>
+        </div>
+      </div>
     </SidebarProvider>
-  )
+  );
 }

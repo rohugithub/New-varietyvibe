@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Search,
-  MapPin,
-  ChevronDown,
   ShoppingCart,
   Heart,
   User,
