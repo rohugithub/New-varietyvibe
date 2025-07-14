@@ -746,7 +746,7 @@ export default function ServicesClient() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-transparent py-20">
+      <div className="bg-gradient-to-r from-blue-800 via-blue-800 to-transparent py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
@@ -757,38 +757,7 @@ export default function ServicesClient() {
               experts, transparent pricing, guaranteed satisfaction.
             </p>
 
-            {/* Search Bar */}
-            <div className="bg-white rounded-lg p-4 shadow-lg max-w-xl mx-auto">
-              <div className="flex flex-col md:flex-row gap-4">
-                <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                  <Input
-                    placeholder="Search for services..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 h-12 text-gray-900"
-                  />
-                </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <MapPin className="h-5 w-5" />
-                  <Select value={location} onValueChange={setLocation}>
-                    <SelectTrigger className="w-40 h-12 text-gray-900">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Delhi NCR">Delhi NCR</SelectItem>
-                      <SelectItem value="Mumbai">Mumbai</SelectItem>
-                      <SelectItem value="Bangalore">Bangalore</SelectItem>
-                      <SelectItem value="Chennai">Chennai</SelectItem>
-                      <SelectItem value="Hyderabad">Hyderabad</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Button className="h-12 px-8 bg-secondary hover:bg-secondary/90 text-white">
-                  Search
-                </Button>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

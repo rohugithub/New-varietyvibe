@@ -55,8 +55,7 @@ export function Footer() {
                 <div className="flex items-center gap-2">
                   <MapPin className="h-6 w-6" />
                   <span>
-                    Harshita Electronics Mart, Shop No. 03, Shree Ram Market
-                    Agra Road, Jaipur 302031 (Rajasthan)
+                    Banglore, India
                   </span>
                 </div>
               </div>

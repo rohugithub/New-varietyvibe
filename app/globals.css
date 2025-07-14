@@ -64,3 +64,31 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+
+/* Base (mobile) – small 24×24 */
+.swiper-button-next,
+.swiper-button-prev {
+  @apply w-10 h-10  text-black rounded-full;
+  /* center the chevron */
+  --swiper-navigation-size: 15px;   /* arrow icon size */
+}
+
+/* ≥640 px (sm) – default 32×32 */
+@media (min-width:640px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    @apply w-8 h-8;
+    --swiper-navigation-size: 16px;
+  }
+}
+
+/* ≥1024 px (lg) – bigger 40×40 */
+@media (min-width:1024px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    @apply w-12 h-12;
+    --swiper-navigation-size: 20px;
+  }
+}
+
