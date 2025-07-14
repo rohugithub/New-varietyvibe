@@ -84,10 +84,10 @@ export default function BrandsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Brands</h1>
+          <h1 className="text-4xl font-bold leading-12">Brands</h1>
           <p className="text-muted-foreground">Manage your product brands</p>
         </div>
         <Button asChild>

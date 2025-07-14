@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
     // Check admin authentication
     const session:any = await getServerSession()
-    console.log(session)
+    
     if (!session || !session.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
 
     // Check admin authentication
     const session:any = await getServerSession()
-    console.log(session)
+    
     if (!session || !session.user ) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }

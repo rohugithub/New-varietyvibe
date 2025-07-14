@@ -116,7 +116,7 @@ export function ProductVariants({ options, variants, onOptionsChange, onVariants
   }
 
   const generateVariants = (currentOptions: ProductOption[]) => {
-    console.log("Generating variants for options:", currentOptions)
+    
 
     if (currentOptions.length === 0) {
       onVariantsChange([])
@@ -124,7 +124,7 @@ export function ProductVariants({ options, variants, onOptionsChange, onVariants
     }
 
     const combinations = generateCombinations(currentOptions)
-    console.log("Generated combinations:", combinations)
+    
 
     const newVariants = combinations.map((combination) => {
       // Try to find existing variant with same option values
@@ -158,7 +158,7 @@ export function ProductVariants({ options, variants, onOptionsChange, onVariants
       return variant
     })
 
-    console.log("Generated variants:", newVariants)
+    
     onVariantsChange(newVariants)
   }
 

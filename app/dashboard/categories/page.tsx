@@ -88,10 +88,10 @@ export default function CategoriesPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Categories</h1>
+          <h1 className="text-4xl font-bold leading-12">Categories</h1>
           <p className="text-muted-foreground">Manage your product categories</p>
         </div>
         <Button asChild>

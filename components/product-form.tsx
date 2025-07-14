@@ -183,7 +183,7 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
         brand: submitData.brand || undefined,
       }
 
-      console.log("Submitting product data:", JSON.stringify(submitData, null, 2))
+      
 
       const response = await fetch(url, {
         method,
@@ -195,7 +195,7 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
 
       if (response.ok) {
         const responseData = await response.json()
-        console.log("Product saved successfully:", responseData)
+        
         toast({
           title: "Success",
           description: `Product ${isEdit ? "updated" : "created"} successfully`,
@@ -236,12 +236,12 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
   }
 
   const handleOptionsChange = (options: Array<{ name: string; values: string[] }>) => {
-    console.log("Options changed:", options)
+    
     setFormData((prev) => ({ ...prev, options }))
   }
 
   const handleVariantsChange = (variants: Product["variants"]) => {
-    console.log("Variants changed:", variants)
+    
     setFormData((prev) => ({ ...prev, variants }))
   }
 

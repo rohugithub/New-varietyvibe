@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/toaster";
-import { Header } from "@/components/Header";
 import { ShowFooter } from "@/components/ShowFooter"; // ⬅️ new
+import { ShowHeader } from "@/components/ShowHeader"; // ⬅️ new
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   title: "Grow your business on inoxsecure",
   description:
     "It is a local search‑engine platform. You can search for businesses and skilled artisans around you and buy daily‑use items.",
-  generator: "v0.dev",
+  icons: {
+    icon: "/fav.ico",
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Header />
+          <ShowHeader />
           {children}
           <Toaster />
           <ShowFooter />   {/* Footer hidden on /dashboard routes */}

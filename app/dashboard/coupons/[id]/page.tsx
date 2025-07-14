@@ -257,7 +257,7 @@ export default function EditCouponPage({
         <Button
           variant="ghost"
           onClick={() => router.push("/dashboard/coupons")}
-          className="mr-4 bg-teal-600 hover:bg-teal-700 text-white hover:text-white"
+          className="mr-4 bg-blue-600 hover:bg-blue-700 text-white hover:text-white"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Coupons
@@ -522,7 +522,7 @@ export default function EditCouponPage({
               <CardContent className="pt-6">
                 <Button
                   type="submit"
-                  className="w-full text-lg py-4 bg-teal-600 font-light hover:bg-teal-700"
+                  className="w-full text-lg py-4 bg-blue-600 font-light hover:bg-blue-700"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (

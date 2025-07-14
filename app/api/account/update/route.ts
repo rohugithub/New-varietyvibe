@@ -5,17 +5,16 @@ import { connectDB } from "@/lib/mongodb"
 import { User } from "@/models/User"
 
 export async function PATCH(req: NextRequest) {
-    console.log("main to chl rha hu")
   await connectDB()
   const session = await getServerSession()
   
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
-  console.log(session)
+
   const body = await req.json()
   const { name, email, phone } = body
-  console.log(name, email, phone)
+  
 
   try {
     const updatedUser = await User.findOneAndUpdate(

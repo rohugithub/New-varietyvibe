@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get("search")
     const page = Number.parseInt(searchParams.get("page") || "1")
     const limit = Number.parseInt(searchParams.get("limit") || "12")
-  console.log(category)
+  
     const query: any = { status: "active" }
 
     // Update: Handle category filtering via slug

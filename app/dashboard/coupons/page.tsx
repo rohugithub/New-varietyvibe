@@ -272,7 +272,7 @@ export default function CouponsPage() {
                         <TableRow key={coupon._id}>
                           <TableCell className="font-medium">
                             <div className="flex items-center">
-                              <Tag className="mr-2 h-4 w-4 text-teal-600" />
+                              <Tag className="mr-2 h-4 w-4 text-blue-600" />
                               {coupon.code}
                             </div>
                           </TableCell>
