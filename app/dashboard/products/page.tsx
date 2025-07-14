@@ -5,10 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Plus, Edit, Trash2, ImageIcon, Eye, Grid3X3, List } from "lucide-react"
+import { Plus, Edit, Trash2, ImageIcon, Eye, Grid3X3, List, ChevronLeft, ChevronRight } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { DeleteAlertDialog } from "@/components/delete-alert-dialog"
-import { ProductImportExport } from "@/components/product-import-export"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -42,19 +41,23 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [viewMode, setViewMode] = useState<"table" | "grid">("table")
-  const [deleteDialog, setDeleteDialog] = useState<{
-    open: boolean
-    product: Product | null
-  }>({ open: false, product: null })
+  const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; product: Product | null }>({
+    open: false,
+    product: null,
+  })
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+
   const { toast } = useToast()
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (page = 1) => {
     try {
-      const response = await fetch("/api/admin/products")
-      if (response.ok) {
-        const data = await response.json()
-        setProducts(data.products)
-      }
+      setLoading(true)
+      const res = await fetch(`/api/admin/products?page=${page}&per_page=10`)
+      const data = await res.json()
+      setProducts(data.products)
+      setTotalPages(data.totalPages)
+      setCurrentPage(page)
     } catch (error) {
       toast({
         title: "Error",
@@ -68,22 +71,17 @@ export default function ProductsPage() {
 
   const handleDelete = async () => {
     if (!deleteDialog.product) return
-
     try {
       const response = await fetch(`/api/admin/products/${deleteDialog.product._id}`, {
         method: "DELETE",
       })
-
       if (response.ok) {
-        toast({
-          title: "Success",
-          description: "Product deleted successfully",
-        })
-        fetchProducts()
+        toast({ title: "Success", description: "Product deleted successfully" })
+        fetchProducts(currentPage)
       } else {
-        throw new Error("Failed to delete product")
+        throw new Error()
       }
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to delete product",
@@ -98,9 +96,7 @@ export default function ProductsPage() {
     fetchProducts()
   }, [])
 
-  if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>
-  }
+  if (loading) return <div className="flex justify-center items-center min-h-screen">Loading...</div>
 
   return (
     <div className="space-y-6 p-6">
@@ -110,7 +106,7 @@ export default function ProductsPage() {
           <p className="text-muted-foreground">Manage your product catalog</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" asChild>
+          <Button asChild variant="outline">
             <Link href="/dashboard/products/all">
               <Grid3X3 className="h-4 w-4 mr-2" />
               View All
@@ -124,17 +120,6 @@ export default function ProductsPage() {
           </Button>
         </div>
       </div>
-
-      {/* Import/Export Section */}
-      {/* <Card>
-        <CardHeader>
-          <CardTitle>Import & Export</CardTitle>
-          <CardDescription>Import products from Excel files or export your current products to Excel</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ProductImportExport />
-        </CardContent>
-      </Card> */}
 
       <Card>
         <CardHeader>
@@ -176,12 +161,12 @@ export default function ProductsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {products.slice(0, 10).map((product) => (
+                {products?.map((product) => (
                   <TableRow key={product._id}>
                     <TableCell>
-                      {product.images && product.images.length > 0 ? (
+                      {product.images?.[0] ? (
                         <Image
-                          src={product.images[0].url || "/placeholder.svg"}
+                          src={product.images[0].url}
                           alt={product.images[0].altText || product.title}
                           width={40}
                           height={40}
@@ -204,14 +189,18 @@ export default function ProductsPage() {
                     <TableCell>
                       <Badge
                         variant={
-                          product.status === "active" ? "default" : product.status === "draft" ? "secondary" : "outline"
+                          product.status === "active"
+                            ? "default"
+                            : product.status === "draft"
+                            ? "secondary"
+                            : "outline"
                         }
                       >
                         {product.status}
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      {product.variants?.reduce((total, variant) => total + variant.inventoryQuantity, 0) || 0} in stock
+                      {product.variants?.reduce((t, v) => t + v.inventoryQuantity, 0) || 0} in stock
                     </TableCell>
                     <TableCell>{product.productType || "—"}</TableCell>
                     <TableCell>{product.vendor || "—"}</TableCell>
@@ -227,7 +216,11 @@ export default function ProductsPage() {
                             <Edit className="h-4 w-4" />
                           </Link>
                         </Button>
-                        <Button variant="outline" size="sm" onClick={() => setDeleteDialog({ open: true, product })}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setDeleteDialog({ open: true, product })}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -238,13 +231,13 @@ export default function ProductsPage() {
             </Table>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {products.slice(0, 9).map((product) => (
+              {products.map((product) => (
                 <Card key={product._id} className="group hover:shadow-md transition-shadow">
                   <CardContent className="p-4">
                     <div className="aspect-square relative overflow-hidden rounded-lg mb-3">
-                      {product.images && product.images.length > 0 ? (
+                      {product.images?.[0] ? (
                         <Image
-                          src={product.images[0].url || "/placeholder.svg"}
+                          src={product.images[0].url}
                           alt={product.images[0].altText || product.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-200"
@@ -263,8 +256,8 @@ export default function ProductsPage() {
                             product.status === "active"
                               ? "default"
                               : product.status === "draft"
-                                ? "secondary"
-                                : "outline"
+                              ? "secondary"
+                              : "outline"
                           }
                           className="text-xs"
                         >
@@ -274,8 +267,7 @@ export default function ProductsPage() {
                       <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-muted-foreground">
-                          {product.variants?.reduce((total, variant) => total + variant.inventoryQuantity, 0) || 0} in
-                          stock
+                          {product.variants?.reduce((t, v) => t + v.inventoryQuantity, 0) || 0} in stock
                         </span>
                         <div className="flex gap-1">
                           <Button variant="ghost" size="sm" asChild>
@@ -297,10 +289,34 @@ export default function ProductsPage() {
             </div>
           )}
 
-          {products.length > (viewMode === "table" ? 10 : 9) && (
-            <div className="mt-6 text-center">
-              <Button variant="outline" asChild>
-                <Link href="/dashboard/products/all">View All {products.length} Products</Link>
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-6 gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => fetchProducts(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <Button
+                  key={page}
+                  size="sm"
+                  variant={page === currentPage ? "default" : "outline"}
+                  onClick={() => fetchProducts(page)}
+                >
+                  {page}
+                </Button>
+              ))}
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => fetchProducts(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                <ChevronRight className="w-4 h-4" />
               </Button>
             </div>
           )}

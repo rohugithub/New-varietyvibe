@@ -279,7 +279,6 @@ export default function AdminContactPage() {
         });
       }
     } catch (error) {
-      console.error("Error deleting contact information:", error);
       toast({
         title: "An error occurred",
         variant: "destructive",

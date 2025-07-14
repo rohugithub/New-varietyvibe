@@ -27,6 +27,9 @@ interface Category {
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [limit] = useState(10)
+  const [totalPages, setTotalPages] = useState(1)
   const [deleteDialog, setDeleteDialog] = useState<{
     open: boolean
     category: Category | null
@@ -34,11 +37,13 @@ export default function CategoriesPage() {
   const { toast } = useToast()
 
   const fetchCategories = async () => {
+    setLoading(true)
     try {
-      const response = await fetch("/api/admin/categories")
+      const response = await fetch(`/api/admin/categories?page=${page}&limit=${limit}`)
       if (response.ok) {
         const data = await response.json()
-        setCategories(data)
+        setCategories(data.categories)
+        setTotalPages(data.totalPages)
       }
     } catch (error) {
       toast({
@@ -81,11 +86,9 @@ export default function CategoriesPage() {
 
   useEffect(() => {
     fetchCategories()
-  }, [])
+  }, [page])
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
+  if (loading) return <div>Loading...</div>
 
   return (
     <div className="space-y-6 p-6">
@@ -169,6 +172,25 @@ export default function CategoriesPage() {
               ))}
             </TableBody>
           </Table>
+
+          {/* Pagination controls */}
+          <div className="flex justify-center gap-4 mt-6">
+            <Button
+              variant="outline"
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+              disabled={page === 1}
+            >
+              Previous
+            </Button>
+            <span className="text-sm text-muted-foreground mt-3">Page {page} of {totalPages}</span>
+            <Button
+              variant="outline"
+              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={page === totalPages}
+            >
+              Next
+            </Button>
+          </div>
         </CardContent>
       </Card>
 

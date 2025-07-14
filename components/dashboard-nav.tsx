@@ -62,37 +62,37 @@ const items = [
   //   href: "/dashboard/announcements",
   //   icon: PartyPopper,
   // },
-  // {
-  //   title:"Faqs",
-  //   href: "/dashboard/faqs",
-  //   icon: TableOfContents,
-  // },
-  // {
-  //   title:"Emails",
-  //   href: "/dashboard/emails",
-  //   icon: MailOpen,
-  // },
+  {
+    title:"Cities",
+    href: "/dashboard/cities",
+    icon: TableOfContents,
+  },
+  {
+    title:"Services Categories",
+    href: "/dashboard/service-category",
+    icon: MailOpen,
+  },
   {
     title:"Contact Us",
     href: "/dashboard/contact",
     icon: PanelTop ,
   },
-  // {
-  //   title:"Shipping Page",
-  //   href: "/dashboard/shipping",
-  //   icon: PanelTop,
-  // },
-  // {
-  //   title:"SEO",
-  //   href: "/dashboard/seo-meta",
-  //   icon:   PanelTop,
-  // },
+  {
+    title:"Block Pincodes",
+    href: "/dashboard/pincodes",
+    icon: PanelTop,
+  },
+  {
+    title:"Bookings",
+    href: "/dashboard/bookings",
+    icon:   PanelTop,
+  },
 
-  // {
-  //   title:"Reviews",
-  //   href: "/dashboard/reviews",
-  //   icon: Star   ,
-  // }
+  {
+    title:"Services",
+    href: "/dashboard/services",
+    icon: Star   ,
+  }
 ]
 
 interface DashboardNavProps {

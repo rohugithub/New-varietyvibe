@@ -2,8 +2,21 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Plus, Edit, Trash2, ImageIcon } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
@@ -15,7 +28,7 @@ interface Brand {
   _id: string
   name: string
   description: string
-  icon: string
+  logo: string
   isActive: boolean
   createdAt: string
 }
@@ -23,18 +36,24 @@ interface Brand {
 export default function BrandsPage() {
   const [brands, setBrands] = useState<Brand[]>([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const limit = 10
+  const { toast } = useToast()
+
   const [deleteDialog, setDeleteDialog] = useState<{
     open: boolean
     brand: Brand | null
   }>({ open: false, brand: null })
-  const { toast } = useToast()
 
   const fetchBrands = async () => {
+    setLoading(true)
     try {
-      const response = await fetch("/api/admin/brands")
+      const response = await fetch(`/api/admin/brands?page=${page}&limit=${limit}`)
       if (response.ok) {
         const data = await response.json()
-        setBrands(data)
+        setBrands(data.brands)
+        setTotalPages(data.totalPages)
       }
     } catch (error) {
       toast({
@@ -77,10 +96,10 @@ export default function BrandsPage() {
 
   useEffect(() => {
     fetchBrands()
-  }, [])
+  }, [page])
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div className="flex justify-center items-center h-32">Loading...</div>
   }
 
   return (
@@ -116,7 +135,7 @@ export default function BrandsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {brands.map((brand:any) => (
+              {brands?.map((brand) => (
                 <TableRow key={brand._id}>
                   <TableCell>
                     {brand.logo ? (
@@ -148,7 +167,11 @@ export default function BrandsPage() {
                           <Edit className="h-4 w-4" />
                         </Link>
                       </Button>
-                      <Button variant="outline" size="sm" onClick={() => setDeleteDialog({ open: true, brand })}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setDeleteDialog({ open: true, brand })}
+                      >
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
@@ -157,6 +180,27 @@ export default function BrandsPage() {
               ))}
             </TableBody>
           </Table>
+
+          {/* Pagination Controls */}
+          <div className="mt-4 flex justify-between items-center">
+            <Button
+              variant="outline"
+              disabled={page === 1}
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            >
+              Previous
+            </Button>
+            <span className="text-sm text-muted-foreground">
+              Page {page} of {totalPages}
+            </span>
+            <Button
+              variant="outline"
+              disabled={page === totalPages}
+              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            >
+              Next
+            </Button>
+          </div>
         </CardContent>
       </Card>
 

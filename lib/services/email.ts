@@ -207,7 +207,7 @@ export const emailService = {
       if (!process.env.MAILTRAP_USER || !process.env.MAILTRAP_PASS) {
         const error =
           "Mailtrap credentials not configured. Please set MAILTRAP_USER and MAILTRAP_PASS environment variables."
-        console.error("❌", error)
+        
         throw new Error(error)
       }
 

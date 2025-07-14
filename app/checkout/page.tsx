@@ -72,7 +72,6 @@ export default function CheckoutPage() {
       alert(data.error || "Invalid coupon code")
     }
   } catch (error) {
-    console.error("Failed to apply coupon:", error)
     setDiscount(0)
     setAppliedCoupon(null)
   }
