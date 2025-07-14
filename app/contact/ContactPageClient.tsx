@@ -101,11 +101,7 @@ export default function ContactPageClient() {
             <h3 className="text-xl font-bold mb-2">Visit Us</h3>
             <p className="text-gray-600 mb-4">Our headquarters location</p>
             <address className="not-italic text-primary font-medium">
-              Harshita Electronics Mart, Shop No. 03,
-              <br />
-              Shree Ram Market Agra Road,
-              <br />
-              Jaipur - 302031 (Rajasthan)
+             Banglore, India
             </address>
           </div>
         </div>
@@ -224,7 +220,7 @@ export default function ContactPageClient() {
           {/* Map and Business Hours */}
           <div className="w-full">
             <h2 className="text-2xl font-bold mb-6">Find Us</h2>
-            <div className="relative h-[300px] w-full mb-8 rounded-lg overflow-hidden">
+            {/* <div className="relative h-[300px] w-full mb-8 rounded-lg overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113843.23621488883!2d75.7138881!3d26.9124336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db30ddcdd9983%3A0x4d842a2f0e68b8f3!2sJaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1720526100000!5m2!1sen!2sin"
                 width="100%"
@@ -234,7 +230,7 @@ export default function ContactPageClient() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
-            </div>
+            </div> */}
 
             <h2 className="text-2xl font-bold mb-4">Business Hours</h2>
             <div className="space-y-2">
@@ -243,15 +239,15 @@ export default function ContactPageClient() {
                 <span className="font-medium">Customer Support:</span>
                 <span className="ml-2 text-gray-600">24/7</span>
               </div>
-              <div className="flex items-start">
+              {/* <div className="flex items-start">
                 <Clock className="h-5 w-5 text-primary mr-2 mt-1" />
                 <span className="font-medium">Office Hours:</span>
                 <div className="ml-2 text-gray-600">
                   <div>Monday - Friday: 9:00 AM - 6:00 PM</div>
                   <div>Saturday: 10:00 AM - 4:00 PM</div>
-                  <div>Sunday: Closed</div>
+                  <div>Sunday: Open</div>
                 </div>
-              </div>
+              </div> */}
               <div className="flex items-start">
                 <Clock className="h-5 w-5 text-primary mr-2 mt-1" />
                 <span className="font-medium">Delivery Hours:</span>
