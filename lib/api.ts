@@ -143,7 +143,7 @@ export async function getMegaSaleSections(): Promise<any[]> {
    Get every Mobile Megasale banner  (type = "mobile-mega-sale")
 ─────────────────────────────────────────────── */
 export async function getMobileMegaSaleSections(): Promise<any[]> {
-  const url = `${getBaseUrl()}/api/admin/homepage-sections?type=mobile-mega-sale`;
+  const url = `${getBaseUrl()}/api/admin/homepage-sections?type=mega-mobile`;
 
   try {
     const res = await fetch(url, { cache: "no-store" });

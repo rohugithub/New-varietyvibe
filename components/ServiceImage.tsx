@@ -45,45 +45,47 @@ export default function PromoSection() {
   return (
     <section className="w-full px-2">
 
-      {/* ——— Desktop & tablet swiper ——— */}
-      <Swiper
-        modules={[Autoplay, Pagination, Navigation]}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        loop
-        pagination={{ clickable: true }}
-        navigation
-        slidesPerView={1}
-        spaceBetween={16}
-        breakpoints={{
-          640: { slidesPerView: 1 },
-          1024: { slidesPerView: 2 },
-        }}
-        className="hidden sm:block rounded-lg"   /* no global aspect */
-      >
-        {desktopBanners.map((b) => (
-          <SwiperSlide key={b._id}>
-            {/* local aspect box gives height */}
-            <Link
-              href="/services"
-              className="block relative w-full aspect-[16/9] overflow-hidden rounded-lg"
-            >
-              <Image
-                src={b.image}
-                alt={b.alt || "service"}
-                fill
-                className="object-contain"
-                sizes="(min-width:1024px) 33vw, 50vw"
-                priority
-              />
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="sm:hidden">
+        {/* ——— Desktop & tablet swiper ——— */}
+        <Swiper
+          modules={[Autoplay, Pagination, Navigation]}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          loop
+          pagination={{ clickable: true }}
+          navigation
+          slidesPerView={1}
+          spaceBetween={16}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            1024: { slidesPerView: 2 },
+          }}
+          className="  rounded-lg"   /* no global aspect */
+        >
+          {desktopBanners.map((b) => (
+            <SwiperSlide key={b._id}>
+              {/* local aspect box gives height */}
+              <Link
+                href="/services"
+                className="block relative w-full aspect-[16/9] overflow-hidden rounded-lg"
+              >
+                <Image
+                  src={b.image}
+                  alt={b.alt || "service"}
+                  fill
+                  className="object-contain"
+                  sizes="(min-width:1024px) 33vw, 50vw"
+                  priority
+                />
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
 
 
       {/* ——— Mobile swiper ——— */}
-      <div className="sm:hidden relative w-full">
+      <div className="md:hidden lg:hidden relative w-full">
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}
           autoplay={{ delay: 5000, disableOnInteraction: false }}
