@@ -45,7 +45,7 @@ export default function PromoSection() {
   return (
     <section className="w-full px-2">
 
-      <div className="sm:hidden">
+      <div className="hidden sm:block">
         {/* ——— Desktop & tablet swiper ——— */}
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}

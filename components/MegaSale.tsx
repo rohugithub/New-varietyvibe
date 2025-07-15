@@ -59,7 +59,7 @@ export default function MegaSaleBanner() {
         <section className="w-full px-2">
             {/* MOBILE banner (≤ 640 px) */}
             {mobileBanner && (
-                <div className="relative h-40 w-full overflow-hidden rounded-lg sm:hidden">
+                <div className="relative h-60 w-full overflow-hidden rounded-lg sm:hidden">
                     {/* if you later add the plugin, you can switch back to aspect-[1900/204] */}
                     <Image
                         src={mobileBanner.image}
