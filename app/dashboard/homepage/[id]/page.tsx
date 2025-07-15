@@ -30,16 +30,17 @@ interface HomepageSection {
 
 const sectionTypes = [
   { value: "banner", label: "Banner" },
+  { value: "product-banner", label: "Product Banner" },
   { value: "services", label: "Services" },
   { value: "mega-sale", label: "Mega Sale" },
-  { value: "product-banner", label: "Product Banner" },
   { value: "mobile-banner", label: "Mobile Banner" },
+  { value: "mobile-product-banner", label: "Mobile Product Banner" },
   { value: "mobile-services", label: "Mobile Services" },
   { value: "mobile-mega-sale", label: "Mobile Mega Sale" },
-  { value: "mobile-product-banner", label: "Mobile Product Banner" },
+
 ]
 
-export default function HomepageSectionEditPage({ params }: { params: Promise<{ id: string }>| Promise<{ id: string }> }) {
+export default function HomepageSectionEditPage({ params }: { params: Promise<{ id: string }> | Promise<{ id: string }> }) {
   // Unwrap params using React.use()
   const unwrappedParams = "then" in params ? use(params) : params
   const id = unwrappedParams.id
@@ -70,7 +71,7 @@ export default function HomepageSectionEditPage({ params }: { params: Promise<{ 
   const addLog = (message: string) => {
     setDebugLogs((prev) => [...prev, message])
   }
-  const fetchSection =useCallback( async () => {
+  const fetchSection = useCallback(async () => {
     try {
       setLoading(true)
       addLog(`Fetching section with ID: ${id}`)
@@ -103,38 +104,38 @@ export default function HomepageSectionEditPage({ params }: { params: Promise<{ 
 
   useEffect(() => {
     const fetchExistingSections = async () => {
-    try {
-      addLog("Fetching existing homepage sections...")
-      const response = await fetch("/api/admin/homepage-sections")
-      if (response.ok) {
-        const data = await response.json()
-        setExistingSections(data)
-        addLog(`Fetched ${data.length} existing sections`)
+      try {
+        addLog("Fetching existing homepage sections...")
+        const response = await fetch("/api/admin/homepage-sections")
+        if (response.ok) {
+          const data = await response.json()
+          setExistingSections(data)
+          addLog(`Fetched ${data.length} existing sections`)
 
-        // If creating a new section, set position to be after the last section
-        if (isNew && data.length > 0) {
-          const maxPosition = Math.max(...data.map((s: HomepageSection) => s.position))
-          setSection((prev) => ({ ...prev, position: maxPosition + 10 })) // Add some space between positions
-          addLog(`Set new section position to ${maxPosition + 10}`)
+          // If creating a new section, set position to be after the last section
+          if (isNew && data.length > 0) {
+            const maxPosition = Math.max(...data.map((s: HomepageSection) => s.position))
+            setSection((prev) => ({ ...prev, position: maxPosition + 10 })) // Add some space between positions
+            addLog(`Set new section position to ${maxPosition + 10}`)
+          }
+        } else {
+          addLog(`Error fetching sections: ${response.status}`)
         }
-      } else {
-        addLog(`Error fetching sections: ${response.status}`)
+      } catch (error) {
+        console.error("Error fetching existing sections:", error)
+        addLog(`Error: ${error instanceof Error ? error.message : String(error)}`)
       }
-    } catch (error) {
-      console.error("Error fetching existing sections:", error)
-      addLog(`Error: ${error instanceof Error ? error.message : String(error)}`)
     }
-  }
     fetchExistingSections()
 
     if (!isNew) {
       fetchSection()
     }
-  }, [id, isNew,fetchSection])
+  }, [id, isNew, fetchSection])
 
-  
 
-  
+
+
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -291,12 +292,12 @@ export default function HomepageSectionEditPage({ params }: { params: Promise<{ 
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">{isNew ? "Add New Section" : "Edit Section"}</h1>
-        <Button variant="ghost"  onClick={() => router.push("/dashboard/homepage")} className="mr-4 bg-blue-600 text-white
+        <Button variant="ghost" onClick={() => router.push("/dashboard/homepage")} className="mr-4 bg-blue-600 text-white
         hover:text-white transition">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
         </Button>
-        
+
       </div>
 
       <Card>

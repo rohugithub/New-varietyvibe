@@ -8,7 +8,7 @@ import { ResizableSidebar } from "@/components/resizable-sidebar";
 import { SidebarProvider } from "@/components/sidebar-context";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/public/Logo/Inoxsecurelogowhite.png";
+import Logo from "@/public/logo-white.png";
 export default async function DashboardLayout({
   children,
 }: {

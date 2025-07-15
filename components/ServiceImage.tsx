@@ -1,5 +1,7 @@
+// components/PromoSection.tsx
 "use client";
 
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -9,43 +11,78 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-/* desktop banners */
-const desktopBanners = [
-  { id: 1, src: "/ac.png", alt: "Promo AC" },
-  { id: 2, src: "/car.png", alt: "Promo Car" },
-];
+import {
+  getServicesSections,
+  getMobileServicesSections,
+} from "@/lib/api";
 
-/* mobile slider banners */
-const mobileSlides = [
-  { id: 1, src: "/mobile/ac-mobile.png", alt: "Mobile AC" },
-  { id: 2, src: "/mobile/car-mobile.png", alt: "Mobile Car" },
-  { id: 3, src: "/mobile/dog-mobile.png", alt: "Mobile Dog" },
-];
+type Banner = {
+  _id: string;
+  image: string;
+  alt?: string;
+};
 
 export default function PromoSection() {
-  return (
-     <section className="w-full px-2">
-      {/* 👨‍💻 Desktop view (grid) */}
-      <div className="hidden sm:grid sm:grid-cols-2 gap-2">
-        {desktopBanners.map((b) => (
-          <Link           /* ← wrap with Link */
-            key={b.id}
-            href="/services"        /* <-- go to /services */
-            className="relative w-full aspect-[16/9] overflow-hidden rounded-lg"
-          >
-            <Image
-              src={b.src}
-              alt={b.alt}
-              fill
-              className="object-contain"
-              sizes="50vw"
-              priority={b.id === 1}
-            />
-          </Link>
-        ))}
-      </div>
+  // banners from the API
+  const [desktopBanners, setDesktopBanners] = useState<Banner[]>([]);
+  const [mobileSlides, setMobileSlides] = useState<Banner[]>([]);
 
-      {/* 📱 Mobile view (swiper) */}
+  // fetch once on mount
+  useEffect(() => {
+    (async () => {
+      const [desk, mob] = await Promise.all([
+        getServicesSections(),       // type=services
+        getMobileServicesSections(), // type=mobile-services
+      ]);
+      setDesktopBanners(desk);
+      setMobileSlides(mob);
+    })();
+  }, []);
+
+  // show nothing until data arrives
+  if (desktopBanners.length === 0 && mobileSlides.length === 0) return null;
+
+  return (
+    <section className="w-full px-2">
+
+      {/* ——— Desktop & tablet swiper ——— */}
+      <Swiper
+        modules={[Autoplay, Pagination, Navigation]}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        loop
+        pagination={{ clickable: true }}
+        navigation
+        slidesPerView={1}
+        spaceBetween={16}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          1024: { slidesPerView: 2 },
+        }}
+        className="hidden sm:block rounded-lg"   /* no global aspect */
+      >
+        {desktopBanners.map((b) => (
+          <SwiperSlide key={b._id}>
+            {/* local aspect box gives height */}
+            <Link
+              href="/services"
+              className="block relative w-full aspect-[16/9] overflow-hidden rounded-lg"
+            >
+              <Image
+                src={b.image}
+                alt={b.alt || "service"}
+                fill
+                className="object-contain"
+                sizes="(min-width:1024px) 33vw, 50vw"
+                priority
+              />
+            </Link>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+
+
+      {/* ——— Mobile swiper ——— */}
       <div className="sm:hidden relative w-full">
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}
@@ -56,11 +93,11 @@ export default function PromoSection() {
           className="rounded-lg aspect-[16/9]"
         >
           {mobileSlides.map((s) => (
-            <SwiperSlide key={s.id} className="relative w-full h-full">
-              <Link href="/services" className="block w-full h-full">  {/* link */}
+            <SwiperSlide key={s._id} className="relative w-full h-full">
+              <Link href="/services" className="block w-full h-full">
                 <Image
-                  src={s.src}
-                  alt={s.alt}
+                  src={s.image}
+                  alt={s.alt || "service"}
                   fill
                   className="object-contain rounded-lg"
                   sizes="100vw"

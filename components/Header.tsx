@@ -18,10 +18,11 @@ import { useWishlist } from "@/contexts/WishlistContext";
 import { CartSidebar } from "./CartSidebar";
 import { AuthModal } from "./AuthModal";
 import { useSession } from "next-auth/react";
-import Logo from "@/public/logo/Inoxsecurelogowhite.png";
+import Logo from "@/public/logo-white.png";
+
 import Image from "next/image";
 
-export function Header() {
+export function Header() { 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCartAnimating, setIsCartAnimating] = useState(false);

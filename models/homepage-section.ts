@@ -10,13 +10,14 @@ const HomepageSectionSchema = new mongoose.Schema(
       type: String,
       enum: [
         "banner",
-        "services",
-        "mega-sale",
         "product-banner",
+        "services",
+        "mega-sale",     
         "mobile-banner",
+        "mobile-product-banner",
         "mobile-services",
         "mobile-mega-sale",
-        "mobile-product-banner",
+        
       ],
       required: true,
     },
