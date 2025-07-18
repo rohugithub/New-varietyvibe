@@ -3,11 +3,11 @@ import * as nodemailer from "nodemailer"
 // Create transporter for Mailtrap
 const createTransporter = () => {
   const config = {
-    host: process.env.smtpHost || "sandbox.smtp.mailtrap.io",
-    port: Number.parseInt(process.env.smtpPort || "2525"),
+    host: process.env.SMTP_HOST || "sandbox.smtp.mailtrap.io",
+    port: Number.parseInt(process.env.SMTP_PORT || "2525"),
     auth: {
-      user: process.env.smtpUser,
-      pass: process.env.smtpPass,
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
   }
 

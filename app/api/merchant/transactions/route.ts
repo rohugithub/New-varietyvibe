@@ -1,0 +1,33 @@
+import { type NextRequest, NextResponse } from "next/server"
+import { connectDB } from "@/lib/mongodb"
+import { Transaction } from "@/lib/models/Transaction"
+import { Merchant } from "@/lib/models/Merchant"
+import { jwtVerify } from "jose"
+import { getServerSession } from "next-auth"
+
+const secret = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-secret")
+
+export async function GET(request: NextRequest) {
+  try {
+    await connectDB()
+
+    const session: any = await getServerSession()
+    if (!session || session.user.role !== "merchant") {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+    }
+    const payload = session.user
+
+    // Find merchant
+    const merchant = await Merchant.findOne({ userId: payload.userId })
+    if (!merchant) {
+      return NextResponse.json({ message: "Merchant not found" }, { status: 404 })
+    }
+
+    const transactions = await Transaction.find({ merchantId: merchant._id }).sort({ createdAt: -1 })
+
+    return NextResponse.json({ transactions })
+  } catch (error) {
+    console.error("Fetch transactions error:", error)
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 })
+  }
+}
