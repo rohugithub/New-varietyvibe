@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn, getSession } from "next-auth/react";
 import Image from "next/image";
+import Logo from "@/public/logo-white.png";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -40,6 +41,10 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
         if (session?.user?.role === "admin") {
           window.location.href = "/dashboard";
+        } else if (session?.user?.role === "agent") {
+          window.location.href = "/agent";
+        } else if (session?.user?.role === "merchant") {
+          window.location.href = "/merchant";
         } else {
           window.location.href = "/";
         }
@@ -89,7 +94,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
               {/* INOX Logo */}
               <div className=" p-5 rounded-lg mb-6 inline-block">
                 <Image
-                  src="/logo/Inoxsecurelogowhite.png"
+                  src={Logo}
                   alt="INOX Logo"
                   width={180}
                   height={100}

@@ -172,7 +172,7 @@ export default function BookingManagement() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredBookings.map((booking) => (
+                {Array.isArray(filteredBookings) && filteredBookings?.map((booking) => (
                   <TableRow key={booking._id}>
                     <TableCell>
                       <div className="flex items-center gap-2">
