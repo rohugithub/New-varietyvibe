@@ -77,15 +77,15 @@ export default function MerchantDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <p className="text-sm text-muted-foreground">Available Balance</p>
-              <p className="text-2xl font-bold text-green-600">₹{stats.walletBalance.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-green-600">₹{stats?.walletBalance?.toLocaleString()}</p>
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Locked Amount</p>
-              <p className="text-2xl font-bold text-orange-600">₹{stats.lockedAmount.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-orange-600">₹{stats?.lockedAmount?.toLocaleString()}</p>
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Total Deposits</p>
-              <p className="text-2xl font-bold">₹{stats.totalDeposits.toLocaleString()}</p>
+              <p className="text-2xl font-bold">₹{stats?.totalDeposits?.toLocaleString()}</p>
             </div>
           </div>
         </CardContent>

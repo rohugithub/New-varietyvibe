@@ -6,13 +6,14 @@ import { Transaction } from "@/lib/models/Transaction"
 import { calculateMaturityDate } from "@/lib/utils/coupon"
 import { sendEmail } from "@/lib/utils/email"
 import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 
 
 export async function GET(request: NextRequest) {
   try {
     await connectDB()
 
-    const session = await getServerSession()
+    const session = await getServerSession(authOptions)
     if (!session || session.user.role !== "agent") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
@@ -46,7 +47,7 @@ export async function POST(request: NextRequest) {
   try {
     await connectDB()
 
-    const session = await getServerSession()
+    const session = await getServerSession(authOptions)
     if (!session || session.user.role !== "agent") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
@@ -71,7 +72,7 @@ export async function POST(request: NextRequest) {
     // Create deposit record
     const newDeposit = new Deposit({
       merchantId,
-      agentId: payload.userId,
+      agentId: payload.id,
       amount: Number.parseFloat(amount),
       receiptNumber,
       notes,

@@ -4,8 +4,8 @@ import { connectDB } from "@/lib/mongodb"
 import { User } from "@/lib/models/User"
 import { Merchant } from "@/lib/models/Merchant"
 import { sendEmail, generatePassword } from "@/lib/utils/email"
-import { jwtVerify } from "jose"
 import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-secret")
 
@@ -14,7 +14,8 @@ export async function POST(request: NextRequest) {
     await connectDB()
 
     // Verify agent token
-    const session: any = await getServerSession()
+    const session: any = await getServerSession(authOptions)
+    console.log("Session data:", session)
     if (!session || session.user.role !== "agent") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
@@ -42,7 +43,7 @@ export async function POST(request: NextRequest) {
       phone,
       isActive: true,
       isApproved: false,
-      createdBy: payload.userId,
+      createdBy: payload.id,
     })
 
     await newUser.save()
@@ -56,7 +57,7 @@ export async function POST(request: NextRequest) {
       gstNumber,
       panNumber,
       bankDetails,
-      agentId: payload.userId,
+      agentId: payload.id,
       status: "pending",
     })
 
@@ -90,7 +91,7 @@ export async function GET(request: NextRequest) {
   try {
     await connectDB()
 
-    const session: any = await getServerSession()
+    const session: any = await getServerSession(authOptions)
     if (!session || session.user.role !== "agent") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
@@ -99,7 +100,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const status = searchParams.get("status")
 
-    const query: any = { agentId: payload.userId }
+    const query: any = { agentId: payload.id }
     if (status) {
       query.status = status
     }

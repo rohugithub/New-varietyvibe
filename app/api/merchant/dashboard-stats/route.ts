@@ -4,21 +4,20 @@ import { Merchant } from "@/lib/models/Merchant"
 import { CouponCode } from "@/lib/models/CouponCode"
 import { Transaction } from "@/lib/models/Transaction"
 import { Deposit } from "@/lib/models/Deposit"
-import { jwtVerify } from "jose"
+import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-secret")
 
 export async function GET(request: NextRequest) {
   try {
     await connectDB()
-    const session: any = await getServerSession()
+    const session: any = await getServerSession(authOptions)
     if (!session || session.user.role !== "merchant") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
     const payload = session.user
 
-    const merchant = await Merchant.findOne({ userId: payload.userId })
+    const merchant = await Merchant.findOne({ userId: payload.id })
     if (!merchant) {
       return NextResponse.json({ message: "Merchant not found" }, { status: 404 })
     }

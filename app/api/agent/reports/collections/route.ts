@@ -2,14 +2,13 @@ import { type NextRequest, NextResponse } from "next/server"
 import { connectDB } from "@/lib/mongodb"
 import { Deposit } from "@/lib/models/Deposit"
 import { getServerSession } from "next-auth"
-
-const secret = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-secret")
+import { authOptions } from "@/lib/auth"
 
 export async function GET(request: NextRequest) {
   try {
     await connectDB()
 
-    const session: any = await getServerSession()
+    const session: any = await getServerSession(authOptions)
     if (!session || session.user.role !== "agent") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
@@ -19,7 +18,7 @@ export async function GET(request: NextRequest) {
     const from = searchParams.get("from")
     const to = searchParams.get("to")
 
-    const query: any = { agentId: payload.userId }
+    const query: any = { agentId: payload.id }
 
     if (from || to) {
       query.createdAt = {}

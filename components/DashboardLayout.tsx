@@ -23,6 +23,7 @@ export default function DashboardLayout({ children, role }: DashboardLayoutProps
     router.push("/login")
   }
 
+  // Update the getNavItems function to include coupon management
   const getNavItems = () => {
     switch (role) {
       case "admin":
@@ -38,6 +39,7 @@ export default function DashboardLayout({ children, role }: DashboardLayoutProps
           { href: "/agent", label: "Dashboard", icon: LayoutDashboard },
           { href: "/agent/merchants", label: "My Merchants", icon: Users },
           { href: "/agent/deposits", label: "Deposits", icon: CreditCard },
+          { href: "/agent/coupons", label: "Coupons", icon: CreditCard },
           { href: "/agent/reports/collections", label: "Reports", icon: FileText },
         ]
       case "merchant":

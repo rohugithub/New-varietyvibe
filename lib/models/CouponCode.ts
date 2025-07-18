@@ -15,6 +15,17 @@ const couponCodeSchema = new mongoose.Schema({
   validUntil: { type: Date, required: true },
   isActive: { type: Boolean, default: true },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  createdByRole: { type: String, enum: ["admin", "agent"], required: true },
+  redemptions: [
+    {
+      customerName: String,
+      customerPhone: String,
+      orderAmount: Number,
+      discountAmount: Number,
+      redeemedAt: { type: Date, default: Date.now },
+      redeemedByMerchant: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // The merchant who processed the redemption
+    },
+  ],
   createdAt: { type: Date, default: Date.now },
 })
 

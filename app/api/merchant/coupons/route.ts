@@ -1,11 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { connectDB } from "@/lib/mongodb"
-import { Transaction } from "@/lib/models/Transaction"
+import { CouponCode } from "@/lib/models/CouponCode"
 import { Merchant } from "@/lib/models/Merchant"
-import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-secret")
 
 export async function GET(request: NextRequest) {
   try {
@@ -23,11 +22,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ message: "Merchant not found" }, { status: 404 })
     }
 
-    const transactions = await Transaction.find({ merchantId: merchant._id }).sort({ createdAt: -1 })
+    const coupons = await CouponCode.find({ merchantId: merchant._id }).sort({ createdAt: -1 })
 
-    return NextResponse.json({ transactions })
+    return NextResponse.json({ coupons })
   } catch (error) {
-    console.error("Fetch transactions error:", error)
+    console.error("Fetch merchant coupons error:", error)
     return NextResponse.json({ message: "Internal server error" }, { status: 500 })
   }
 }

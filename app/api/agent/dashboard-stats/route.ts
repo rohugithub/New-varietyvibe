@@ -3,35 +3,23 @@ import { connectDB } from "@/lib/mongodb"
 import { Merchant } from "@/lib/models/Merchant"
 import { Deposit } from "@/lib/models/Deposit"
 import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 
-import { jwtVerify } from "jose"
-
-const secret = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-secret")
 
 export async function GET(request: NextRequest) {
   try {
     await connectDB()
-    const session: any = await getServerSession()
-    console.log(session)
-    const token = session?.user?.token
-    if (!token) {
+    const session: any = await getServerSession(authOptions)
+    if (!session || session.user.role !== "agent") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
-    const { payload } = await jwtVerify(token, secret)
-    if (payload.role !== "agent") {
-      return NextResponse.json({ message: "Forbidden" }, { status: 403 })
-    }
-
-    // const { payload } = await jwtVerify(token, secret)
-    // if (payload.role !== "agent") {
-    //   return NextResponse.json({ message: "Forbidden" }, { status: 403 })
-    // }
-
+    const payload = session.user
+     
     const [totalMerchants, pendingMerchants, totalDepositsResult, monthlyCollectionResult] = await Promise.all([
-      Merchant.countDocuments({ agentId: payload.userId }),
-      Merchant.countDocuments({ agentId: payload.userId, status: "pending" }),
+      Merchant.countDocuments({ agentId: payload.id }),
+      Merchant.countDocuments({ agentId: payload.id, status: "pending" }),
       Deposit.aggregate([
-        { $match: { agentId: payload.userId } },
+        { $match: { agentId: payload.id } },
         { $group: { _id: null, total: { $sum: "$amount" } } },
       ]),
       Deposit.aggregate([
