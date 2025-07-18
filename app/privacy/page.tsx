@@ -24,621 +24,273 @@ export default function PrivacyPolicyPage() {
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="prose prose-lg max-w-none">
+
           <section className="mb-10">
             <p>
-              <strong>Last Updated:</strong> June 15, 2023
+              We, i.e., "Inoxsecure e-Commerce" (formerly known as Inoxsecure Services) ("Company"), are committed to protecting the privacy and security of your personal information. Your privacy is important to us, and maintaining your trust is paramount.
+              <br />
+              <br />
+              This Privacy Policy explains how we collect, use, process, and disclose information about you. By using our website/app/platform and affiliated services, you consent to the terms of our Privacy Policy, in addition to our Terms of Use. We encourage you to read this Privacy Policy to understand how your information is collected, used, and disclosed from time to time. Please stay updated with any changes or updates we make to this policy.
+              <br />
+              <br />
+              This Privacy Policy describes our privacy practices for all websites, products, and services that are linked to it. However, this policy does not apply to affiliates and partners that have their own privacy policies. In such cases, we recommend that you read the privacy policy on the applicable site.
+              <br />
+              <br />
+              If you have any questions regarding this Privacy Policy, please write to us at <a href="mailto:privacy@inoxsecure.com" className="text-blue-600 underline">privacy@inoxsecure.com</a>.
             </p>
+          </section>
+
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">
+              Applicability and Scope
+            </h2>
             <p>
-              This Privacy Policy describes how Inox Secure Pvt. Ltd. ("Inox
-              Secure," "we," "us," or "our") collects, uses, shares, and
-              protects your personal information when you use our website,
-              mobile application, and services (collectively, the "Services").
-              By accessing or using our Services, you consent to the practices
-              described in this Privacy Policy.
+              Blink Commerce Private Limited ("Inoxsecure", the "Company", "we", "us", and "our") respects your privacy and is committed to protecting it. This policy sets out:
+              <br />
+              • The types of information that Inoxsecure may collect from you directly or through automated means when you access or use its website and other online services (collectively referred to as "Services"); and
+              <br />
+              • Its practices for collecting, using, maintaining, protecting, and disclosing that information.
+              <br />
+              <br />
+              This policy applies only to the information Inoxsecure collects through its Services, including email, text, and other electronic communications sent through or in connection with the Services. This policy does not apply to information you provide to, or that is collected by, any third party you use in connection with the Services. Inoxsecure encourages you to consult such third parties directly regarding their privacy practices.
+              <br />
+              <br />
+              Please read this policy carefully to understand Inoxsecure's policies and practices regarding your information and how it will be treated. By accessing or using the Services and/or registering for an account with Inoxsecure, you agree to this privacy policy and consent to Inoxsecure's collection, use, disclosure, retention, and protection of your personal information as described here.
+              <br />
+              <br />
+              If you do not provide the required information, Inoxsecure may not be able to offer all of its Services to you.
+              <br />
+              <br />
+              This policy may change from time to time. Your continued use of Inoxsecure's Services after any such change will be considered your acceptance of those changes, so please review this policy periodically for updates.
+              <br />
+              <br />
+              <strong>Permissible Age:</strong> The Services are not intended for users under the age of 18 unless allowed under applicable local laws ("Permissible Age"). We do not knowingly collect personal information from, or market to, anyone under the Permissible Age.
             </p>
+
+            <h3 className="text-xl font-semibold mt-6 mb-3">
+              1. The information we collect and how we use it
+            </h3>
+            <ul className="list-disc pl-6 space-y-2 my-4 text-justify">
+              <li>
+                The information we collect on or through our Services may include:
+              </li>
+              <li>
+                <strong>Personal Information:</strong> Name, address, email address, postal code, password, and other account details like gender, mobile number, date of birth, anniversary date, bio, and website.
+              </li>
+              <li>
+                <strong>Your Content:</strong> Information you share through our Services, such as order details, contact info of people you add for features, and anything you add to your profile. If you share your friends’ or others’ contact info, you confirm that you have their consent to do so.
+              </li>
+              <li>
+                <strong>Your Searches and Activities:</strong> Search terms you used and the results you clicked on.
+              </li>
+              <li>
+                <strong>Your Browsing Information:</strong> How long you used our Services, which features you used, and ads you clicked.
+              </li>
+              <li>
+                <strong>Your Communications:</strong> Messages between you and delivery partners or sellers (some may be recorded). This includes surveys, contests, newsletters, customer support chats, or messages via SMS (your number, carrier, time logged). If you give feedback, we may share it with third-party sellers or providers.
+              </li>
+              <li>
+                <strong>Your Transactional Information:</strong> When you make purchases, we store info to process your orders — like phone number, address, email, billing info, and payment details. We may share this with third parties like PCI-compliant payment gateways. Your card data is encrypted using standard security methods.
+              </li>
+              <li>
+                <strong>Image / Video Data:</strong> We may collect images or videos from CCTV at offices, stores, or events for security purposes. These may include faces, vehicles, and other personal details. Event photos/videos may also be used for promotions and shared with business/event partners.
+              </li>
+            </ul>
+
+
+            <h3 className="text-xl font-semibold mt-6 mb-3">
+              2. Information We Collect Through Automatic Data Collection Technologies
+            </h3>
+            <ul className="list-disc pl-5 space-y-2 text-justify">
+              <li>
+                We may automatically collect certain information about the computer or devices (including mobile devices) you use to access the Services, and about your usage, even if you're not logged in.
+              </li>
+              <li>
+                <strong>Usage Information:</strong> Details about how you use our Services — including traffic data, location data, logs, and other communication data.
+              </li>
+              <li>
+                <strong>Computer and Device Information:</strong> Info like your IP address, OS, platform, browser type, connection type/speed, device type, unique device ID, mobile network, and phone number.
+              </li>
+              <li>
+                <strong>Stored Information and Files:</strong> Our app may access metadata from files stored on your device — like photos, videos, audio, contacts, etc.
+              </li>
+              <li>
+                <strong>Location Information:</strong> We may collect real-time location data from your device if you allow it.
+              </li>
+              <li>
+                <strong>Last URL Visited:</strong> The URL of the last webpage you visited before coming to our site.
+              </li>
+              <li>
+                <strong>Your Preferences:</strong> Settings like time zone and language.
+              </li>
+              <li>
+                <strong>Your Activity:</strong> Data like search queries, comments, clicked links, pages viewed (and order), time spent, and error logs.
+              </li>
+              <li>
+                <strong>Precise Location:</strong> If you use GPS features, we may collect latitude, longitude, altitude, and timestamp to customize location-based features. This may be linked with your device ID.
+              </li>
+              <li>
+                <strong>Cookies and Tracking Tools:</strong> Inoxsecure and our partners may use cookies, web beacons, mobile IDs, and similar tools to recognize users, store preferences, personalize content/ads, analyze usage, and for security.
+              </li>
+            </ul>
+
+
+            <h3 className="text-xl font-semibold mt-6 mb-3">
+              Information We Collect From Third Parties
+            </h3>
+            <ul className="list-disc pl-6 space-y-2 my-4 text-justify">
+              <li>
+                We may collect, process, and store your user ID associated with any social media account (such as Facebook or Google) that you use to sign in to the Services or connect with them. When you log in using a social media account or link it with our Services, you consent to our collection, storage, and use of the information available through that social media interface, as per this Privacy Policy.
+                <br />
+                <br />
+                This may include — but is not limited to — public information on your social media account, data shared with us by the social media service, or information provided during sign-in. Please refer to your social media provider’s privacy policy and help center to learn how they handle and share your data.
+              </li>
+              <li>
+                We may also collect information about you from third parties — such as marketing partners, third-party websites, and researchers — and combine it with the information we collect from or about you.
+              </li>
+            </ul>
+
           </section>
 
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">
-              1. Information We Collect
+              How we use the information we collect
             </h2>
-            <p>
-              We collect several types of information from and about users of
-              our Services, including:
+
+            <p className="mb-4">
+              We primarily collect your data to provide you with the Services that you opt for. Our Services are supported by a wide range of additional services that directly or indirectly enhance the experience we offer. We use the information we collect from and about you for a variety of purposes, including:
+
+              <ul className="list-disc pl-5 mt-2 space-y-1">
+                <li><strong>To administer our Services:</strong> by sharing information with third parties that help facilitate the Services, such as delivery partners, service providers, and vendors.</li>
+                <li><strong>To process and respond</strong> to your queries and complaints.</li>
+                <li><strong>To understand our users:</strong> (e.g., their activities on our Services, features they like, and how they use them), improve the content and features (e.g., by personalizing content to your interests), complete transactions, and offer customized deals and services based on your preferences.</li>
+                <li><strong>To diagnose technical problems,</strong> platform issues, and other necessary diagnostics for a stable and functional service.</li>
+                <li><strong>To send you communications</strong> (emails, courier, registered post, calls, SMS, WhatsApp messages, or other modes) that you have requested or that may interest you. This includes customer support and grievance redressal.</li>
+                <li><strong>To show you ads</strong> that are relevant to your interests.</li>
+                <li><strong>To generate and review reports</strong> and conduct research on user behavior and service usage patterns.</li>
+                <li><strong>To allow you to participate</strong> in interactive features like promotions, contests, and sweepstakes. We may share your data with third parties managing these activities.</li>
+                <li><strong>To fulfill and enforce</strong> our obligations and rights from contracts between you and us, including enforcing terms, agreements, billing, and collections.</li>
+                <li><strong>To detect and prevent fraud,</strong> abuse of promotions, and violations of our terms of service.</li>
+                <li><strong>For employee training</strong> and quality assurance purposes.</li>
+                <li><strong>To notify you</strong> about changes to our Services.</li>
+                <li><strong>To comply</strong> with legal requirements and obligations.</li>
+                <li><strong>To anonymize or de-identify</strong> information collected from you (e.g., via third-party web analytics tools). This data may be used or disclosed without restriction.</li>
+                <li><strong>To contact you for marketing</strong> our own or third-party products and services that may interest you. We may use collected data to show ads to target audiences of third-party advertisers. While we do not share personal data without your consent, interacting with ads may reveal you match the advertiser's criteria.</li>
+                <li><strong>Analytics and tailored advertising:</strong> We may use third-party web analytics tools (e.g., Google Analytics) to better understand your use of our Services. These tools may collect and evaluate user behavior.</li>
+                <li><strong>Tailored advertising:</strong> Third parties (e.g., ad networks like Google Analytics, OpenX, Pubmatic, DoubleClick) may use cookies and similar tech to collect information about your use of our Services. This data helps deliver customized ads, measure impressions, and track user interactions. We do not control or govern the use of such tracking technologies. Tailored ads may also appear in our mobile applications.</li>
+                <li><strong>For any other purpose</strong> necessary to administer the Services, with your consent.</li>
+                <li><strong>Payment card information:</strong> To use specific features like transactions, we may require your credit/debit card details. By submitting this information, you agree to share it with third-party payment processors and service providers (including fraud detection services).</li>
+                <li><strong>Applicants:</strong> If you apply for a job (e.g., delivery partner or in-store staff), we will use your information to evaluate your application. We may retain your data for administrative use and share it with other companies for job consideration, background checks, and with third-party providers managing recruitment. If hired or processed, we may also collect and store more information as governed by this Privacy Policy.</li>
+              </ul>
             </p>
 
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              1.1 Personal Information
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                <strong>Contact Information:</strong> Name, email address,
-                postal address, phone number
-              </li>
-              <li>
-                <strong>Account Information:</strong> Username, password,
-                account preferences, profile picture
-              </li>
-              <li>
-                <strong>Payment Information:</strong> Credit card details,
-                billing address, payment history (note: full payment card
-                details are processed securely by our payment service providers)
-              </li>
-              <li>
-                <strong>Delivery Information:</strong> Delivery address,
-                delivery instructions, preferred delivery times
-              </li>
-              <li>
-                <strong>Identity Verification:</strong> For certain high-value
-                products, we may collect government-issued ID information for
-                verification purposes
-              </li>
-              <li>
-                <strong>Communication Data:</strong> Records of your
-                communications with us, including customer service interactions,
-                reviews, and feedback
-              </li>
-            </ul>
 
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              1.2 Technical Information
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                <strong>Device Information:</strong> IP address, device type,
-                operating system, browser type, mobile network information,
-                device identifiers
-              </li>
-              <li>
-                <strong>Usage Data:</strong> Pages viewed, time spent on pages,
-                links clicked, search queries, purchase history, browsing
-                patterns
-              </li>
-              <li>
-                <strong>Location Data:</strong> Precise location (with your
-                consent) for delivery services, approximate location based on IP
-                address
-              </li>
-              <li>
-                <strong>Cookies and Similar Technologies:</strong> Information
-                collected through cookies, web beacons, pixel tags, and similar
-                tracking technologies
-              </li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              1.3 Information from Third Parties
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>Social media platforms when you connect your accounts</li>
-              <li>Payment processors and financial institutions</li>
-              <li>Delivery partners and logistics providers</li>
-              <li>Marketing partners and analytics providers</li>
-              <li>Public databases and data aggregators</li>
-            </ul>
           </section>
+
 
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">
-              2. How We Use Your Information
+              How We Share Your Information
             </h2>
+            <p className="mb-4">
+              We use personal information to provide you with the services that you have opted to receive through the use of our platform and services. For facilitation of this, we may disclose personal information that we collect, or you provide, as described in this privacy policy, in the following ways:<br /><br />
+
+              <strong>General Information Disclosures</strong>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                <li>
+                  <strong>To our subsidiaries and affiliates:</strong> which are entities under common ownership or control of our ultimate parent company inoxscure services.
+                </li>
+                <li>
+                  <strong>To contractors, sellers, suppliers, advertisers/service providers:</strong> who are typically bound by contractual obligations to keep personal information confidential and use it only for the purposes for which we disclose it to them.
+                </li>
+                <li>
+                  <strong>To an actual or potential buyer or other successor:</strong> in the event of a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of inoxsecure's assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which personal information held by inoxsecure about the users of our Services are among the assets transferred.
+                </li>
+                <li>
+                  <strong>To third-parties, including suppliers:</strong> to market their products or services to you if you have consented to receive the promotional updates. We contractually require these third-parties to keep personal information confidential and use it only for the purposes for which we disclose it to them.
+                </li>
+                <li>
+                  <strong>Sellers and brands:</strong> In cases where you provide us with feedback regarding the quality of products or services received by you, we may share this feedback with the relevant brand / seller or other third party as the case may be, along with your personal data, to ensure timely grievance redressal and prevent recurrence of similar issues. We may also run contests and campaigns on the platform in collaboration with or on behalf of brands. Participation in such campaigns is voluntary, and customer details may be shared with the brand to administer such events, additionally subject to their terms and conditions and privacy policy.
+                </li>
+                <li>
+                  <strong>Service Providers:</strong> We may share your information with third-party service providers that we use for a variety of purposes, such as to send you communications via emails, messages or tele-call to inform you about our products and Services that may be of interest to you, push notifications to your mobile device on our behalf, provide voice recognition services to process your spoken queries and questions, help us analyze use of our Services, and process and collect payments. Some of our products, Services, and databases are hosted by third-party hosting services providers. We may also use third-party service providers for other projects, such as conducting surveys, organizing sweepstakes, or providing services and business/commercial solutions for us whether permanently or on an ad hoc basis. We may share information about you with these service providers to enable them to perform their services.
+                </li>
+                <li>
+                  <strong>Legal Authorities:</strong> We may share your information when we believe in good faith that such sharing is reasonably necessary in order to investigate, prevent, or take action regarding possible illegal activities or to comply with legal processes. This may involve the sharing of your information with law enforcement, government agencies, courts, and/or other organizations on account of legal requests such as notices, summons, court orders, or government demands to comply with applicable laws.
+                </li>
+                <li>
+                  <strong>Audit and other assurance purposes:</strong> We may also share your information to investigate and address threats or potential threats to the safety of any person, to investigate and address violations of this Privacy Policy or the Terms of Service, or to investigate and address violations of the rights of third parties and/or to protect the rights, property, and safety of inoxsecure, our employees, other users, or the public. We may also share information with internal and external audit teams and various stakeholders across our ecosystem, including affiliated entities, payment gateways, banks, and other financial entities for fraud detection, prevention, mitigation, auditing, and assurance purposes.
+                </li>
+                <li>
+                  <strong>Exceptional circumstances:</strong> If we believe disclosure is necessary or appropriate to protect the rights, property, or safety of inoxsecure, our customers or others, we may share limited data to the extent necessary to ensure safety of the platform. This includes exchanging information with other companies and organizations for the purposes of fraud protection and credit risk reduction.
+                </li>
+                <li>
+                  We may additionally share your information with third parties in any other circumstances where we have your consent to do so.
+                </li>
+              </ul>
+            </p>
+
+
+
+            <h3 className="text-xl font-semibold mt-6 mb-3">
+              Your Information
+            </h3>
             <p>
-              We use the information we collect for various legitimate business
-              purposes, including:
+              <strong>Correspondence:</strong> When you sign up for an account, you are opting to receive correspondence from other inoxsecure users and inoxsecure. You can manage your email and notification preferences and follow the "unsubscribe" instructions for commercial email messages. Note that you cannot opt out of receiving certain administrative policy, service policy, or legal policy related correspondences from inoxsecure.
+              <br /><br />
+
+              <strong>Deletion:</strong> If you would like to permanently delete your account, please use the "Contact Us" link at the bottom of every page (also located here). Once you have requested for deletion of the data associated with your account, we will not be able to restore your account or any of its associated data to you. Copies and backups of your personal information may continue to remain in our backup storage used for recovery in case of contingencies, as well as for enforcing our legal rights and fraud / risk mitigation purposes.
+              <br /><br />
+
+              <strong>Limitation:</strong> Your rights regarding your personal information may be limited, subject to the law of your jurisdiction, particularly:
+              <ul className="list-disc pl-5 mt-2 space-y-1">
+                <li>If your requests are abusive or unreasonably excessive,</li>
+                <li>Where the rights or safety of another person or persons would be encroached upon, or</li>
+                <li>If the information or material you request relates to existing or anticipated legal proceedings between you and us, or providing access to you would prejudice negotiations between us or an investigation of possible unlawful activity.</li>
+              </ul>
+              <br />
+              Your right to review, update, correct, and delete your information is subject to our records retention policies and applicable law, including any statutory retention requirements.
+            </p>
+
+
+
+            <h3 className="text-xl font-semibold mt-6 mb-3">
+              Security: How we protect your information
+            </h3>
+            <p>
+              We have implemented appropriate physical, electronic, and managerial procedures to safeguard and help prevent unauthorized access to your information and to maintain data security. These safeguards take into account the sensitivity of the information that we collect, process and store and the current state of technology. We follow generally accepted industry standards to protect the personal information submitted to us, both during transmission and once we receive it. The third party service providers providing payment gateway and payment processing services are all validated as compliant with the payment card industry standard (generally referred to as PCI compliant service providers).
+              We assume no liability or responsibility for disclosure of your information due to errors in transmission, unauthorized third-party access, or other causes beyond our control. You play an important role in keeping your personal information secure. You should not share your user name, password, or other security information for your inoxsecure account with anyone. If we receive instructions using your username and password, we will consider that you have authorized the instructions and will not be liable for any breach or subsequent loss arising out of such perceived authorisation.
+
             </p>
 
             <h3 className="text-xl font-semibold mt-6 mb-3">
-              2.1 Service Provision
+              Miscellaneous
             </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>Process and fulfill your orders for products and services</li>
-              <li>Provide and maintain our Services</li>
-              <li>Verify your identity and prevent fraud</li>
-              <li>Process payments and manage your account</li>
-              <li>Deliver products to your specified location</li>
-              <li>Provide customer support and respond to your inquiries</li>
-            </ul>
+            <p>
+              <strong>Third party links and services:</strong> The Services may contain links to third-party websites. Your use of these features may result in the collection, processing or sharing of information about you, depending on the feature. Please be aware that we are not responsible for the content or privacy practices of other websites or services which may be linked to our services. We do not endorse or make any representations about third-party websites or services. Our Privacy Policy does not cover the information you choose to provide to or that is collected by these third parties. We strongly encourage you to read such third parties' privacy policies prior to sharing any personal information with such third parties.
+              <br /><br />
+
+              <strong>Policy amendments:</strong> We reserve the right to amend this Privacy Policy from time to time to reflect changes in the law, our data collection and processing practices, the features of our Services, or advances in technology. Please check this page periodically for any changes or updates. Use of information we collect is subject to the Privacy Policy in effect at the time such information is used. If we make any material changes to this Privacy Policy, we will post the changes here and may notify you where required by law. Please review the changes carefully. Your continued use of the Services following the posting of changes to this Privacy Policy will constitute your consent and acceptance of those changes.
+            </p>
+
+
+
 
             <h3 className="text-xl font-semibold mt-6 mb-3">
-              2.2 Communication
+              Contact Us
             </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                Send you transactional messages about your orders and account
-              </li>
-              <li>
-                Send you marketing communications (with your consent where
-                required)
-              </li>
-              <li>Notify you about changes to our Services or policies</li>
-              <li>Respond to your comments, questions, and requests</li>
-            </ul>
+            <p>
+              <strong>Contact Information:</strong> If you have any queries relating to the processing/usage of information provided by you or inoxsecure's Privacy Policy, you may email the Data Protection Officer (DPO) at <a href="mailto:privacy@inoxsecure.com">privacy@inoxsecure.com</a>.
+            </p>
 
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              2.3 Personalization and Improvement
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                Personalize your experience and provide product recommendations
-              </li>
-              <li>Improve our Services and develop new features</li>
-              <li>Analyze usage patterns and conduct research</li>
-              <li>Test new features and functionality</li>
-            </ul>
 
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              2.4 Legal and Security
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>Ensure the security and integrity of our Services</li>
-              <li>Detect, prevent, and address fraud and security issues</li>
-              <li>Comply with legal obligations and regulatory requirements</li>
-              <li>Protect our rights and the rights of our users</li>
-            </ul>
           </section>
 
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">
-              3. How We Share Your Information
-            </h2>
-            <p>
-              We may share your personal information in the following
-              circumstances:
-            </p>
 
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              3.1 Service Providers
-            </h3>
-            <p>
-              We share information with third-party vendors who perform services
-              on our behalf, including:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>Payment processing companies</li>
-              <li>Delivery and logistics partners</li>
-              <li>Cloud hosting and data storage providers</li>
-              <li>Customer service and support platforms</li>
-              <li>Marketing and advertising partners</li>
-              <li>Analytics and research providers</li>
-              <li>Installation and technical support services</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              3.2 Business Partners
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                Manufacturers and suppliers for warranty and support services
-              </li>
-              <li>Financial institutions for EMI and credit services</li>
-              <li>Insurance providers for product protection plans</li>
-              <li>Joint marketing partners (with your consent)</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              3.3 Legal Requirements
-            </h3>
-            <p>We may disclose your information when required by law or to:</p>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                Comply with legal processes, court orders, or governmental
-                requests
-              </li>
-              <li>Enforce our terms of service and other agreements</li>
-              <li>
-                Protect the rights, property, or safety of Inox Secure, our
-                users, or others
-              </li>
-              <li>
-                Investigate and prevent fraud, security breaches, or illegal
-                activities
-              </li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              3.4 Business Transfers
-            </h3>
-            <p>
-              In connection with a merger, acquisition, reorganization, or sale
-              of assets, your information may be transferred to the acquiring
-              entity, subject to the same privacy protections.
-            </p>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              3.5 With Your Consent
-            </h3>
-            <p>
-              We may share your information in other ways with your consent or
-              at your direction, such as when you choose to share information on
-              social media platforms.
-            </p>
-
-            <div className="bg-blue-50 p-6 rounded-lg my-6">
-              <p className="font-semibold text-blue-800">
-                Important: We do not sell your personal information to third
-                parties for their marketing purposes without your explicit
-                consent.
-              </p>
-            </div>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">
-              4. Your Rights and Choices
-            </h2>
-            <p>
-              Depending on your location and applicable laws, you may have
-              certain rights regarding your personal information:
-            </p>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              4.1 Access and Portability
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>Request access to your personal information</li>
-              <li>
-                Receive a copy of your data in a structured, commonly used
-                format
-              </li>
-              <li>Request information about how we process your data</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              4.2 Correction and Updates
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>Correct inaccuracies in your personal information</li>
-              <li>Update your account information and preferences</li>
-              <li>Complete incomplete personal information</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              4.3 Deletion and Restriction
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                Request deletion of your personal information (subject to legal
-                requirements)
-              </li>
-              <li>
-                Restrict or object to processing of your personal information
-              </li>
-              <li>Withdraw consent where processing is based on consent</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              4.4 Marketing Communications
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                Opt-out of marketing emails by clicking the unsubscribe link
-              </li>
-              <li>
-                Adjust your communication preferences in your account settings
-              </li>
-              <li>Contact us to opt-out of SMS marketing messages</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              4.5 Cookies and Tracking
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>Manage cookie preferences through your browser settings</li>
-              <li>
-                Opt-out of targeted advertising through industry opt-out tools
-              </li>
-              <li>Disable location tracking through your device settings</li>
-            </ul>
-
-            <div className="bg-gray-50 p-6 rounded-lg my-6">
-              <h4 className="font-semibold mb-2">
-                How to Exercise Your Rights
-              </h4>
-              <p className="text-sm">
-                To exercise these rights, please contact us at{" "}
-                <a
-                  href="mailto:support@inoxsecure.com"
-                  className="text-primary hover:underline"
-                >
-                  support@inoxsecure.com
-                </a>{" "}
-                or through your account settings. We will respond to your
-                request in accordance with applicable law, typically within 30
-                days.
-              </p>
-            </div>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">5. Data Security</h2>
-            <p>
-              We implement comprehensive security measures to protect your
-              personal information against unauthorized access, alteration,
-              disclosure, or destruction:
-            </p>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              5.1 Technical Safeguards
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>SSL/TLS encryption for data transmission</li>
-              <li>Advanced encryption for data storage</li>
-              <li>
-                Secure server infrastructure with regular security updates
-              </li>
-              <li>Multi-factor authentication for administrative access</li>
-              <li>Regular security audits and penetration testing</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              5.2 Organizational Measures
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                Access controls limiting data access to authorized personnel
-                only
-              </li>
-              <li>Regular employee training on data protection and security</li>
-              <li>Incident response procedures for security breaches</li>
-              <li>Data retention policies to minimize data storage</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              5.3 Payment Security
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>PCI DSS compliance for payment card processing</li>
-              <li>Tokenization of payment information</li>
-              <li>Secure payment gateways from trusted providers</li>
-              <li>Fraud detection and prevention systems</li>
-            </ul>
-
-            <div className="bg-yellow-50 p-6 rounded-lg my-6">
-              <p className="font-semibold text-yellow-800 mb-2">
-                Important Security Note:
-              </p>
-              <p className="text-yellow-700 text-sm">
-                While we implement robust security measures, no method of
-                transmission over the Internet or electronic storage is 100%
-                secure. We cannot guarantee absolute security, but we
-                continuously work to improve our security practices and respond
-                quickly to any potential threats.
-              </p>
-            </div>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">6. Data Retention</h2>
-            <p>
-              We retain your personal information for as long as necessary to
-              fulfill the purposes outlined in this Privacy Policy, unless a
-              longer retention period is required or permitted by law:
-            </p>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              6.1 Retention Periods
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                <strong>Account Information:</strong> Until you delete your
-                account or request deletion
-              </li>
-              <li>
-                <strong>Transaction Records:</strong> 7 years for tax and
-                accounting purposes
-              </li>
-              <li>
-                <strong>Customer Service Records:</strong> 3 years for quality
-                assurance
-              </li>
-              <li>
-                <strong>Marketing Data:</strong> Until you opt-out or 2 years of
-                inactivity
-              </li>
-              <li>
-                <strong>Technical Logs:</strong> 12 months for security and
-                performance monitoring
-              </li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              6.2 Deletion Process
-            </h3>
-            <p>
-              When we no longer need your personal information, we securely
-              delete or anonymize it. Some information may be retained in
-              anonymized form for analytical purposes.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">
-              7. International Data Transfers
-            </h2>
-            <p>
-              Your personal information may be transferred to and processed in
-              countries other than your country of residence. When we transfer
-              data internationally, we ensure appropriate safeguards are in
-              place:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                Standard contractual clauses approved by relevant authorities
-              </li>
-              <li>
-                Adequacy decisions by competent data protection authorities
-              </li>
-              <li>Certification schemes and codes of conduct</li>
-              <li>Your explicit consent where required</li>
-            </ul>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">8. Children's Privacy</h2>
-            <p>
-              Our Services are not intended for children under the age of 18. We
-              do not knowingly collect personal information from children under
-              18. If we become aware that we have collected personal information
-              from a child under 18, we will take steps to delete such
-              information promptly.
-            </p>
-            <p>
-              If you are a parent or guardian and believe your child has
-              provided us with personal information, please contact us
-              immediately.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">
-              9. Cookies and Tracking Technologies
-            </h2>
-            <p>
-              We use cookies and similar tracking technologies to enhance your
-              experience on our Services:
-            </p>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              9.1 Types of Cookies
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>
-                <strong>Essential Cookies:</strong> Required for basic website
-                functionality
-              </li>
-              <li>
-                <strong>Performance Cookies:</strong> Help us understand how
-                visitors use our website
-              </li>
-              <li>
-                <strong>Functional Cookies:</strong> Remember your preferences
-                and settings
-              </li>
-              <li>
-                <strong>Marketing Cookies:</strong> Used to deliver relevant
-                advertisements
-              </li>
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-6 mb-3">
-              9.2 Managing Cookies
-            </h3>
-            <p>
-              You can control cookies through your browser settings. However,
-              disabling certain cookies may affect the functionality of our
-              Services.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">
-              10. Third-Party Links and Services
-            </h2>
-            <p>
-              Our Services may contain links to third-party websites,
-              applications, or services. This Privacy Policy does not apply to
-              these third-party services. We encourage you to read the privacy
-              policies of any third-party services you visit or use.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">
-              11. Changes to This Privacy Policy
-            </h2>
-            <p>
-              We may update this Privacy Policy from time to time to reflect
-              changes in our practices, technology, or legal requirements. We
-              will notify you of any material changes by:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 my-4">
-              <li>Posting the updated policy on our website</li>
-              <li>
-                Sending you an email notification (if you have an account)
-              </li>
-              <li>Displaying a prominent notice on our Services</li>
-            </ul>
-            <p>
-              Your continued use of our Services after any changes indicates
-              your acceptance of the updated Privacy Policy.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">12. Contact Us</h2>
-            <p>
-              If you have any questions, concerns, or requests regarding this
-              Privacy Policy or our data practices, please contact us:
-            </p>
-            <div className="bg-gray-50 p-6 rounded-lg my-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-semibold mb-2">Privacy Officer</h4>
-                  <p className="text-sm text-gray-600 mb-1">
-                    Email:{" "}
-                    <a
-                      href="mailto:support@inoxsecure.com"
-                      className="text-primary hover:underline"
-                    >
-                      support@inoxsecure.com
-                    </a>
-                  </p>
-                  <p className="text-sm text-gray-600 mb-1">
-                    Phone: +91 9680849577 
-
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Response Time: Within (24/7 support)
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2">Mailing Address</h4>
-                  <address className="text-sm text-gray-600 not-italic">
-                    Harshita Electronics Mart,
-                    <br />
-                    Shop No. 03, Shree Ram Market Agra Road,
-                    <br />
-                    Jaipur - 302031 (Rajasthan)
-                    <br />
-                    India
-                  </address>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <div className="bg-primary text-white p-6 rounded-lg text-center">
-            <h3 className="text-xl font-bold mb-2">
-              Questions About Your Privacy?
-            </h3>
-            <p className="mb-4 opacity-90">
-              Our privacy team is here to help you understand how we protect
-              your personal information.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <button className="bg-white text-primary px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                  Contact Privacy Team
-                </button>
-              </Link>
-              <Link href="/faq">
-                <button className="border border-white text-white px-6 py-2 rounded-lg font-medium hover:bg-white/10 transition-colors">
-                  Privacy FAQ
-                </button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-8 text-sm text-gray-600">
-            <p>
-              This Privacy Policy is effective as of the date stated above and
-              will remain in effect except with respect to any changes in its
-              provisions in the future, which will be in effect immediately
-              after being posted on this page.
-            </p>
-          </div>
         </div>
       </div>
+
     </div>
   );
 }

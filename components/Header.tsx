@@ -113,7 +113,7 @@ export function Header() {
               <Link href="/appliances" className="hover:text-blue-200">Appliances</Link>
               <Link href="/it-products" className="hover:text-blue-200">IT Products</Link>
               <Link href="/products" className="hover:text-blue-200">All Products</Link>
-              <Link href="/services" className="hover:text-blue-200">Services</Link>
+              <Link href="/service" className="hover:text-blue-200">Services</Link>
             </nav>
 
             {/* actions */}

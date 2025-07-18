@@ -4,38 +4,41 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { getBannerSections, getMobileBannerSections } from "@/lib/api";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import {
+  getBannerSections,
+  getMobileBannerSections,
+} from "@/lib/api";
 
 type Slide = {
   _id: string;
-  image: string;      // common field in both APIs
-  mobile?: string;    // only desktop‑banner docs might have this
+  image: string;
+  mobile?: string;
   alt?: string;
   link?: string;
 };
 
+/* true when the screen is 640 px wide or less */
 function useIsMobile() {
-  const [m, setM] = useState(false);
+  const [mobile, setMobile] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 640px)");
-    const f = () => setM(mq.matches);
-    f();
-    mq.addEventListener("change", f);
-    return () => mq.removeEventListener("change", f);
+    const mq = window.matchMedia("(max-width:640px)");
+    const handle = () => setMobile(mq.matches);
+    handle();
+    mq.addEventListener("change", handle);
+    return () => mq.removeEventListener("change", handle);
   }, []);
-  return m;
+  return mobile;
 }
 
 export function HeroSection() {
   const isMobile = useIsMobile();
 
-  // keep both lists
   const [desktopSlides, setDesktopSlides] = useState<Slide[]>([]);
   const [mobileSlides, setMobileSlides] = useState<Slide[]>([]);
-  const [current, setCurrent] = useState(0);
 
-  // fetch once
+  /* fetch banners once */
   useEffect(() => {
     (async () => {
       const [desk, mob] = await Promise.all([
@@ -48,75 +51,47 @@ export function HeroSection() {
   }, []);
 
   const slides = isMobile ? mobileSlides : desktopSlides;
-  const len = slides.length;
-
-  /* auto‑play */
-  useEffect(() => {
-    if (len === 0) return;
-    const t = setInterval(() => setCurrent((p) => (p + 1) % len), 7000);
-    return () => clearInterval(t);
-  }, [len, current]);
-
-  if (len === 0) return null;
-
-  const next = () => setCurrent((p) => (p + 1) % len);
-  const prev = () => setCurrent((p) => (p - 1 + len) % len);
+  if (slides.length === 0) return null;
 
   return (
-    <section className="relative overflow-hidden w-full">
-      {/* track */}
-      <div
-        className="flex transition-transform duration-700 ease-in-out"
-        style={{ transform: `translateX(-${current * 100}%)` }}
+    <section className="relative w-full">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        loop
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        navigation
+        pagination={{ clickable: true }}
+        className="w-full"
       >
-        {slides.map((s, idx) => (
-          <Link
-            key={s._id}
-            href={s.link || "#"}
-            className="relative flex-shrink-0 w-full h-[340px] md:h-[435px] lg:h-[520px]"
-          >
-            <Image
-              src={
-                isMobile
-                  ? s.mobile || s.image // mobile first • fallback to image
-                  : s.image
-              }
-              alt={s.alt || "banner"}
-              fill
-              priority={idx === 0}
-              className="object-cover object-center"
-            />
-          </Link>
-        ))}
-      </div>
+        {slides.map((s) => (
+          <SwiperSlide key={s._id}>
+            <Link href={s.link || "#"} className="block w-full">
+              <div className="relative w-full">
+                {/* mobile (≤ 640 px) */}
+                <Image
+                  src={s.mobile || s.image}
+                  alt={s.alt || "banner"}
+                  width={1920}      /* use your banner size */
+                  height={750}
+                  priority
+                  className="w-full h-auto object-cover sm:hidden"
+                  sizes="100vw"
+                />
 
-      {/* arrows */}
-      <button
-        onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white border rounded-full p-3 shadow-lg z-20"
-      >
-        <ChevronLeft className="h-6 w-6 text-gray-800" />
-      </button>
-      <button
-        onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white border rounded-full p-3 shadow-lg z-20"
-      >
-        <ChevronRight className="h-6 w-6 text-gray-800" />
-      </button>
-
-      {/* dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            aria-label={`slide ${i + 1}`}
-            onClick={() => setCurrent(i)}
-            className={`w-3 h-3 rounded-full ${
-              i === current ? "bg-white" : "bg-white/50"
-            }`}
-          />
+                {/* desktop (≥ 640 px) */}
+                <Image
+                  src={s.image}
+                  alt={s.alt || "banner"}
+                  width={1920}
+                  height={750}
+                  className="w-full h-auto object-cover hidden sm:block"
+                  sizes="(min-width:640px) 100vw"
+                />
+              </div>
+            </Link>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </section>
   );
 }

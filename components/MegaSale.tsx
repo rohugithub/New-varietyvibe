@@ -57,6 +57,7 @@ export default function MegaSaleBanner() {
 
     return (
         <section className="w-full px-2">
+            
             {/* MOBILE banner (≤ 640 px) */}
             {mobileBanner && (
                 <div className="relative h-60 w-full overflow-hidden rounded-lg sm:hidden">
@@ -72,7 +73,6 @@ export default function MegaSaleBanner() {
                 </div>
             )}
 
-
             {/* DESKTOP / TABLET banner (≥ 641 px) */}
             {desktopBanner && (
                 <div className="relative aspect-[1900/204] w-full overflow-hidden rounded-lg hidden sm:block">
@@ -86,6 +86,7 @@ export default function MegaSaleBanner() {
                     />
                 </div>
             )}
+
         </section>
     );
 }

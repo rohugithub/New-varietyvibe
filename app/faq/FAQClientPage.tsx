@@ -51,7 +51,7 @@ export default function FAQClientPage() {
       category: "General",
       question: "What is Inox Secure and what products do you sell?",
       answer:
-        "Inox Secure is a leading e-commerce platform specializing in electronics, home appliances, and IT products. We offer a wide range of products including TVs, washing machines, refrigerators, air conditioners, smartphones, laptops, kitchen appliances, and much more. All our products are 100% genuine and come with manufacturer warranties.",
+        "Inox Secure is India’s No.1 local search and e-commerce platform for electronics, appliances, and IT products. We connect users with local businesses and offer fast delivery, genuine products, and trusted services. With features like Search Plus and real-time chat, we help users and small businesses grow together.",
     },
     {
       id: 2,
@@ -79,82 +79,83 @@ export default function FAQClientPage() {
       category: "General",
       question: "How can I contact customer support?",
       answer:
-        "You can reach our customer support team 24/7 through multiple channels: Call us at +91 1234 567 890, email us at support@inoxsecure.com, use the live chat feature on our website/app, or visit our Help Center for instant answers to common questions.",
+        "You can reach our customer support team 24/7 through multiple channels: Call us at +91 9680849577, email us at support@inoxsecure.com, use the live chat feature on our website/app, or visit our Help Center for instant answers to common questions.",
     },
     {
       id: 6,
-      category: "General",
-      question: "Do you have a mobile app?",
-      answer:
-        "Yes! Our mobile app is available for both Android and iOS devices. You can download it from Google Play Store or Apple App Store. The app offers exclusive deals, faster checkout, real-time order tracking, and push notifications for offers and order updates.",
+      category: "About Us",
+      question: "When was Inox Secure launched?",
+      answer: "Inox Secure started its services in 2005 and launched its official website www.inoxsecure.com in 2025 to serve customers online."
     },
 
+    // Orders & Payment
     // Orders & Payment
     {
       id: 7,
       category: "Orders & Payment",
       question: "What payment methods do you accept?",
       answer:
-        "We accept multiple payment methods for your convenience: Credit/Debit Cards (Visa, MasterCard, American Express, RuPay), Net Banking from all major banks, UPI payments (Google Pay, PhonePe, Paytm, etc.), Digital Wallets (Paytm, Amazon Pay, etc.), EMI options, and Cash on Delivery (COD) for eligible orders.",
+        "We support many payment options for your comfort. You can pay using credit/debit cards (Visa, MasterCard, RuPay), UPI apps like PhonePe or Google Pay, Net Banking, digital wallets, EMI, or Cash on Delivery.",
     },
     {
       id: 8,
       category: "Orders & Payment",
       question: "Can I modify or cancel my order after placing it?",
       answer:
-        "Yes, you can modify or cancel your order within 30 minutes of placement, provided it hasn't been dispatched from our warehouse. To modify or cancel, go to 'My Orders' in your account or contact our customer support immediately. Once the order is dispatched, you can only return it as per our return policy.",
+        "Yes, you can cancel or change your order within 30 minutes if it hasn’t shipped. Go to ‘My Orders or contact support quickly. After shipping, cancellation is not allowed—only return is possible.",
     },
     {
       id: 9,
       category: "Orders & Payment",
-      question: "Do you offer EMI options?",
+      question: "When will I receive my refund if I cancel an order?",
       answer:
-        "Yes, we offer EMI options on most products above ₹3,000. You can choose from 3, 6, 9, 12, 18, and 24-month EMI plans. EMI is available on credit cards from major banks and through digital lending partners. The EMI amount and interest rates vary based on the bank and tenure selected.",
+        "Once your cancellation is confirmed, refunds are processed in 5 to 7 working days. The money will go back to your original payment method. We will notify you when it’s successfully refunded.",
     },
     {
       id: 10,
       category: "Orders & Payment",
       question: "Is it safe to make payments on your website?",
       answer:
-        "We use industry-standard SSL encryption and are PCI DSS compliant to ensure your payment information is completely secure. We partner with trusted payment gateways and never store your complete card details on our servers. All transactions are processed through secure, encrypted channels.",
+        "Yes, your payment is fully secure. We use encrypted SSL connections and trusted payment gateways. Your card details are never stored on our servers. Every transaction is processed through protected channels.",
     },
     {
       id: 11,
       category: "Orders & Payment",
       question: "Why was my payment declined?",
       answer:
-        "Payment declines can happen due to various reasons: Insufficient funds, incorrect card details, expired card, bank security restrictions, daily transaction limits exceeded, or technical issues. Please verify your payment details and try again. If the problem persists, contact your bank or try an alternative payment method.",
+        "Payments may fail due to wrong card info, low balance, bank limits, expired card, or network errors. Try again or use another method. You can also contact your bank for help.",
     },
 
     // Shipping & Delivery
     {
       id: 12,
       category: "Shipping & Delivery",
-      question: "How fast is your delivery?",
+      question: "What if my delivery is delayed?",
       answer:
-        "We offer multiple delivery options: Express Delivery (10-15 minutes) for select products in certain areas, Standard Delivery (same day to 3 days) depending on your location and product, and Scheduled Delivery where you can choose a specific time slot. Delivery times may vary based on product availability and location.",
+        "Delivery may be delayed due to weather, traffic, or other reasons. We will keep you updated through SMS or email. You can also contact our support team for quick help anytime.",
     },
     {
       id: 13,
       category: "Shipping & Delivery",
       question: "What are the delivery charges?",
       answer:
-        "Delivery charges are: FREE for orders above ₹499, ₹49 for orders below ₹499, and an additional ₹20 for Express Delivery (10-15 minutes) when available. Special delivery charges may apply for large appliances or remote locations. Current delivery charges are displayed at checkout.",
+        "Delivery charges are ₹199 for orders below ₹19,999. Orders ₹19,999 and above get free delivery. If Express Delivery is available, it costs ₹199 extra. Charges are shown at checkout clearly.",
     },
     {
       id: 14,
       category: "Shipping & Delivery",
       question: "How can I track my order?",
       answer:
-        "You can track your order in real-time through: Our mobile app or website by logging into your account and visiting 'My Orders', SMS updates sent to your registered mobile number, email notifications with tracking details, or by calling our customer support with your order number.",
+        "You can track your order live on our website. We also send updates by SMS. You’ll see delivery partner location, estimated time, and contact info. Just log in and visit ‘My Orders’.",
     },
     {
       id: 15,
       category: "Shipping & Delivery",
       question: "What if I'm not available during delivery?",
       answer:
-        "If you're not available during delivery, our delivery partner will attempt to contact you. You can reschedule the delivery for a convenient time through our app/website or by calling customer support. For high-value items, we may require ID verification and cannot leave packages unattended.",
+        "If you're not available, our delivery partner will try to call you. If delivery fails, we’ll return the item to our warehouse. You can reschedule the delivery or ask for a refund.",
     },
+
 
     // Returns & Exchanges
     {
@@ -267,11 +268,10 @@ export default function FAQClientPage() {
               <button
                 key={category.name}
                 onClick={() => setSelectedCategory(category.name)}
-                className={`p-4 rounded-lg border text-center transition-all duration-200 hover:shadow-md ${
-                  selectedCategory === category.name
-                    ? "bg-primary text-white border-primary"
-                    : "bg-white border-gray-200 hover:border-primary"
-                }`}
+                className={`p-4 rounded-lg border text-center transition-all duration-200 hover:shadow-md ${selectedCategory === category.name
+                  ? "bg-primary text-white border-primary"
+                  : "bg-white border-gray-200 hover:border-primary"
+                  }`}
               >
                 <div className="text-2xl mb-2">{category.icon}</div>
                 <div className="font-medium text-sm">{category.name}</div>
@@ -385,59 +385,8 @@ export default function FAQClientPage() {
           </div>
         </div>
 
-        {/* Still Need Help */}
-        {/* <div className="bg-primary text-white rounded-lg p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Still Need Help?</h2>
-          <p className="mb-6 opacity-90 max-w-2xl mx-auto">
-            Can't find the answer you're looking for? Our customer support team
-            is available 24/7 to assist you with any questions or concerns.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button variant="secondary" className="flex items-center gap-2">
-                <MessageCircle className="h-4 w-4" />
-                Contact Support
-              </Button>
-            </Link>
-            <Link href="/help">
-              <Button
-                variant="outline"
-                className="bg-transparent text-white border-white hover:bg-white/10 flex items-center gap-2"
-              >
-                <Clock className="h-4 w-4" />
-                Visit Help Center
-              </Button>
-            </Link>
-          </div>
-        </div> */}
-
-        {/* Support Hours */}
-        {/* <div className="mt-12 bg-gray-50 rounded-lg p-8">
-          <h2 className="text-xl font-bold mb-6 text-center">
-            Support Availability
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div className="flex flex-col items-center">
-              <Phone className="h-8 w-8 text-primary mb-3" />
-              <h3 className="font-semibold mb-2">Phone Support</h3>
-              <p className="text-sm text-gray-600">24/7 Available</p>
-              <p className="text-xs text-gray-500">+91 1234 567 890</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <MessageCircle className="h-8 w-8 text-primary mb-3" />
-              <h3 className="font-semibold mb-2">Live Chat</h3>
-              <p className="text-sm text-gray-600">24/7 Available</p>
-              <p className="text-xs text-gray-500">Instant responses</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <Mail className="h-8 w-8 text-primary mb-3" />
-              <h3 className="font-semibold mb-2">Email Support</h3>
-              <p className="text-sm text-gray-600">Response within 24 hours</p>
-              <p className="text-xs text-gray-500">support@inoxsecure.com</p>
-            </div>
-          </div>
-        </div> */}
       </div>
+
     </div>
   );
 }
