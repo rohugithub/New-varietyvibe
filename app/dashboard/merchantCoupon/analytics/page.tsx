@@ -66,7 +66,7 @@ export default function CouponAnalyticsPage() {
   return (
     <div className="p-6 space-y-6">
       <div className="flex items-center gap-4">
-        <Link href="/admin/merchantCoupon">
+        <Link href="/dashboard/merchantCoupon">
           <Button variant="outline" size="sm">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Coupons

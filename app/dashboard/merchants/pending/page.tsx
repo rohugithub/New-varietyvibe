@@ -82,7 +82,7 @@ export default function PendingMerchantsPage() {
   return (
     <div className="p-6 space-y-6">
       <div className="flex items-center gap-4">
-        <Link href="/admin/merchants">
+        <Link href="/dashboard/merchants">
           <Button variant="outline" size="sm">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Merchants

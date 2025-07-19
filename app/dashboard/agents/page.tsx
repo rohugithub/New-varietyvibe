@@ -71,7 +71,7 @@ export default function AgentsPage() {
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Agents Management</h1>
-        <Link href="/admin/agents/create">
+        <Link href="/dashboard/agents/create">
           <Button>
             <UserPlus className="w-4 h-4 mr-2" />
             Create Agent

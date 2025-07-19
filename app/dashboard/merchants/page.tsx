@@ -96,7 +96,7 @@ export default function AdminMerchantsPage() {
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Merchants Management</h1>
-        <Link href="/admin/merchants/pending">
+        <Link href="/dashboard/merchants/pending">
           <Button>
             <CheckCircle className="w-4 h-4 mr-2" />
             Pending Approvals

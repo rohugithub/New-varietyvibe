@@ -59,7 +59,7 @@ export default function CreateAgentPage() {
   return (
     <div className="p-6 max-w-2xl mx-auto">
       <div className="flex items-center gap-4 mb-6">
-        <Link href="/admin/agents">
+        <Link href="/dashboard/agents">
           <Button variant="outline" size="sm">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Agents
