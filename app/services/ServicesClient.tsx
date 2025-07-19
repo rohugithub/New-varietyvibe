@@ -757,39 +757,12 @@ export default function ServicesClient() {
               experts, transparent pricing, guaranteed satisfaction.
             </p>
 
-            
+
           </div>
         </div>
       </div>
 
-      {/* Features Section */}
-      {/* <div className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Verified Professionals</h3>
-              <p className="text-gray-600">All service providers are background verified and highly rated</p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Quick Booking</h3>
-              <p className="text-gray-600">Book services instantly and get confirmed appointments</p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Quality Guaranteed</h3>
-              <p className="text-gray-600">100% satisfaction guarantee with quality service delivery</p>
-            </div>
-          </div>
-        </div>
-      </div> */}
+
 
       {/* Services Section */}
       <div className="py-12 px-10">
@@ -811,36 +784,7 @@ export default function ServicesClient() {
               ))}
             </div>
 
-            {/* Sort and Filter */}
-            {/* <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="flex items-center gap-4">
-                <span className="text-gray-600">
-                  {filteredServices.length} services found
-                </span>
-                {searchTerm && (
-                  <Badge variant="secondary">Searching: "{searchTerm}"</Badge>
-                )}
-              </div>
-              <div className="flex items-center gap-2">
-                <Filter className="h-4 w-4 text-gray-500" />
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-48">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="popular">Most Popular</SelectItem>
-                    <SelectItem value="rating">Highest Rated</SelectItem>
-                    <SelectItem value="reviews">Most Reviews</SelectItem>
-                    <SelectItem value="price-low">
-                      Price: Low to High
-                    </SelectItem>
-                    <SelectItem value="price-high">
-                      Price: High to Low
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div> */}
+
           </div>
 
           {/* Services Grid */}
@@ -874,50 +818,16 @@ export default function ServicesClient() {
                       <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
                         {service.name}
                       </h3>
-                      {/* <Badge variant="outline" className="text-xs">
-                        {service.category}
-                      </Badge> */}
+
                     </div>
 
                     <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                       {service.description}
                     </p>
 
-                    {/* <div className="flex items-center gap-4 mb-4">
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className="font-medium">{service.rating}</span>
-                        <span className="text-gray-500 text-sm">
-                          ({service.reviews})
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1 text-gray-500 text-sm">
-                        <Clock className="h-4 w-4" />
-                        {service.duration}
-                      </div>
-                    </div> */}
-
-                    {/* <div className="flex flex-wrap gap-1 mb-4">
-                      {service.tags.slice(0, 2).map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="secondary"
-                          className="text-xs"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div> */}
 
                     <div className="flex items-center justify-between">
-                      {/* <div>
-                        <span className="text-2xl font-bold text-primary">
-                          ₹{service.startingPrice.toLocaleString()}
-                        </span>
-                        <span className="text-gray-500 text-sm ml-1">
-                          onwards
-                        </span>
-                      </div> */}
+
                       <Button className="group-hover:bg-primary group-hover:text-white transition-colors text-sm">
                         Book Now
                         <ChevronRight className="h-4 w-4" />
@@ -943,18 +853,7 @@ export default function ServicesClient() {
         </div>
       </div>
 
-      {/* CTA Section */}
-      {/* <div className="bg-primary text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Book your service today and experience professional quality at your doorstep
-          </p>
-          <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-8">
-            Browse All Services
-          </Button>
-        </div>
-      </div> */}
+
     </div>
   );
 }
