@@ -66,7 +66,7 @@ export default function CategoryNavigation() {
           <Button
             key={category._id}
             variant={activeCategory === category._id ? "default" : "ghost"}
-            onClick={() => handleCategoryChange(category._id)}
+            onClick={() => handleCategoryChange(category.slug)}
             className={cn(
               "rounded-full px-6 py-2 text-sm font-medium transition-colors",
               activeCategory === category._id

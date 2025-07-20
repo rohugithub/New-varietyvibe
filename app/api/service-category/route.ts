@@ -5,6 +5,7 @@ import ServiceCategory from "@/models/ServiceCategory"
 export async function GET() {
   try {
     await connectDB()
+    console.log("data is coming from here")
     const categories = await ServiceCategory.find({ isActive: true }).sort({ name: 1 })
     return NextResponse.json(categories)
   } catch (error) {
