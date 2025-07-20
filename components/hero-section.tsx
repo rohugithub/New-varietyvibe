@@ -65,7 +65,7 @@ export function HeroSection() {
       >
         {slides.map((s) => (
           <SwiperSlide key={s._id}>
-            <Link href={s.link || "#"} className="block w-full">
+            <Link href={s.link || "products"} className="block w-full">
               <div className="relative w-full">
                 {/* mobile (≤ 640 px) */}
                 <Image

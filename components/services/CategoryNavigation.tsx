@@ -43,7 +43,7 @@ export default function CategoryNavigation() {
       params.set("category", categoryId)
     }
 
-    router.push(`/services?${params.toString()}`)
+    router.push(`/service?${params.toString()}`)
   }
 
   return (
