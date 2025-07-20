@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { UserPlus, Search, MoreHorizontal } from "lucide-react"
+import { UserPlus, Search, MoreHorizontal, Eye } from "lucide-react"
 import Link from "next/link"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { useToast } from "@/hooks/use-toast"
 
 interface Agent {
   _id: string
@@ -24,6 +25,7 @@ export default function AgentsPage() {
   const [agents, setAgents] = useState<Agent[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState("")
+  const { toast } = useToast()
 
   useEffect(() => {
     fetchAgents()
@@ -36,6 +38,11 @@ export default function AgentsPage() {
       setAgents(data.agents || [])
     } catch (error) {
       console.error("Failed to fetch agents:", error)
+      toast({
+        title: "Error",
+        description: "Failed to fetch agents",
+        variant: "destructive",
+      })
     } finally {
       setLoading(false)
     }
@@ -51,9 +58,52 @@ export default function AgentsPage() {
 
       if (response.ok) {
         fetchAgents()
+        toast({
+          title: "Success",
+          description: `Agent ${!currentStatus ? "activated" : "deactivated"} successfully`,
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to update agent status",
+          variant: "destructive",
+        })
       }
     } catch (error) {
       console.error("Failed to update agent status:", error)
+      toast({
+        title: "Error",
+        description: "Failed to update agent status",
+        variant: "destructive",
+      })
+    }
+  }
+
+  const resetPassword = async (agentId: string) => {
+    try {
+      const response = await fetch(`/api/admin/agents/${agentId}/reset-password`, {
+        method: "POST",
+      })
+
+      if (response.ok) {
+        toast({
+          title: "Success",
+          description: "Password reset successfully. New credentials sent to agent's email.",
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to reset password",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      console.error("Failed to reset password:", error)
+      toast({
+        title: "Error",
+        description: "Failed to reset password",
+        variant: "destructive",
+      })
     }
   }
 
@@ -111,20 +161,26 @@ export default function AgentsPage() {
                     <span>Joined: {new Date(agent.createdAt).toLocaleDateString()}</span>
                   </div>
                 </div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
+                <div className="flex items-center gap-2">
+                  <Link href={`/dashboard/agents/${agent._id}`}>
                     <Button variant="ghost" size="sm">
-                      <MoreHorizontal className="w-4 h-4" />
+                      <Eye className="w-4 h-4" />
                     </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem onClick={() => toggleAgentStatus(agent._id, agent.isActive)}>
-                      {agent.isActive ? "Deactivate" : "Activate"}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>View Details</DropdownMenuItem>
-                    <DropdownMenuItem>Reset Password</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                  </Link>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm">
+                        <MoreHorizontal className="w-4 h-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => toggleAgentStatus(agent._id, agent.isActive)}>
+                        {agent.isActive ? "Deactivate" : "Activate"}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => resetPassword(agent._id)}>Reset Password</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
               </div>
             ))}
           </div>

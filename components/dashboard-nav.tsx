@@ -37,31 +37,31 @@ const items = [
     href: "/dashboard/homepage",
     icon: House,
   },
-  // {
-  //   title: "Testimonials",
-  //   href: "/dashboard/testimonials",
-  //   icon: BadgeCheck,
-  // },
+  {
+    title: "Agents",
+    href: "/dashboard/agents",
+    icon: BadgeCheck,
+  },
   {
     title:"Orders",
     href: "/dashboard/orders",
     icon: CalendarArrowDown,
   },
-  // {
-  //   title:"Blogs",
-  //   href: "/dashboard/blogs",
-  //   icon: BookOpenCheck,
-  // },
+  {
+    title:"Merchants",
+    href: "/dashboard/merchants",
+    icon: BookOpenCheck,
+  },
   {
     title:"Coupons",
     href: "/dashboard/coupons",
     icon: BadgeDollarSign,
   },
-  // {
-  //   title:"Announcement Bar",
-  //   href: "/dashboard/announcements",
-  //   icon: PartyPopper,
-  // },
+  {
+    title:"Merchants Coupons",
+    href: "/dashboard/merchantCoupon",
+    icon: PartyPopper,
+  },
   {
     title:"Cities",
     href: "/dashboard/cities",

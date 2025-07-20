@@ -72,7 +72,7 @@ export default function CreateCouponPage() {
       if (response.ok) {
         setSuccess(`Coupon created successfully! Code: ${data.coupon.code}`)
         setTimeout(() => {
-          router.push("/admin/coupons")
+          router.push("/dashboard/merchantCoupon")
         }, 2000)
       } else {
         setError(data.message || "Failed to create coupon")

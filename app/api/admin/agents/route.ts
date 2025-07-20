@@ -4,14 +4,15 @@ import { connectDB } from "@/lib/mongodb"
 import { User } from "@/lib/models/User"
 import { sendEmail, generatePassword } from "@/lib/utils/email"
 import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 
 export async function POST(request: NextRequest) {
   try {
     await connectDB()
-    const session:any= await getServerSession()
-    // if (!session || session.user.role !== "admin") {
-    //   return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
-    // }
+    const session:any= await getServerSession(authOptions)
+    if (!session || session.user.role !== "admin") {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+    }
     const payload:any = session.user
     
 

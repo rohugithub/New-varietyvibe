@@ -110,7 +110,7 @@ export default function EditCouponPage() {
       if (response.ok) {
         setSuccess("Coupon updated successfully!")
         setTimeout(() => {
-          router.push("/admin/merchantCoupon")
+          router.push("/dashboard/merchantCoupon")
         }, 2000)
       } else {
         setError(data.message || "Failed to update coupon")

@@ -2,7 +2,6 @@ import type React from "react";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { MobileSidebar } from "@/components/mobile-sidebar";
-import { ModeToggle } from "@/components/mode-toggle";
 import { UserNav } from "@/components/user-nav";
 import { ResizableSidebar } from "@/components/resizable-sidebar";
 import { SidebarProvider } from "@/components/sidebar-context";
@@ -42,7 +41,6 @@ export default async function DashboardLayout({
               </Link> */}
             </div>
             <div className="flex items-center gap-2">
-              <ModeToggle />
               <UserNav user={session.user} />
             </div>
           </div>
