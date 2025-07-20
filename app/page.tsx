@@ -5,7 +5,6 @@ import FeatuedSection from "@/components/features-section";
 import HomeServicesSection from "@/components/Services";
 import { ElectronicsBannerSection } from "@/components/Electronics-banner";
 import PromoSection from "@/components/ServiceImage";
-import Image from "next/image";
 import MegaSale from "@/components/MegaSale";
 
 export default function HomePage() {
