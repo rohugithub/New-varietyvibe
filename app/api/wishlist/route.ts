@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/mongodb"
 import Wishlist from "@/models/Wishlist"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-
+import "@/models/Product"
 
 async function getUser(request: NextRequest) {
   try {

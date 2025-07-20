@@ -14,7 +14,7 @@ import { AccountOrders } from "./AccountOrders"
 import { AccountAddresses } from "./AccountAddresses"
 import { AccountPayment } from "./AccountPayment"
 import { AccountWishlist } from "./AccountWishlist"
-import { AccountSettings } from "./AccountSettings"
+// import { AccountSettings } from "./AccountSettings"
 import { signOut } from "next-auth/react"
 interface AccountLayoutProps {
   children?: React.ReactNode
@@ -63,10 +63,6 @@ export function AccountLayout({ children }: AccountLayoutProps) {
             <h1 className="text-3xl font-bold text-gray-900">My Account</h1>
             <p className="text-gray-600">Manage your account settings and preferences</p>
           </div>
-          <Button variant="outline" className="gap-2 bg-transparent">
-            <Edit className="h-4 w-4" />
-            Edit Profile
-          </Button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -95,19 +91,19 @@ export function AccountLayout({ children }: AccountLayoutProps) {
                   <span className="text-gray-600">Total Spent</span>
                   <span className="font-semibold">₹{userStats.totalSpent.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between items-center">
+                {/* <div className="flex justify-between items-center">
                   <span className="text-gray-600">Loyalty Points</span>
                   <span className="font-semibold text-[#0042adef]">{userStats.loyaltyPoints}</span>
-                </div>
+                </div> */}
                 <button className="w-full mt-4 bg-red-500 hover:bg-red-600 text-white py-2 rounded" onClick={() => signOut({ callbackUrl: "/"} )}>Log Out</button>
               </div>
             </div>
           </div>
 
           {/* Main Content */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 ">
             <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="grid w-full grid-cols-6 mb-8">
+              <TabsList className="grid w-full grid-cols-5 mb-8">
                 <TabsTrigger value="overview" className="gap-2">
                   <User className="h-4 w-4" />
                   Overview
@@ -128,10 +124,10 @@ export function AccountLayout({ children }: AccountLayoutProps) {
                   <Heart className="h-4 w-4" />
                   Wishlist
                 </TabsTrigger>
-                <TabsTrigger value="settings" className="gap-2">
+                {/* <TabsTrigger value="settings" className="gap-2">
                   <Settings className="h-4 w-4" />
                   Settings
-                </TabsTrigger>
+                </TabsTrigger> */}
               </TabsList>
 
               <TabsContent value="overview">
@@ -154,9 +150,9 @@ export function AccountLayout({ children }: AccountLayoutProps) {
                 <AccountWishlist />
               </TabsContent>
 
-              <TabsContent value="settings">
+              {/* <TabsContent value="settings">
                 <AccountSettings />
-              </TabsContent>
+              </TabsContent> */}
             </Tabs>
           </div>
         </div>

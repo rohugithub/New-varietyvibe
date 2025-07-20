@@ -82,13 +82,13 @@ export function AccountOverview({ userStats }: AccountOverviewProps) {
             <div className="text-gray-600">Total Orders</div>
           </CardContent>
         </Card>
-        <Card className="text-center">
+        {/* <Card className="text-center">
           <CardContent className="p-6">
             <Star className="h-12 w-12 mx-auto mb-4 text-yellow-500" />
             <div className="text-3xl font-bold text-gray-900 mb-2">{userStats.loyaltyPoints}</div>
             <div className="text-gray-600">Loyalty Points</div>
           </CardContent>
-        </Card>
+        </Card> */}
         <Card className="text-center">
           <CardContent className="p-6">
             <Heart className="h-12 w-12 mx-auto mb-4 text-red-500" />
