@@ -22,7 +22,7 @@ const ServiceSchema = new mongoose.Schema(
     },
     startingPrice: {
       type: Number,
-      required: true,
+      
     },
     duration: String,
     image: String,

@@ -72,6 +72,17 @@ export default function ServiceManagement() {
     popular: false,
     tags: "",
   })
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const servicesPerPage = 5
+
+  // Calculate which services to show
+  const indexOfLastService = currentPage * servicesPerPage
+  const indexOfFirstService = indexOfLastService - servicesPerPage
+  const currentServices = services.slice(indexOfFirstService, indexOfLastService)
+
+  const totalPages = Math.ceil(services.length / servicesPerPage)
+
   const { toast } = useToast()
 
   useEffect(() => {
@@ -153,7 +164,7 @@ export default function ServiceManagement() {
       name: service.name,
       category: service.category._id,
       description: service.description,
-      startingPrice: service.startingPrice.toString(),
+      startingPrice: service?.startingPrice?.toString(),
       duration: service.duration || "",
       image: service.image || "",
       verified: service.verified,
@@ -275,7 +286,7 @@ export default function ServiceManagement() {
                     type="number"
                     value={formData.startingPrice}
                     onChange={(e) => setFormData((prev) => ({ ...prev, startingPrice: e.target.value }))}
-                    required
+
                   />
                 </div>
                 <div>
@@ -354,7 +365,7 @@ export default function ServiceManagement() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {services.map((service) => (
+                {currentServices.map((service) => (
                   <TableRow key={service._id}>
                     <TableCell>
                       {service.image ? (
@@ -400,9 +411,8 @@ export default function ServiceManagement() {
                     </TableCell>
                     <TableCell>
                       <span
-                        className={`px-2 py-1 rounded-full text-xs ${
-                          service.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
-                        }`}
+                        className={`px-2 py-1 rounded-full text-xs ${service.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                          }`}
                       >
                         {service.isActive ? "Active" : "Inactive"}
                       </span>
@@ -437,7 +447,38 @@ export default function ServiceManagement() {
                 ))}
               </TableBody>
             </Table>
+
           )}
+
+          <div className="flex justify-center items-center gap-4 p-6">
+            <Button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded-md font-medium transition ${currentPage === 1
+                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                  : "bg-white hover:bg-gray-100 text-black border border-gray-300"
+                }`}
+            >
+              Previous
+            </Button>
+
+            <span className="text-sm font-semibold text-gray-700">
+              Page {currentPage} of {totalPages}
+            </span>
+
+            <Button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded-md font-medium transition ${currentPage === totalPages
+                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                  : "bg-white hover:bg-gray-100 text-black border border-gray-300"
+                }`}
+            >
+              Next
+            </Button>
+          </div>
+
+
         </CardContent>
       </Card>
     </div>
