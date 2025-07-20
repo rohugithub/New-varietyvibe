@@ -1,6 +1,15 @@
-import mongoose from "mongoose"
+import mongoose, { Document, Schema } from "mongoose"
+import slugify from "slugify"
 
-const ServiceCategorySchema = new mongoose.Schema(
+export interface IServiceCategory extends Document {
+  name: string
+  description?: string
+  image?: string
+  isActive: boolean
+  slug: string
+}
+
+const ServiceCategorySchema: Schema<IServiceCategory> = new Schema(
   {
     name: {
       type: String,
@@ -13,10 +22,22 @@ const ServiceCategorySchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    slug: {
+      type: String,
+      unique: true,
+    },
   },
   {
     timestamps: true,
-  },
+  }
 )
 
-export default mongoose.models.ServiceCategory || mongoose.model("ServiceCategory", ServiceCategorySchema)
+ServiceCategorySchema.pre("save", function (next) {
+  if (this.isModified("name") || !this.slug) {
+    this.slug = slugify(this.name, { lower: true, strict: true })
+  }
+  next()
+})
+
+export default mongoose.models.ServiceCategory ||
+  mongoose.model<IServiceCategory>("ServiceCategory", ServiceCategorySchema)
