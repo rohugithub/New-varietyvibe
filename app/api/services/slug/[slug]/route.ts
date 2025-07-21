@@ -4,7 +4,7 @@ import Service from "@/models/Service"
 
 export async function GET(request: Request, { params }: { params: { slug: string } }) {
   try {
-    console.log("hello brother")
+   
     await connectDB()
     const service = await Service.findOne({ slug: params.slug, isActive: true }).populate("category", "name")
 

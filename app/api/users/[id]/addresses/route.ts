@@ -21,7 +21,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await connectDB()
-    console.log("hello")
+   
     const addressData = await request.json()
 
     const user = await User.findById(params.id)
