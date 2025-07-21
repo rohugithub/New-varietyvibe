@@ -55,7 +55,7 @@ export function HeroSection() {
   if (slides.length === 0) return null;
 
   return (
-    <section className="relative w-full">
+    <section className="relative w-full ">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         loop
@@ -66,14 +66,14 @@ export function HeroSection() {
       >
         {slides.map((s) => (
           <SwiperSlide key={s._id}>
-            <Link href={`/${s.title}`} className="block w-full">
+            <Link href={`/${s.title}`} className="block w-full ">
               <div className="relative w-full">
                 {/* mobile (≤ 640 px) */}
                 <Image
                   src={s.mobile || s.image}
                   alt={s.alt || "banner"}
                   width={1920}      /* use your banner size */
-                  height={750}
+                  height={800}
                   priority
                   className="w-full h-auto object-cover sm:hidden"
                   sizes="100vw"
