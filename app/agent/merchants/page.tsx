@@ -115,10 +115,12 @@ export default function AgentMerchantsPage() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm">
-                      <Eye className="w-4 h-4 mr-2" />
-                      View Details
-                    </Button>
+                    <Link href={`/agent/merchants/${merchant._id}`}>
+                      <Button variant="outline" size="sm">
+                        <Eye className="w-4 h-4 mr-2" />
+                        View Details
+                      </Button>
+                    </Link>
                     {merchant.status === "approved" && (
                       <Link href="/agent/deposits/collect">
                         <Button size="sm">Collect Deposit</Button>

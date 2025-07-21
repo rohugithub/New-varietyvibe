@@ -6,8 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Plus, Search, Edit, Trash2, ToggleLeft, ToggleRight } from "lucide-react"
+import { Plus, Search, Edit, Trash2, ToggleLeft, ToggleRight, AlertCircle } from "lucide-react"
 import Link from "next/link"
+import { toast } from "sonner"
 
 interface Coupon {
   _id: string
@@ -47,6 +48,7 @@ export default function AgentCouponsPage() {
       setCoupons(data.coupons || [])
     } catch (error) {
       console.error("Failed to fetch coupons:", error)
+      toast.error("Failed to fetch coupons")
     } finally {
       setLoading(false)
     }
@@ -61,14 +63,24 @@ export default function AgentCouponsPage() {
       })
 
       if (response.ok) {
+        toast.success(`Coupon ${!currentStatus ? "activated" : "deactivated"} successfully`)
         fetchCoupons()
+      } else {
+        const error = await response.json()
+        toast.error(error.message || "Failed to update coupon")
       }
     } catch (error) {
       console.error("Failed to toggle coupon status:", error)
+      toast.error("Failed to update coupon")
     }
   }
 
-  const deleteCoupon = async (couponId: string) => {
+  const deleteCoupon = async (couponId: string, usedCount: number) => {
+    if (usedCount > 0) {
+      toast.error("Cannot delete coupon that has been redeemed")
+      return
+    }
+
     if (!confirm("Are you sure you want to delete this coupon?")) return
 
     try {
@@ -77,10 +89,15 @@ export default function AgentCouponsPage() {
       })
 
       if (response.ok) {
+        toast.success("Coupon deleted successfully")
         fetchCoupons()
+      } else {
+        const error = await response.json()
+        toast.error(error.message || "Failed to delete coupon")
       }
     } catch (error) {
       console.error("Failed to delete coupon:", error)
+      toast.error("Failed to delete coupon")
     }
   }
 
@@ -126,6 +143,38 @@ export default function AgentCouponsPage() {
             Create Coupon
           </Button>
         </Link>
+      </div>
+
+      {/* Summary Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-2xl font-bold">{coupons.length}</div>
+            <p className="text-sm text-gray-600">Total Coupons</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-2xl font-bold text-green-600">
+              {coupons.filter((c) => c.isActive && new Date(c.validUntil) > new Date()).length}
+            </div>
+            <p className="text-sm text-gray-600">Active Coupons</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-2xl font-bold text-blue-600">{coupons.reduce((sum, c) => sum + c.usedCount, 0)}</div>
+            <p className="text-sm text-gray-600">Total Redemptions</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-2xl font-bold text-red-600">
+              {coupons.filter((c) => new Date(c.validUntil) < new Date()).length}
+            </div>
+            <p className="text-sm text-gray-600">Expired Coupons</p>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Filters */}
@@ -185,6 +234,11 @@ export default function AgentCouponsPage() {
                       <Badge className={getStatusColor(coupon.isActive, coupon.validUntil)}>
                         {getStatusText(coupon.isActive, coupon.validUntil)}
                       </Badge>
+                      {coupon.usedCount > 0 && (
+                        <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                          {coupon.usedCount} Redeemed
+                        </Badge>
+                      )}
                     </div>
                     <p className="font-medium">{coupon.title}</p>
                     <p className="text-sm text-gray-600">Merchant: {coupon.merchantId.businessName}</p>
@@ -200,7 +254,12 @@ export default function AgentCouponsPage() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" onClick={() => toggleCouponStatus(coupon._id, coupon.isActive)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => toggleCouponStatus(coupon._id, coupon.isActive)}
+                      disabled={new Date(coupon.validUntil) < new Date()}
+                    >
                       {coupon.isActive ? (
                         <ToggleRight className="w-4 h-4 mr-2" />
                       ) : (
@@ -212,8 +271,18 @@ export default function AgentCouponsPage() {
                       <Edit className="w-4 h-4 mr-2" />
                       Edit
                     </Button>
-                    <Button variant="destructive" size="sm" onClick={() => deleteCoupon(coupon._id)}>
-                      <Trash2 className="w-4 h-4 mr-2" />
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => deleteCoupon(coupon._id, coupon.usedCount)}
+                      disabled={coupon.usedCount > 0}
+                      title={coupon.usedCount > 0 ? "Cannot delete redeemed coupon" : "Delete coupon"}
+                    >
+                      {coupon.usedCount > 0 ? (
+                        <AlertCircle className="w-4 h-4 mr-2" />
+                      ) : (
+                        <Trash2 className="w-4 h-4 mr-2" />
+                      )}
                       Delete
                     </Button>
                   </div>

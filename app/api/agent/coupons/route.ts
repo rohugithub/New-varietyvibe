@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
       usageLimit: usageLimit ? Number.parseInt(usageLimit) : null,
       validFrom: new Date(validFrom),
       validUntil: new Date(validUntil),
-      createdBy: payload.userId,
+      createdBy: payload.id,
       createdByRole: "agent",
     })
 
