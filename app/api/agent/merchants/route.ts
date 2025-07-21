@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
 
     // Verify agent token
     const session: any = await getServerSession(authOptions)
-    console.log("Session data:", session)
+
     if (!session || session.user.role !== "agent") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }

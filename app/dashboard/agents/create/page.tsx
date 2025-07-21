@@ -42,7 +42,7 @@ export default function CreateAgentPage() {
           `Agent created successfully! Login credentials sent to ${formData.email}`
         );
         setTimeout(() => {
-          router.push("/admin/agents");
+          router.push("/dashboard/agents");
         }, 3000);
       } else {
         setError(data.message || "Failed to create agent");

@@ -46,7 +46,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         } else if (session?.user?.role === "merchant") {
           window.location.href = "/merchant";
         } else {
-          window.location.href = "/";
+          window.location.href = "/account";
         }
 
         onClose();

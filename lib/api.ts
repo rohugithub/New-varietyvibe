@@ -38,7 +38,6 @@ export async function getHomepageSectionById(id: string): Promise<any | null> {
   try {
     const response = await fetch(url)
     const data = await handleResponse<any>(response)
-    console.log(data)
     return data || null
   
   } catch (error) {
