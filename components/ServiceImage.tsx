@@ -65,7 +65,7 @@ export default function PromoSection() {
             <SwiperSlide key={b._id}>
               {/* local aspect box gives height */}
               <Link
-                href="/services"
+                href="/service"
                 className="block relative w-full aspect-[16/9] overflow-hidden rounded-lg"
               >
                 <Image
@@ -96,7 +96,7 @@ export default function PromoSection() {
         >
           {mobileSlides.map((s) => (
             <SwiperSlide key={s._id} className="relative w-full h-full">
-              <Link href="/services" className="block w-full h-full">
+              <Link href="/service" className="block w-full h-full">
                 <Image
                   src={s.image}
                   alt={s.alt || "service"}

@@ -46,7 +46,7 @@ export default function PrivacyPolicyPage() {
               Applicability and Scope
             </h2>
             <p>
-              Blink Commerce Private Limited ("Inoxsecure", the "Company", "we", "us", and "our") respects your privacy and is committed to protecting it. This policy sets out:
+            Inoxsecure (the "Company", "we", "us", or "our") respects your privacy and is committed to protecting it. This policy explains:
               <br />
               • The types of information that Inoxsecure may collect from you directly or through automated means when you access or use its website and other online services (collectively referred to as "Services"); and
               <br />

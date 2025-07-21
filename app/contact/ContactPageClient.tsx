@@ -49,10 +49,9 @@ export default function ContactPageClient() {
         <div className="flex flex-col items-center text-center mb-16 px-6 md:px-10 py-10 w-full text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
           <p className="text-lg text-white max-w-4xl">
-            Have questions or need assistance? Our team is here to help. Reach
-            out to us through any of the channels below. Stay informed with the
-            latest security tips, product reviews, and industry insights from
-            our security experts.
+            Have questions or need assistance? Our team is here to help. Reach out to us through any of the channels below.
+            Stay informed with the latest updates on product availability, return policies, and service support from our
+            customer care experts.
           </p>
         </div>
       </div>
@@ -101,7 +100,7 @@ export default function ContactPageClient() {
             <h3 className="text-xl font-bold mb-2">Visit Us</h3>
             <p className="text-gray-600 mb-4">Our headquarters location</p>
             <address className="not-italic text-primary font-medium">
-             Banglore, India
+              Banglore, India
             </address>
           </div>
         </div>

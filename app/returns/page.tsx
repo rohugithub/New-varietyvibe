@@ -33,19 +33,19 @@ export default function ReturnPolicyPage() {
             </li>
             <li>
               <strong>Home Appliances:</strong> Washing machines, refrigerators,
-              ACs – <em>non-replaceable</em>
+              ACs – <em>open box delivery eligible</em>
             </li>
             <li>
               <strong>Kitchen Appliances:</strong> Microwaves, mixer grinders,
-              induction cooktops – <em>non-replaceable</em>
+              induction cooktops – <em>open box delivery eligible</em>
             </li>
             <li>
               <strong>IT Accessories:</strong> Keyboards, mice, headphones,
-              speakers – <em>non-replaceable</em>
+              speakers – <em>open box delivery eligible</em>
             </li>
             <li>
               <strong>Small Appliances:</strong> Irons, vacuum cleaners, air
-              purifiers – <em>non-replaceable</em>
+              purifiers – <em>open box delivery eligible</em>
             </li>
           </ul>
         </section>

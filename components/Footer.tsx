@@ -165,7 +165,7 @@ export function Footer() {
                     href="/contact"
                     className="hover:text-orange-400 transition-colors"
                   >
-                    Contact
+                    Contact Us
                   </Link>
                 </li>
                 <li>

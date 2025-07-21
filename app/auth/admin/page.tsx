@@ -40,13 +40,13 @@ export default function LoginForm() {
       const session = await getSession()
       const role = session?.user?.role
 
-      if (role === "merchant") {
+      if (role === "admin") {
         toast({
           title: "Success",
-          description: "User deleted successfully",
+          description: "Login Sucessfully",
         })
 
-        router.push("/merchant")
+        router.push("/admin")
       } else {
         toast({
           title: "Error",
@@ -72,8 +72,8 @@ export default function LoginForm() {
               <Image src="/logo-white.png" alt="Store" width={52} height={52} />
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900">Merchant Portal</h1>
-          <p className="text-slate-600 mt-2">Access your  dashboard</p>
+          <h1 className="text-2xl font-bold text-slate-900">Admin Portal</h1>
+          <p className="text-slate-600 mt-2">Access your seller dashboard</p>
         </div>
 
         <Card className="shadow-lg border-0">
@@ -88,7 +88,7 @@ export default function LoginForm() {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" placeholder="merchant@example.com" className="h-11" required />
+                <Input id="email" type="email" placeholder="admin@example.com" className="h-11" required />
               </div>
 
               <div className="space-y-2">
