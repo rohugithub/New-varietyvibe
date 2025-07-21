@@ -111,7 +111,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           </div>
 
           {/* Form Side */}
-          <div className="w-full md:w-1/2 p-8 overflow-y-auto">
+          <div className="w-full md:w-1/2 mt-28 p-8 overflow-y-auto">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-bold">
                 {isLogin ? "Sign In" : "Create Account"}
@@ -199,6 +199,12 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 </div>
               )}
 
+              <div className=" text-right">
+              <a href="/auth/forgot-password" className="text-sm text-blue-600 hover:underline">
+                Forgot password?
+              </a>
+            </div>
+
               <Button
                 type="submit"
                 className="w-full bg-[#0042adef] hover:bg-[#0042ad]"
@@ -206,6 +212,9 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 {isLogin ? "Sign In" : "Create Account"}
               </Button>
             </form>
+
+            
+
 
             <div className="mt-6 text-center">
               <p className="text-gray-600">

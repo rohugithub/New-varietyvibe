@@ -28,24 +28,24 @@ export default function ReturnPolicyPage() {
           </p>
           <ul className="list-disc pl-6 space-y-2 mt-4">
             <li>
-              <strong>Electronics:</strong> TVs, laptops, smartphones, tablets –{" "}
-              <em>open box delivery eligible</em>
+              <strong>Electronics:</strong> TVs, laptops, smartphones, tablets
+              – open box delivery eligible
             </li>
             <li>
               <strong>Home Appliances:</strong> Washing machines, refrigerators,
-              ACs – <em>non-replaceable</em>
+              ACs – open box delivery eligible
             </li>
             <li>
               <strong>Kitchen Appliances:</strong> Microwaves, mixer grinders,
-              induction cooktops – <em>non-replaceable</em>
+              induction cooktops – open box delivery eligible
             </li>
             <li>
               <strong>IT Accessories:</strong> Keyboards, mice, headphones,
-              speakers – <em>non-replaceable</em>
+              speakers – open box delivery eligible
             </li>
             <li>
               <strong>Small Appliances:</strong> Irons, vacuum cleaners, air
-              purifiers – <em>non-replaceable</em>
+              purifiers – open box delivery eligible
             </li>
           </ul>
         </section>

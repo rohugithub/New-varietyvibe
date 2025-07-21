@@ -58,54 +58,59 @@ export default function HomeServicesSection() {
         {/* grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
           {services.map((s) => (
-            <Card
+            <Link
               key={s._id}
-              className="group hover:shadow-lg transition-transform duration-300 hover:-translate-y-1"
+              href={`/service/${s.slug}`}
+              className="group block hover:shadow-lg transition-transform duration-300 hover:-translate-y-1 rounded-xl"
             >
-              <CardContent className="p-0">
-                {/* image */}
-                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-t-lg">
-                  <Image
-                    src={s.image || "/placeholder.svg"}
-                    alt={s.name}
-                    fill
-                    className="object-contain"
-                  />
-                  {s.popular && (
-                    <Badge className="absolute top-3 left-3 bg-blue-800 text-white">
-                      Popular
-                    </Badge>
-                  )}
-                  {s.verified && (
-                    <span className="absolute top-3 right-3 bg-green-600 text-white p-1 rounded-full">
-                      <Shield className="h-4 w-4" />
-                    </span>
-                  )}
-                </div>
-
-                {/* content */}
-                <div className="p-5 space-y-3">
-                  <h3 className="text-lg font-semibold line-clamp-2">
-                    {s.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm line-clamp-2">
-                    {s.description}
-                  </p>
-                  <div className="flex items-center justify-between pt-2">
-                    <span className="text-xl font-bold text-blue-800">
-
-                      <span className="text-sm text-gray-500 ml-1">onwards</span>
-                    </span>
-                    <Link href={`/service/${s.slug}`}>
-                      <Button size="sm" className="bg-blue-800 hover:bg-blue-900">
-                        Book&nbsp;Now
-                        <ChevronRight className="h-4 w-4 ml-1" />
-                      </Button>
-                    </Link>
+              <Card className="overflow-hidden">
+                <CardContent className="p-0">
+                  {/* Image section */}
+                  <div className="relative w-full aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={s.image || "/placeholder.svg"}
+                      alt={s.name}
+                      fill
+                      className="object-contain"
+                    />
+                    {s.popular && (
+                      <Badge className="absolute top-3 left-3 bg-blue-800 text-white">
+                        Popular
+                      </Badge>
+                    )}
+                    {s.verified && (
+                      <span className="absolute top-3 right-3 bg-green-600 text-white p-1 rounded-full">
+                        <Shield className="h-4 w-4" />
+                      </span>
+                    )}
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+
+                  {/* Text content */}
+                  <div className="p-5 space-y-3">
+                    <h3 className="text-lg font-semibold line-clamp-2">{s.name}</h3>
+                    <p className="text-gray-600 text-sm line-clamp-2">{s.description}</p>
+                    <div className="flex items-center justify-between pt-2">
+                      <span className="text-xl font-bold text-blue-800">
+                        ₹{s.price}
+                        <span className="text-sm text-gray-500 ml-1">onwards</span>
+                      </span>
+
+                      {/* Book Now button (still links, but inside a Link wrapper) */}
+                      <Button
+                        asChild
+                        size="sm"
+                        className="bg-blue-800 hover:bg-blue-900"
+                      >
+                        <Link href={`/service/${s.slug}`}>
+                          Book&nbsp;Now
+                          <ChevronRight className="h-4 w-4 ml-1" />
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
 

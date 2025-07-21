@@ -124,12 +124,12 @@ const html = `<!DOCTYPE html>
     </ul>
   </div>
 
-  <p>If you have any questions about your order, please contact us at support@inoxstore.com or +91 9680849577.</p>
+  <p>If you have any questions about your order, please contact us at info@inoxstore.com or +91 9680849577.</p>
   <p>Thank you for choosing INOX Store!</p>
 
   <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
     <p>INOX Store – Premium Electronics & Appliances</p>
-    <p>Jaipur, Rajasthan | support@inoxstore.com</p>
+    <p>Jaipur, Rajasthan | info@inoxstore.com</p>
   </div>
 </body>
 </html>`;
@@ -154,4 +154,54 @@ const html = `<!DOCTYPE html>
     console.error("❌ Failed to send order confirmation email:", error)
     throw error
   }
+}
+
+export async function sendEmail({
+  to,
+  subject,
+  html,
+ }: {
+  to: string;
+  subject: string;
+  html: string;
+}) {
+  try {
+    const info = await transporter.sendMail({
+      from: `<info@inoxsecure.com>`, // ✅ fallback
+      to,
+      subject,
+      html,
+    });
+
+    console.log("Email sent successfully:", info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error: any) {
+    console.error("Email sending failed:", error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function sendPasswordResetEmail(email: string, resetToken: string) {
+  const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`
+
+  const html = `
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
+      <h2 style="color: #333; text-align: center;">Password Reset Request</h2>
+      <p>You requested a password reset for your InoxSecure account.</p>
+      <p>Click the button below to reset your password:</p>
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${resetUrl}" style="background-color: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">Reset Password</a>
+      </div>
+      <p>If you didn't request this, please ignore this email.</p>
+      <p>This link will expire in 1 hour.</p>
+      <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+      <p style="color: #666; font-size: 12px;">InoxSecure Team</p>
+    </div>
+  `
+
+  return sendEmail({
+    to: email,
+    subject: "Reset Your Password - InoxSecure",
+    html,
+  })
 }

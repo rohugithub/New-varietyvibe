@@ -8,6 +8,7 @@ import {
     getMegaSaleSections,
     getMobileMegaSaleSections,
 } from "@/lib/api";        // adjust path if needed
+import Link from "next/link";
 
 type Banner = {
     _id: string;
@@ -57,7 +58,7 @@ export default function MegaSaleBanner() {
 
     return (
         <section className="w-full px-2">
-            
+
             {/* MOBILE banner (≤ 640 px) */}
             {mobileBanner && (
                 <div className="relative h-60 w-full overflow-hidden rounded-lg sm:hidden">
@@ -76,14 +77,17 @@ export default function MegaSaleBanner() {
             {/* DESKTOP / TABLET banner (≥ 641 px) */}
             {desktopBanner && (
                 <div className="relative aspect-[1900/204] w-full overflow-hidden rounded-lg hidden sm:block">
-                    <Image
-                        src={desktopBanner.image}
-                        alt={desktopBanner.alt || "Mega sale"}
-                        fill
-                        className="object-contain"
-                        sizes="100vw"
-                        priority
-                    />
+                    <a href="/products">
+                        <Image
+                            src={desktopBanner.image}
+                            alt={desktopBanner.alt || "Mega sale"}
+                            fill
+                            className="object-contain"
+                            sizes="100vw"
+                            priority
+                        />
+                    </a>
+
                 </div>
             )}
 

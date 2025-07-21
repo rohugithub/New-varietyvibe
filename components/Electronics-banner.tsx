@@ -51,7 +51,7 @@ export function ElectronicsBannerSection() {
         {slides.map((s, idx) => (                            // CHANGED
           <SwiperSlide key={s._id}>                         
             <Link
-              href={s.link || "#"}                           // CHANGED
+              href={s.link || "/service"}                           // CHANGED
               className="block relative w-full aspect-[16/9]"
             >
               <Image
