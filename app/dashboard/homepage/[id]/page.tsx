@@ -362,13 +362,13 @@ export default function HomepageSectionEditPage({ params }: { params: Promise<{ 
 
               <div className="space-y-4 mb-4">
                 <div>
-                  <Label htmlFor="title" className="text-lg mb-2 block">Section Title</Label>
+                  <Label htmlFor="title" className="text-lg mb-2 block">Category Link</Label>
                   <Input
                     id="title"
                     name="title"
                     value={section.title || ""}
                     onChange={handleInputChange}
-                    placeholder="e.g. Featured Products, New Arrivals"
+                    placeholder="products, electronic, it-product"
                   />
                   <p className="text-xs text-gray-500 mt-1">
                     This will be displayed as the heading for this section (optional)

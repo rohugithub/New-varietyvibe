@@ -17,6 +17,7 @@ type Slide = {
   mobile?: string;
   alt?: string;
   link?: string;
+   title?: string;
 };
 
 /* true when the screen is 640 px wide or less */
@@ -65,7 +66,7 @@ export function HeroSection() {
       >
         {slides.map((s) => (
           <SwiperSlide key={s._id}>
-            <Link href={s.link || "products"} className="block w-full">
+            <Link href={`/${s.title}`} className="block w-full">
               <div className="relative w-full">
                 {/* mobile (≤ 640 px) */}
                 <Image
