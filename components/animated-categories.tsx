@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
@@ -63,7 +62,7 @@ export default function AnimatedCategories() {
     {
       id: 3,
       name: "IT Products",
-      image: "/cate2.png",
+      image: "/mobile/itproduct.png",
       count: 15,
       slug: "it-products",
       subcategories: ["Mobile Phones", "Laptops", "Tablets", "Accessories"],
@@ -74,57 +73,20 @@ export default function AnimatedCategories() {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-      scale: 0.9,
-      rotateX: -15,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      rotateX: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12,
-        duration: 0.6,
-      },
-    },
-  };
-
   return (
-    <section className="w-full py-6 md:py-20 lg:py-20 px-6 lg:px-14 bg-[#dbeafe34]">
-      <div className="container mx-auto ">
-        {/* Static Header Section */}
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
-
-
-          <div className="space-y-4">
-            <h2 className="text-xl md:text-4xl font-medium text-[#efa46edb] tracking-tighter ">
-              Shop by Category
-            </h2>
-            <p className="max-w-[700px] text-gray-900 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed font-light">
-              Discover amazing products across our carefully curated categories
-              with exclusive deals and fast delivery
-            </p>
-          </div>
+    <section className="w-full py-6 md:py-20 px-6 lg:px-14 bg-[#dbeafe34]">
+      <div className="container mx-auto">
+        <div className="flex flex-col items-center justify-center text-center mb-16">
+          <h2 className="text-xl md:text-4xl font-medium text-[#efa46edb]">
+            Shop by Category
+          </h2>
+          <p className="max-w-[700px] text-gray-900 md:text-xl font-light">
+            Discover amazing products across our carefully curated categories
+            with exclusive deals and fast delivery
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {categories.map((category, index) => (
             <motion.div
               key={category.id}
@@ -132,125 +94,75 @@ export default function AnimatedCategories() {
               onHoverStart={() => setHoveredCategory(category.id)}
               onHoverEnd={() => setHoveredCategory(null)}
               whileHover={{ y: -10 }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-                delay: index * 0.2,
-                duration: 0.6,
-              }}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2, duration: 0.6 }}
             >
               <Link href={`/${category.slug}`}>
                 <div className="relative overflow-hidden rounded-3xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500">
-                  {/* Trending badge */}
                   {category.trending && (
                     <motion.div
                       className="absolute top-4 right-4 z-20 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
                       initial={{ scale: 0, rotate: -180 }}
                       animate={{ scale: 1, rotate: 0 }}
-                      transition={{
-                        delay: 0.8 + index * 0.1,
-                        type: "spring",
-                        stiffness: 200,
-                      }}
                       whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ delay: 0.8 + index * 0.1, type: "spring" }}
                     >
                       🔥 Trending
                     </motion.div>
                   )}
 
-                  {/* Background gradient overlay */}
                   <motion.div
                     className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 0.1 }}
                   />
 
-                  {/* Static Image container */}
-                  <div className="relative h-64 w-full overflow-hidden">
-                    <div className="relative h-full w-full">
-                      <Image
-                        src={category.image || "/placeholder.svg"}
-                        alt={category.name}
-                        fill
-                        className="object-fill"
-                      />
+                  <div className="relative w-full aspect-[4/3] overflow-hidden rounded-t-3xl">
+                    <Image
+                      src={category.image || "/placeholder.svg"}
+                      alt={category.name}
+                      fill
+                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority
+                    />
 
-                      {/* Animated overlay on hover only */}
-                      <motion.div
-                        className="absolute inset-0 bg-black/20"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </div>
-
-                    {/* Floating icon */}
                     <motion.div
                       className="absolute top-4 left-4 p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg"
                       style={{ color: category.color }}
-                      whileHover={{
-                        scale: 1.2,
-                        rotate: 360,
-                        backgroundColor: category.color,
-                        color: "white",
-                      }}
+                      whileHover={{ scale: 1.2, rotate: 360, backgroundColor: category.color, color: "white" }}
                       transition={{ duration: 0.5 }}
                     >
                       {category.icon}
                     </motion.div>
                   </div>
 
-                  {/* Static Content section */}
                   <div className="p-8 relative">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-2xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
-                          {category.name}
-                        </h3>
-                        <motion.div
-                          className="flex items-center text-sm font-medium text-gray-500"
-                          whileHover={{ scale: 1.1 }}
-                        >
-                          {/* <span className="bg-gray-100 px-3 py-1 rounded-full">
-                            {category.count}+ products
-                          </span> */}
-                        </motion.div>
-                      </div>
-
-
-
-                      {/* Static CTA */}
-                      {/* CTA block */}
-                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between pt-4 border-t border-gray-100">
-                        <span className="text-sm text-gray-500">
-                          Explore collection
-                        </span>
-
-                        <motion.div
-                          className="w-full sm:w-auto flex items-center justify-center text-blue-600 font-medium"
-                          whileHover={{ x: 5 }}
-                          transition={{ type: "spring", stiffness: 400 }}
-                        >
-
-                          <Link
-                            href={`/${category.slug}#shop-section`}
-                            className="w-full text-center block bg-white border border-blue-600 rounded-md py-2 px-4 sm:inline"
-                          >
-                            Shop Now
-                          </Link>
-
-
-                          <ArrowRight className="h-4 w-4 hidden sm:block ml-2" />
-                        </motion.div>
-                      </div>
-
-
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-2xl font-bold text-gray-900 group-hover:text-transparent bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
+                        {category.name}
+                      </h3>
                     </div>
 
-                    {/* Hover effect particles */}
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pt-4 border-t border-gray-100">
+                      <span className="text-sm text-gray-500">
+                        Explore collection
+                      </span>
+                      <motion.div
+                        className="flex items-center text-blue-600 font-medium"
+                        whileHover={{ x: 5 }}
+                      >
+                        <Link
+                          href={`/${category.slug}#shop-section`}
+                          className="block bg-white border border-blue-600 rounded-md py-2 px-4"
+                        >
+                          Shop Now
+                        </Link>
+                        <ArrowRight className="h-4 w-4 ml-2 hidden sm:block" />
+                      </motion.div>
+                    </div>
+
                     <motion.div
                       className="absolute inset-0 pointer-events-none"
                       initial={{ opacity: 0 }}
@@ -264,10 +176,7 @@ export default function AnimatedCategories() {
                             left: `${20 + i * 15}%`,
                             top: `${30 + (i % 2) * 40}%`,
                           }}
-                          animate={{
-                            scale: [0, 1, 0],
-                            opacity: [0, 1, 0],
-                          }}
+                          animate={{ scale: [0, 1, 0], opacity: [0, 1, 0] }}
                           transition={{
                             duration: 2,
                             repeat: Number.POSITIVE_INFINITY,
@@ -282,8 +191,6 @@ export default function AnimatedCategories() {
             </motion.div>
           ))}
         </div>
-
-
       </div>
     </section>
   );

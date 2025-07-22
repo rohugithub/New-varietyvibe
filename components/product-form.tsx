@@ -387,6 +387,7 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
                       {category.name}
                     </SelectItem>
                   ))}
+                  
                 </SelectContent>
               </Select>
             </div>
