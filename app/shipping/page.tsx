@@ -64,7 +64,7 @@ export default function ShippingPolicyPage() {
                 in select areas)
               </li>
               <li>
-                <strong>Standard Delivery:</strong> Within 1 day
+                <strong>Standard Delivery:</strong> Within 7-10 days
               </li>
               <li>
                 <strong>Scheduled Delivery:</strong> Choose a specific time slot

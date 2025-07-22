@@ -78,6 +78,9 @@ export default function ReturnPolicyPage() {
               pickup or provide further steps.
             </li>
           </ol>
+          <p className="mt-6">
+              <strong>Note:</strong> Product Return & Refund within 10 days  
+            </p>
         </section>
 
         <section className="mb-10">

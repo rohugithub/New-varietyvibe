@@ -382,11 +382,13 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="none">No Category</SelectItem>
+
                   {categories.map((category) => (
                     <SelectItem key={category._id} value={category._id}>
                       {category.name}
                     </SelectItem>
                   ))}
+                  
                 </SelectContent>
               </Select>
             </div>

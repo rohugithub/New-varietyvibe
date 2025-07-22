@@ -90,10 +90,7 @@ export default function HomeServicesSection() {
                     <h3 className="text-lg font-semibold line-clamp-2">{s.name}</h3>
                     <p className="text-gray-600 text-sm line-clamp-2">{s.description}</p>
                     <div className="flex items-center justify-between pt-2">
-                      <span className="text-xl font-bold text-blue-800">
-                        ₹{s.price}
-                        <span className="text-sm text-gray-500 ml-1">onwards</span>
-                      </span>
+                      
 
                       {/* Book Now button (still links, but inside a Link wrapper) */}
                       <Button
