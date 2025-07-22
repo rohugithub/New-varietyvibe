@@ -16,6 +16,7 @@ export async function GET(request: NextRequest) {
       .skip(skip)
       .limit(limit)
 
+
     const total = await Brand.countDocuments()
 
     return NextResponse.json({

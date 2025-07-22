@@ -115,12 +115,12 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
 
         if (categoriesRes.ok) {
           const categoriesData = await categoriesRes.json()
-          setCategories(categoriesData)
+          setCategories(categoriesData.categories)
         }
 
         if (brandsRes.ok) {
           const brandsData = await brandsRes.json()
-          setBrands(brandsData)
+          setBrands(brandsData.brands)
         }
       } catch (error) {
         console.error("Failed to fetch data:", error)
@@ -179,7 +179,7 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
       // Clean up empty values
       submitData = {
         ...submitData,
-        category: submitData.category || undefined,
+        category : submitData.category || undefined,
         brand: submitData.brand || undefined,
       }
 
@@ -382,7 +382,7 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="none">No Category</SelectItem>
-                  {categories.map((category) => (
+                  {Array.isArray(categories) && categories.map((category) => (
                     <SelectItem key={category._id} value={category._id}>
                       {category.name}
                     </SelectItem>
@@ -402,7 +402,7 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="none">No Brand</SelectItem>
-                  {brands.map((brand) => (
+                  {Array.isArray(brands) && brands.map((brand) => (
                     <SelectItem key={brand._id} value={brand._id}>
                       {brand.name}
                     </SelectItem>
