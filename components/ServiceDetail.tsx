@@ -75,10 +75,10 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
           ))}
         </div>
 
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <span className="text-gray-600">Starting at</span>
           <div className="text-3xl font-bold text-blue-600">₹{service.startingPrice}</div>
-        </div>
+        </div> */}
       </div>
 
       <Card>
