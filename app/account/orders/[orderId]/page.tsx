@@ -14,11 +14,16 @@ import {
   MapPin,
   CreditCard,
   ShoppingCart,
+  Star,
+  MessageSquare,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 import Image from "next/image"
 
@@ -69,7 +74,12 @@ interface StatusStep {
   label: string
   description: string
   icon: React.ReactNode
-  date?: string
+}
+
+interface ReviewForm {
+  rating: number
+  title: string
+  comment: string
 }
 
 export default function OrderDetailsPage() {
@@ -79,6 +89,14 @@ export default function OrderDetailsPage() {
   const [order, setOrder] = useState<Order | null>(null)
   const [loading, setLoading] = useState(true)
   const [animatedSteps, setAnimatedSteps] = useState<number>(0)
+  const [reviewDialogOpen, setReviewDialogOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<OrderItem | null>(null)
+  const [reviewForm, setReviewForm] = useState<ReviewForm>({
+    rating: 5,
+    title: "",
+    comment: "",
+  })
+  const [reviewableItems, setReviewableItems] = useState<Set<string>>(new Set())
 
   const statusSteps: StatusStep[] = [
     {
@@ -121,22 +139,51 @@ export default function OrderDetailsPage() {
 
   useEffect(() => {
     if (order) {
-      // Start animation after order is loaded
-      const currentStepIndex = getCurrentStepIndex(order.status)
-      let step = 0
-
-      const animateSteps = () => {
-        if (step <= currentStepIndex) {
-          setAnimatedSteps(step + 1)
-          step++
-          setTimeout(animateSteps, 800) // 800ms delay between each step
-        }
+      animateStatusSteps()
+      if (order.status === "delivered") {
+        checkReviewableItems()
       }
-
-      // Start animation after a short delay
-      setTimeout(animateSteps, 500)
     }
   }, [order])
+
+  const checkReviewableItems = async () => {
+    if (!order || !session?.user?.id) return
+
+    const reviewable = new Set<string>()
+
+    for (const item of order.items) {
+      try {
+        const response = await fetch(`/api/users/${session.user.id}/can-review/${item.product_id}`)
+        if (response.ok) {
+          const data = await response.json()
+          if (data.canReview) {
+            reviewable.add(item.product_id)
+          }
+        }
+      } catch (error) {
+        console.error("Error checking review eligibility:", error)
+      }
+    }
+
+    setReviewableItems(reviewable)
+  }
+
+  const animateStatusSteps = () => {
+    if (!order) return
+
+    const currentStepIndex = getCurrentStepIndex(order.status)
+    let step = 0
+
+    const animateSteps = () => {
+      if (step <= currentStepIndex) {
+        setAnimatedSteps(step + 1)
+        step++
+        setTimeout(animateSteps, 800)
+      }
+    }
+
+    setTimeout(animateSteps, 500)
+  }
 
   const fetchOrderDetails = async () => {
     try {
@@ -206,6 +253,43 @@ export default function OrderDetailsPage() {
     }
   }
 
+  const handleOpenReviewDialog = (item: OrderItem) => {
+    setSelectedProduct(item)
+    setReviewForm({ rating: 5, title: "", comment: "" })
+    setReviewDialogOpen(true)
+  }
+
+  const handleSubmitReview = async () => {
+    if (!selectedProduct || !session?.user?.id) return
+
+    try {
+      const response = await fetch(`/api/products/${selectedProduct.product_id}/reviews`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reviewForm),
+      })
+
+      if (response.ok) {
+        toast.success("Review submitted successfully! It will be visible after admin verification.")
+        setReviewDialogOpen(false)
+        setSelectedProduct(null)
+        setReviewForm({ rating: 5, title: "", comment: "" })
+        // Remove from reviewable items
+        setReviewableItems((prev) => {
+          const newSet = new Set(prev)
+          newSet.delete(selectedProduct.product_id)
+          return newSet
+        })
+      } else {
+        const error = await response.json()
+        toast.error(error.error || "Failed to submit review")
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error)
+      toast.error("Failed to submit review")
+    }
+  }
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "delivered":
@@ -238,6 +322,23 @@ export default function OrderDetailsPage() {
       default:
         return "bg-gray-100 text-gray-800"
     }
+  }
+
+  const renderStars = (rating: number, interactive = false, onRatingChange?: (rating: number) => void) => {
+    return [...Array(5)].map((_, i) => (
+      <button
+        key={i}
+        onClick={() => interactive && onRatingChange && onRatingChange(i + 1)}
+        className={interactive ? "p-1 hover:scale-110 transition-transform" : ""}
+        disabled={!interactive}
+      >
+        <Star
+          className={`h-5 w-5 ${
+            i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+          } ${interactive ? "cursor-pointer" : ""}`}
+        />
+      </button>
+    ))
   }
 
   if (loading) {
@@ -284,7 +385,7 @@ export default function OrderDetailsPage() {
           <p className="text-gray-600 mb-4">
             The order you're looking for doesn't exist or you don't have access to it.
           </p>
-          <Button onClick={() => router.push("/account")}>
+          <Button onClick={() => router.push("/account/orders")}>
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Orders
           </Button>
@@ -298,7 +399,7 @@ export default function OrderDetailsPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
-          <Button variant="outline" size="sm" onClick={() => router.push("/account")}>
+          <Button variant="outline" size="sm" onClick={() => router.push("/account/orders")}>
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Orders
           </Button>
@@ -499,6 +600,19 @@ export default function OrderDetailsPage() {
                     <div className="text-right">
                       <p className="font-medium">₹{(item.price * item.quantity).toLocaleString()}</p>
                       <p className="text-sm text-gray-600">₹{item.price.toLocaleString()} each</p>
+
+                      {/* Review Button for Delivered Orders */}
+                      {order.status === "delivered" && reviewableItems.has(item.product_id) && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="mt-2 text-xs bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100"
+                          onClick={() => handleOpenReviewDialog(item)}
+                        >
+                          <Star className="h-3 w-3 mr-1" />
+                          Write Review
+                        </Button>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -614,6 +728,88 @@ export default function OrderDetailsPage() {
           </Card>
         </div>
       </div>
+
+      {/* Review Dialog */}
+      <Dialog open={reviewDialogOpen} onOpenChange={setReviewDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <MessageSquare className="h-5 w-5" />
+              Write a Review
+            </DialogTitle>
+          </DialogHeader>
+
+          {selectedProduct && (
+            <div className="space-y-4">
+              {/* Product Info */}
+              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                <div className="w-12 h-12 bg-white rounded overflow-hidden">
+                  {selectedProduct.image ? (
+                    <Image
+                      src={selectedProduct.image || "/placeholder.svg"}
+                      alt={selectedProduct.name}
+                      width={48}
+                      height={48}
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <Package className="h-6 w-6 text-gray-400 m-3" />
+                  )}
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-medium text-sm">{selectedProduct.name}</h4>
+                  <p className="text-xs text-gray-600">₹{selectedProduct.price.toLocaleString()}</p>
+                </div>
+              </div>
+
+              {/* Rating */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Rating</label>
+                <div className="flex gap-1">
+                  {renderStars(reviewForm.rating, true, (rating) => setReviewForm({ ...reviewForm, rating }))}
+                </div>
+              </div>
+
+              {/* Title */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Review Title</label>
+                <Input
+                  placeholder="Summarize your review"
+                  value={reviewForm.title}
+                  onChange={(e) => setReviewForm({ ...reviewForm, title: e.target.value })}
+                />
+              </div>
+
+              {/* Comment */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Your Review</label>
+                <Textarea
+                  placeholder="Share your experience with this product..."
+                  value={reviewForm.comment}
+                  onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })}
+                  rows={4}
+                />
+              </div>
+
+              {/* Actions */}
+              <div className="flex gap-2 pt-4">
+                <Button
+                  onClick={handleSubmitReview}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700"
+                  disabled={!reviewForm.title.trim() || !reviewForm.comment.trim()}
+                >
+                  Submit Review
+                </Button>
+                <Button variant="outline" onClick={() => setReviewDialogOpen(false)} className="flex-1">
+                  Cancel
+                </Button>
+              </div>
+
+              <p className="text-xs text-gray-500 text-center">Your review will be visible after admin verification</p>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
