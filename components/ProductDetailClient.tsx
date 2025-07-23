@@ -1,16 +1,39 @@
 "use client"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
-import { Star, Heart, ShoppingCart, Truck, Shield, RotateCcw, Phone, Minus, Plus } from "lucide-react"
+import { Star, Heart, ShoppingCart, Truck, Shield, RotateCcw, Phone, Minus, Plus, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { useCart } from "@/contexts/CartContext"
 import { useWishlist } from "@/contexts/WishlistContext"
 import { useProductAction } from "@/contexts/ProductActionContext"
 import { ProductCard } from "./ProductCard"
+import { useSession } from "next-auth/react"
+import { toast } from "sonner"
+
+interface Review {
+  _id: string
+  user_id?: { name: string }
+  admin_id?: { name: string }
+  name: string
+  rating: number
+  title: string
+  comment: string
+  verified_purchase: boolean
+  is_admin_review: boolean
+  images?: string[]
+  createdAt: string
+}
+
+interface ReviewStats {
+  totalReviews: number
+  averageRating: number
+  ratingDistribution: { [key: number]: number }
+}
 
 interface ProductDetailClientProps {
   product: any
@@ -18,12 +41,87 @@ interface ProductDetailClientProps {
 }
 
 export function ProductDetailClient({ product, relatedProducts }: ProductDetailClientProps) {
+  const { data: session } = useSession()
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
   const [quantity, setQuantity] = useState(1)
+  const [reviews, setReviews] = useState<Review[]>([])
+  const [reviewStats, setReviewStats] = useState<ReviewStats>({
+    totalReviews: 0,
+    averageRating: 0,
+    ratingDistribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+  })
+  const [showReviewForm, setShowReviewForm] = useState(false)
+  const [canReview, setCanReview] = useState(false)
+  const [reviewForm, setReviewForm] = useState({
+    rating: 5,
+    title: "",
+    comment: "",
+  })
+
   const { addToCart } = useCart()
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
   const { showProductAction } = useProductAction()
+
+  useEffect(() => {
+    fetchReviews()
+    if (session?.user?.id) {
+      checkCanReview()
+    }
+  }, [product._id, session])
+
+  const fetchReviews = async () => {
+    try {
+      const response = await fetch(`/api/products/${product._id}/reviews`)
+      if (response.ok) {
+        const data = await response.json()
+        setReviews(data.reviews)
+        setReviewStats(data.stats)
+      }
+    } catch (error) {
+      console.error("Error fetching reviews:", error)
+    }
+  }
+
+  const checkCanReview = async () => {
+    try {
+      const response = await fetch(`/api/users/${session?.user?.id}/can-review/${product._id}`)
+      if (response.ok) {
+        const data = await response.json()
+        setCanReview(data.canReview)
+      }
+    } catch (error) {
+      console.error("Error checking review eligibility:", error)
+    }
+  }
+
+  const handleSubmitReview = async () => {
+    if (!session?.user?.id) {
+      toast.error("Please login to submit a review")
+      return
+    }
+
+    try {
+      const response = await fetch(`/api/products/${product._id}/reviews`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reviewForm),
+      })
+
+      if (response.ok) {
+        toast.success("Review submitted successfully! It will be visible after admin verification.")
+        setShowReviewForm(false)
+        setReviewForm({ rating: 5, title: "", comment: "" })
+        fetchReviews()
+      } else {
+        const error = await response.json()
+        toast.error(error.message || "Failed to submit review")
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error)
+      toast.error("Failed to submit review")
+    }
+  }
 
   const handleAddToCart = () => {
     addToCart({
@@ -34,8 +132,6 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
       image: product.images[0]?.url || "",
       quantity,
     })
-
-    // Show the big product action toast
     showProductAction(
       {
         _id: product._id,
@@ -63,8 +159,6 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
         image: product.images[0]?.url || "",
         inStock: selectedVariant.inventoryQuantity > 0,
       })
-
-      // Show the big product action toast for wishlist
       showProductAction(
         {
           _id: product._id,
@@ -77,6 +171,28 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
         "wishlist",
       )
     }
+  }
+
+  const renderStars = (rating: number, size = "h-4 w-4") => {
+    return [...Array(5)].map((_, i) => (
+      <Star key={i} className={`${size} ${i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`} />
+    ))
+  }
+
+  const renderRatingBar = (rating: number, count: number) => {
+    const percentage = reviewStats.totalReviews > 0 ? (count / reviewStats.totalReviews) * 100 : 0
+    return (
+      <div className="flex items-center gap-2 text-sm">
+        <span className="w-8">{rating}★</span>
+        <div className="flex-1 bg-gray-200 rounded-full h-2">
+          <div
+            className="bg-yellow-400 h-2 rounded-full transition-all duration-500"
+            style={{ width: `${percentage}%` }}
+          />
+        </div>
+        <span className="w-8 text-gray-600">{count}</span>
+      </div>
+    )
   }
 
   const discountPercentage = selectedVariant.compareAtPrice
@@ -104,7 +220,6 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
               />
               {product.isHotDeal && <Badge className="absolute top-4 left-4 bg-red-500 text-white">Hot Deal</Badge>}
             </div>
-
             {product.images.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
                 {product.images.map((image: any, index: number) => (
@@ -131,12 +246,10 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
           <div className="space-y-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <span className="text-sm text-gray-600">(4.5) 124 Reviews</span>
+                <div className="flex items-center">{renderStars(Math.round(reviewStats.averageRating))}</div>
+                <span className="text-sm text-gray-600">
+                  ({reviewStats.averageRating.toFixed(1)}) {reviewStats.totalReviews} Reviews
+                </span>
               </div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.title}</h1>
               {product.brand && (
@@ -189,12 +302,10 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                   {selectedVariant.inventoryQuantity > 0 ? "In Stock" : "Out of Stock"}
                 </Badge>
               </div>
-
               <div>
                 <span className="text-sm font-medium text-gray-700">Delivery:</span>
                 <span className="ml-2 text-sm text-green-600">10-15 days</span>
               </div>
-
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium text-gray-700">Quantity:</span>
                 <div className="flex items-center border rounded">
@@ -222,7 +333,6 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 <ShoppingCart className="h-5 w-5 mr-2" />
                 Add to Cart
               </Button>
-
               <Button variant="outline" size="lg" className="w-full bg-transparent" onClick={handleWishlistToggle}>
                 <Heart className={`h-5 w-5 mr-2 ${isInWishlist(product._id) ? "fill-current text-red-500" : ""}`} />
                 {isInWishlist(product._id) ? "Remove from Wishlist" : "Add to Wishlist"}
@@ -256,7 +366,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="features">Features</TabsTrigger>
             <TabsTrigger value="specifications">Specifications</TabsTrigger>
-            <TabsTrigger value="reviews">Reviews</TabsTrigger>
+            <TabsTrigger value="reviews">Reviews ({reviewStats.totalReviews})</TabsTrigger>
           </TabsList>
 
           <TabsContent value="features" className="mt-6">
@@ -265,14 +375,6 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 <h3 className="text-lg font-semibold mb-4">Product Features</h3>
                 <div className="prose max-w-none">
                   <p>{product.description}</p>
-                  <ul className="list-disc pl-6 space-y-2 mt-4">
-                    <li>High-quality construction and materials</li>
-                    <li>Advanced technology integration</li>
-                    <li>Energy efficient operation</li>
-                    <li>User-friendly interface</li>
-                    <li>Comprehensive warranty coverage</li>
-                    <li>Professional installation support</li>
-                  </ul>
                 </div>
               </CardContent>
             </Card>
@@ -317,29 +419,145 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
           </TabsContent>
 
           <TabsContent value="reviews" className="mt-6">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-4">Customer Reviews</h3>
-                <div className="space-y-4">
-                  {[1, 2, 3].map((review) => (
-                    <div key={review} className="border-b pb-4 last:border-b-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="flex items-center">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                          ))}
-                        </div>
-                        <span className="font-medium">Customer {review}</span>
-                        <span className="text-sm text-gray-500">{review} days ago</span>
+            <div className="space-y-6">
+              {/* Review Summary */}
+              <Card>
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="text-center">
+                      <div className="text-4xl font-bold mb-2">{reviewStats.averageRating.toFixed(1)}</div>
+                      <div className="flex justify-center mb-2">
+                        {renderStars(Math.round(reviewStats.averageRating), "h-6 w-6")}
                       </div>
-                      <p className="text-gray-700">
-                        Great product with excellent quality. Easy to use and the delivery was fast. Highly recommended!
-                      </p>
+                      <p className="text-gray-600">{reviewStats.totalReviews} reviews</p>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    <div className="space-y-2">
+                      {[5, 4, 3, 2, 1].map((rating) =>
+                        renderRatingBar(rating, reviewStats.ratingDistribution[rating] || 0),
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Write Review */}
+              {session?.user && canReview && (
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-semibold">Write a Review</h3>
+                      <Button
+                        onClick={() => setShowReviewForm(!showReviewForm)}
+                        className="bg-blue-600 hover:bg-blue-700"
+                      >
+                        <MessageSquare className="h-4 w-4 mr-2" />
+                        Write Review
+                      </Button>
+                    </div>
+
+                    {showReviewForm && (
+                      <div className="space-y-4 border-t pt-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Rating</label>
+                          <div className="flex gap-1">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <button
+                                key={star}
+                                onClick={() => setReviewForm({ ...reviewForm, rating: star })}
+                                className="p-1"
+                              >
+                                <Star
+                                  className={`h-6 w-6 ${star <= reviewForm.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
+                                />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <Input
+                          placeholder="Review Title"
+                          value={reviewForm.title}
+                          onChange={(e) => setReviewForm({ ...reviewForm, title: e.target.value })}
+                        />
+
+                        <Textarea
+                          placeholder="Write your review..."
+                          value={reviewForm.comment}
+                          onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })}
+                          rows={4}
+                        />
+
+                        <div className="flex gap-2">
+                          <Button onClick={handleSubmitReview} className="bg-blue-600 hover:bg-blue-700">
+                            Submit Review
+                          </Button>
+                          <Button variant="outline" onClick={() => setShowReviewForm(false)}>
+                            Cancel
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Reviews List */}
+              <div className="space-y-4">
+                {reviews.length === 0 ? (
+                  <Card>
+                    <CardContent className="p-8 text-center">
+                      <p className="text-gray-500">No reviews yet. Be the first to review this product!</p>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  reviews.map((review) => (
+                    <Card key={review._id}>
+                      <CardContent className="p-6">
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <div className="flex items-center gap-2 mb-1">
+                              <div className="flex">{renderStars(review.rating)}</div>
+                              {review.verified_purchase && (
+                                <Badge variant="secondary" className="text-xs">
+                                  Verified Purchase
+                                </Badge>
+                              )}
+                              {review.is_admin_review && (
+                                <Badge className="text-xs bg-blue-100 text-blue-800">Admin Review</Badge>
+                              )}
+                            </div>
+                            <h4 className="font-semibold">{review.title}</h4>
+                            <p className="text-sm text-gray-600">
+                              By {review.is_admin_review ? review.admin_id?.name || review.name : review.name}
+                            </p>
+                          </div>
+                          <span className="text-sm text-gray-500">
+                            {new Date(review.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
+
+                        <p className="text-gray-700 mb-3">{review.comment}</p>
+
+                        {review.images && review.images.length > 0 && (
+                          <div className="flex gap-2">
+                            {review.images.map((image, index) => (
+                              <Image
+                                key={index}
+                                src={image || "/placeholder.svg"}
+                                alt={`Review image ${index + 1}`}
+                                width={80}
+                                height={80}
+                                className="rounded object-cover"
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  ))
+                )}
+              </div>
+            </div>
           </TabsContent>
         </Tabs>
 

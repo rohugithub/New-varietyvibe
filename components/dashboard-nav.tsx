@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Layers, LayoutDashboard, Package, Tag , Users ,House , BadgeCheck, CalendarArrowDown , MailOpen,BookOpenCheck , BadgeDollarSign , PartyPopper ,TableOfContents, PanelTop  , Star   } from "lucide-react"
+import { Layers, LayoutDashboard, Package, Tag , Users ,House , BadgeCheck, CalendarArrowDown , MailOpen,BookOpenCheck , BadgeDollarSign , PartyPopper ,TableOfContents, PanelTop  , Star, ChevronRight   } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 
 const items = [
@@ -71,6 +71,11 @@ const items = [
     title:"Services Categories",
     href: "/dashboard/service-category",
     icon: MailOpen,
+  },
+  {
+    title:"Reviews",
+    href: "/dashboard/reviews",
+    icon: ChevronRight,
   },
   {
     title:"Contact Us",
