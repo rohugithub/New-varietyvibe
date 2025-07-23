@@ -110,7 +110,7 @@ export function ProductCard({ product }: ProductCardProps) {
               src={product.images[0]?.url || "/placeholder.svg"}
               alt={product.images[0]?.altText || product.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              className="object-contain group-hover:scale-105 transition-transform duration-300"
             />
           </div>
         </Link>
