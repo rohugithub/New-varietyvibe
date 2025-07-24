@@ -8,7 +8,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Calendar, Clock, MapPin, Phone, User } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
@@ -109,7 +115,7 @@ export default function BookingForm({ serviceId, serviceName }: BookingFormProps
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          <div className="space-y-1">
             <Label htmlFor="customerName" className="flex items-center gap-2">
               <User className="w-4 h-4" />
               Full Name
@@ -123,7 +129,7 @@ export default function BookingForm({ serviceId, serviceName }: BookingFormProps
             />
           </div>
 
-          <div>
+          <div className="space-y-1">
             <Label htmlFor="mobileNumber" className="flex items-center gap-2">
               <Phone className="w-4 h-4" />
               Mobile Number
@@ -138,7 +144,7 @@ export default function BookingForm({ serviceId, serviceName }: BookingFormProps
             />
           </div>
 
-          <div>
+          <div className="space-y-1">
             <Label htmlFor="city" className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
               City
@@ -157,7 +163,7 @@ export default function BookingForm({ serviceId, serviceName }: BookingFormProps
             </Select>
           </div>
 
-          <div>
+          <div className="space-y-1">
             <Label htmlFor="address">Address</Label>
             <Textarea
               id="address"
@@ -169,7 +175,7 @@ export default function BookingForm({ serviceId, serviceName }: BookingFormProps
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
+            <div className="space-y-1">
               <Label htmlFor="preferredDate">Preferred Date</Label>
               <Input
                 id="preferredDate"
@@ -179,7 +185,7 @@ export default function BookingForm({ serviceId, serviceName }: BookingFormProps
                 min={new Date().toISOString().split("T")[0]}
               />
             </div>
-            <div>
+            <div className="space-y-1">
               <Label htmlFor="preferredTime" className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
                 Time
@@ -200,7 +206,7 @@ export default function BookingForm({ serviceId, serviceName }: BookingFormProps
             </div>
           </div>
 
-          <div>
+          <div className="space-y-1">
             <Label htmlFor="notes">Additional Notes</Label>
             <Textarea
               id="notes"

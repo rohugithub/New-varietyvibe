@@ -78,9 +78,15 @@ export default function ReturnPolicyPage() {
               pickup or provide further steps.
             </li>
           </ol>
-          <p className="mt-6">
-              <strong>Note:</strong> Product Return & Refund within 10 days  
-            </p>
+
+          
+          <ul className="mt-6 list-disc list-inside">
+            <h1><strong>Note:</strong></h1>
+            <li> Product can be returned within 3 days.</li>
+            <li>No replacement and exchange is available.</li>
+            <li>Post approval, refund will be credited to original payment method within 10 working days.</li>
+          </ul>
+
         </section>
 
         <section className="mb-10">

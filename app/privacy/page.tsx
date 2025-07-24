@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div>
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-transparent">
+      <div className="bg-blue-600 to-transparent">
         <div className="flex flex-col items-center text-center mb-16 px-10 py-10 w-full text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Privacy policy

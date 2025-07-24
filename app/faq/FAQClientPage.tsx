@@ -284,7 +284,7 @@ export default function FAQClientPage() {
         </div>
 
         {/* FAQ List */}
-        <div className="mb-16">
+        <div className="mb-16 px-2">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold">
               {selectedCategory === "All" ? "All Questions" : selectedCategory}

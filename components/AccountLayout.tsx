@@ -116,10 +116,10 @@ export function AccountLayout({ children }: AccountLayoutProps) {
                   <MapPin className="h-4 w-4" />
                   Addresses
                 </TabsTrigger>
-                <TabsTrigger value="payment" className="gap-2">
+                {/* <TabsTrigger value="payment" className="gap-2">
                   <CreditCard className="h-4 w-4" />
                   Payment
-                </TabsTrigger>
+                </TabsTrigger> */}
                 <TabsTrigger value="wishlist" className="gap-2">
                   <Heart className="h-4 w-4" />
                   Wishlist

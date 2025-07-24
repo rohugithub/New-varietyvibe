@@ -48,7 +48,8 @@ export default function CategoryNavigation() {
 
   return (
     <nav className="py-4">
-      <div className="flex flex-wrap gap-2">
+
+      {/* <div className="flex flex-wrap gap-2">
         <Button
           variant={activeCategory === "all" ? "default" : "ghost"}
           onClick={() => handleCategoryChange("all")}
@@ -56,7 +57,7 @@ export default function CategoryNavigation() {
             "rounded-full px-6 py-2 text-sm font-medium transition-colors",
             activeCategory === "all"
               ? "bg-blue-600 text-white hover:bg-blue-700"
-              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100",
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-300",
           )}
         >
           Top and Upcoming
@@ -70,14 +71,46 @@ export default function CategoryNavigation() {
             className={cn(
               "rounded-full px-6 py-2 text-sm font-medium transition-colors",
               activeCategory === category._id
-                ? "bg-blue-600 text-white hover:bg-blue-700"
-                : "text-gray-600 hover:text-gray-900 hover:bg-gray-100",
+               ? "bg-blue-600 text-white hover:bg-blue-700"
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-300",
             )}
           >
             {category.name}
           </Button>
         ))}
-      </div>
+      </div> */}
+
+      <div className="flex flex-wrap gap-2">
+  <Button
+    variant={activeCategory === "all" ? "default" : "ghost"}
+    onClick={() => handleCategoryChange("all")}
+    className={cn(
+      "rounded-full px-6 py-2 text-sm font-medium transition-colors",
+      activeCategory === "all"
+        ? "bg-blue-600 text-white hover:bg-blue-700"
+        : "text-gray-600 hover:text-gray-900 hover:bg-gray-300",
+    )}
+  >
+    Top and Upcoming
+  </Button>
+
+  {categories.map((category) => (
+    <Button
+      key={category._id}
+      variant={activeCategory === category.slug ? "default" : "ghost"}
+      onClick={() => handleCategoryChange(category.slug)}
+      className={cn(
+        "rounded-full px-6 py-2 text-sm font-medium transition-colors",
+        activeCategory === category.slug
+          ? "bg-blue-600 text-white hover:bg-blue-700"
+          : "text-gray-600 hover:text-gray-900 hover:bg-gray-300",
+      )}
+    >
+      {category.name}
+    </Button>
+  ))}
+</div>
+
     </nav>
   )
 }

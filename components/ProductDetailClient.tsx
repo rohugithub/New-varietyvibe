@@ -216,7 +216,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 src={product.images[selectedImage]?.url || "/placeholder.svg"}
                 alt={product.title}
                 fill
-                className="object-cover"
+                className="object-contain"
               />
               {product.isHotDeal && <Badge className="absolute top-4 left-4 bg-red-500 text-white">Hot Deal</Badge>}
             </div>
@@ -234,7 +234,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                       src={image.url || "/placeholder.svg"}
                       alt={`${product.title} ${index + 1}`}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                     />
                   </button>
                 ))}

@@ -54,15 +54,16 @@ export default function CartPage() {
   }
 
   return (
+
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
           <div className="flex items-center space-x-4">
             <Link href="/" className="text-blue-600 hover:text-blue-700">
               <ArrowLeft className="h-6 w-6" />
             </Link>
-            <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Shopping Cart</h1>
           </div>
           {state.items.length > 0 && (
             <Button
@@ -76,41 +77,42 @@ export default function CartPage() {
         </div>
 
         {state.items.length === 0 ? (
-          /* Empty Cart */
+          // Empty cart
           <div className="text-center py-16">
             <ShoppingBag className="h-24 w-24 text-gray-300 mx-auto mb-6" />
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Your cart is empty</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">Your cart is empty</h2>
             <p className="text-gray-600 mb-8">Looks like you haven't added anything to your cart yet.</p>
             <Link href="/">
               <Button className="bg-blue-600 hover:bg-blue-700 px-8 py-3">Continue Shopping</Button>
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Cart Items */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 space-y-4">
               <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-semibold">Cart Items ({state.itemCount})</h2>
-                  </div>
+                <CardContent className="p-4 sm:p-6">
+                  <h2 className="text-lg sm:text-xl font-semibold mb-4">Cart Items ({state.itemCount})</h2>
 
                   <div className="space-y-6">
-                    {state.items.map((item :any, index) => (
+                    {state.items.map((item: any, index) => (
                       <div key={item.id}>
-                        <div className="flex items-start space-x-4">
-                          <Image
-                            src={item.image || "/placeholder.svg?height=120&width=120"}
-                            alt={item.name}
-                            width={120}
-                            height={120}
-                            className="rounded-lg object-cover"
-                          />
+                        <div className="flex flex-col sm:flex-row items-start gap-4">
+                          <div className="relative w-28 h-28 sm:w-32 sm:h-32">
+                            <Image
+                              src={item.image || "/placeholder.svg?height=120&width=120"}
+                              alt={item.name}
+                              fill
+                              className="object-contain rounded-lg"
+                              sizes="(max-width: 640px) 112px, 128px"
+                            />
+                          </div>
+
 
                           <div className="flex-1">
-                            <h3 className="text-lg font-medium text-gray-900 mb-2">{item.name}</h3>
+                            <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">{item.name}</h3>
 
-                            <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+                            <div className="flex flex-wrap gap-2 text-sm text-gray-600 mb-4">
                               {item.size && <span className="bg-gray-100 px-2 py-1 rounded">Size: {item.size}</span>}
                               {item.color && <span className="bg-gray-100 px-2 py-1 rounded">Color: {item.color}</span>}
                               <span className="bg-green-100 text-green-800 px-2 py-1 rounded">
@@ -118,7 +120,7 @@ export default function CartPage() {
                               </span>
                             </div>
 
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-wrap justify-between items-center gap-4">
                               <div className="flex items-center space-x-3">
                                 <Button
                                   variant="outline"
@@ -130,7 +132,7 @@ export default function CartPage() {
                                   <Minus className="h-4 w-4" />
                                 </Button>
 
-                                <span className="w-12 text-center font-medium">{item.quantity}</span>
+                                <span className="w-10 text-center font-medium">{item.quantity}</span>
 
                                 <Button
                                   variant="outline"
@@ -144,7 +146,7 @@ export default function CartPage() {
                               </div>
 
                               <div className="text-right">
-                                <p className="text-lg font-semibold text-gray-900">
+                                <p className="text-base font-semibold text-gray-900">
                                   ₹{(item.price * item.quantity).toLocaleString()}
                                 </p>
                                 <p className="text-sm text-gray-500">₹{item.price.toLocaleString()} each</p>
@@ -170,11 +172,11 @@ export default function CartPage() {
               </Card>
             </div>
 
-            {/* Order Summary */}
+            {/* Summary */}
             <div className="lg:col-span-1">
-              <Card className="sticky top-8">
-                <CardContent className="p-6">
-                  <h2 className="text-xl font-semibold mb-6">Order Summary</h2>
+              <Card className="lg:sticky top-8">
+                <CardContent className="p-4 sm:p-6">
+                  <h2 className="text-lg sm:text-xl font-semibold mb-4">Order Summary</h2>
 
                   <div className="space-y-4">
                     <div className="flex justify-between">
@@ -184,7 +186,9 @@ export default function CartPage() {
 
                     <div className="flex justify-between">
                       <span className="text-gray-600">Shipping</span>
-                      <span className="font-medium text-green-600">{state.total >= 499 ? "Free" : "₹50"}</span>
+                      <span className="font-medium text-green-600">
+                        {state.total >= 499 ? "Free" : "₹50"}
+                      </span>
                     </div>
 
                     <div className="flex justify-between">
@@ -194,7 +198,7 @@ export default function CartPage() {
 
                     <Separator />
 
-                    <div className="flex justify-between text-lg font-semibold">
+                    <div className="flex justify-between text-base sm:text-lg font-semibold">
                       <span>Total</span>
                       <span>
                         ₹
@@ -211,7 +215,6 @@ export default function CartPage() {
                     <Link href="/checkout">
                       <Button className="w-full bg-blue-600 hover:bg-blue-700 py-3">Proceed to Checkout</Button>
                     </Link>
-
                     <Link href="/">
                       <Button variant="outline" className="w-full border-blue-200 hover:bg-blue-50 bg-transparent">
                         Continue Shopping
@@ -233,5 +236,7 @@ export default function CartPage() {
         )}
       </div>
     </div>
+
+
   )
 }

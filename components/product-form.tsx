@@ -250,9 +250,11 @@ export function ProductForm({ product, isEdit = false }: ProductFormProps) {
       {/* Main Content */}
       <div className="lg:col-span-2 space-y-6">
         <Card>
+          
           <CardHeader>
             <CardTitle>Product Information</CardTitle>
           </CardHeader>
+
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>

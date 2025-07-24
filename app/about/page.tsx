@@ -11,7 +11,7 @@ export default function AboutPage() {
   return (
     <div>
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-transparent">
+      <div className="bg-blue-600">
         <div className="flex flex-col items-center text-center mb-16 px-10 py-20 w-full text-white">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">About Inoxsecure</h1>
           <p className="text-lg md:text-xl text-white max-w-4xl leading-relaxed">
@@ -450,7 +450,7 @@ export default function AboutPage() {
             benefit both users and business partners.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link href="/services">
+            <Link href="/service">
               <Button
                 variant="secondary"
                 size="lg"

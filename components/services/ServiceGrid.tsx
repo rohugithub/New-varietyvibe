@@ -40,7 +40,6 @@ export default function ServiceGrid() {
     try {
       const category = searchParams.get("category")
       const url = category ? `/api/services?category=${category}` : "/api/services"
-
       const response = await fetch(url)
       const data = await response.json()
       setServices(data)
@@ -83,52 +82,49 @@ interface ServiceCardProps {
 
 function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <Card className="group hover:shadow-lg transition-all duration-200 relative overflow-hidden bg-white">
-      {/* Service Image */}
-      <div className="relative h-48 overflow-hidden">
-        <Image
-          src={service.image || "/placeholder.svg?height=200&width=300"}
-          alt={service.name}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-200"
-        />
-        {service.verified && (
-          <div className="absolute top-3 right-3">
-            <CheckCircle className="w-6 h-6 text-green-500 bg-white rounded-full" />
-          </div>
-        )}
-      </div>
-
-      <CardContent className="p-4">
-        {/* Service Title */}
-        <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-gray-900">{service.name}</h3>
-
-        {/* Service Description */}
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{service.description}</p>
-
-        {/* Rating */}
-        <div className="flex items-center gap-1 mb-4">
-          <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`w-4 h-4 ${
-                  i < Math.floor(service.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
-                }`}
-              />
-            ))}
-          </div>
-          <span className="text-sm font-medium text-gray-700">{service.rating}</span>
-          <span className="text-sm text-gray-500">({service.reviews})</span>
+    <Link href={`/service/${service.slug}`} className="block">
+      <Card className="group hover:shadow-lg transition-all duration-200 relative overflow-hidden bg-white">
+        {/* Service Image */}
+        <div className="relative h-48 overflow-hidden">
+          <Image
+            src={service.image || "/placeholder.svg?height=200&width=300"}
+            alt={service.name}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-200"
+          />
+          {service.verified && (
+            <div className="absolute top-3 right-3">
+              <CheckCircle className="w-6 h-6 text-green-500 bg-white rounded-full" />
+            </div>
+          )}
         </div>
 
-        {/* Book Now Button */}
-        <Link href={`/service/${service.slug}`}>
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition-colors">
+        <CardContent className="p-4">
+          <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-gray-900">{service.name}</h3>
+          <p className="text-sm text-gray-600 mb-3 line-clamp-2">{service.description}</p>
+
+          <div className="flex items-center gap-1 mb-4">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`w-4 h-4 ${i < Math.floor(service.rating)
+                    ? "fill-yellow-400 text-yellow-400"
+                    : "text-gray-300"
+                    }`}
+                />
+              ))}
+            </div>
+            <span className="text-sm font-medium text-gray-700">{service.rating}</span>
+            <span className="text-sm text-gray-500">({service.reviews})</span>
+          </div>
+
+          {/* Looks like a button, but it's part of the Link */}
+          <div className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md text-center">
             Book Now
-          </Button>
-        </Link>
-      </CardContent>
-    </Card>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }

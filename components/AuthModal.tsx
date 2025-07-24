@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { signIn, getSession } from "next-auth/react";
 import Image from "next/image";
 import Logo from "@/public/logo-white.png";
+import { useToast } from "@/hooks/use-toast"; // ✅ Corrected path
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -24,6 +25,8 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     confirmPassword: "",
   });
 
+  const { toast } = useToast(); // ✅ Toast setup
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,6 +42,11 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
       if (result?.ok) {
         const session = await getSession();
 
+        toast({
+          title: "Success",
+          description: "Login successful!",
+        });
+
         if (session?.user?.role === "admin") {
           window.location.href = "/dashboard";
         } else if (session?.user?.role === "agent") {
@@ -51,12 +59,19 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
         onClose();
       } else {
-        alert("Login failed. Check credentials.");
+        toast({
+          title: "Error",
+          description: "Login failed. Check your email or password.",
+          variant: "destructive",
+        });
       }
     } else {
-      // Registration form validations
       if (formData.password !== formData.confirmPassword) {
-        alert("Passwords do not match!");
+        toast({
+          title: "Error",
+          description: "Passwords do not match!",
+          variant: "destructive",
+        });
         return;
       }
 
@@ -71,11 +86,18 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
       });
 
       if (response.ok) {
-        alert("Account created successfully. You can now sign in.");
+        toast({
+          title: "Success",
+          description: "Account created successfully. You can now sign in.",
+        });
         setIsLogin(true);
       } else {
         const data = await response.json();
-        alert(data?.message || "Registration failed");
+        toast({
+          title: "Error",
+          description: data?.message || "Registration failed.",
+          variant: "destructive",
+        });
       }
     }
   };
@@ -91,8 +113,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           {/* Image Side */}
           <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-[#0042adef] to-blue-600 items-center justify-center p-8">
             <div className="text-center text-white">
-              {/* INOX Logo */}
-              <div className=" p-5 rounded-lg mb-6 inline-block">
+              <div className="p-5 rounded-lg mb-6 inline-block">
                 <Image
                   src={Logo}
                   alt="INOX Logo"
@@ -101,7 +122,6 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   className="object-contain mx-auto"
                 />
               </div>
-
               <h2 className="text-2xl font-bold mb-4">Welcome to INOX Store</h2>
               <p className="text-blue-100">
                 Discover premium electronics and appliances with exclusive deals
@@ -199,11 +219,14 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 </div>
               )}
 
-              <div className=" text-right">
-              <a href="/auth/forgot-password" className="text-sm text-blue-600 hover:underline">
-                Forgot password?
-              </a>
-            </div>
+              <div className="text-right">
+                <a
+                  href="/auth/forgot-password"
+                  className="text-sm text-blue-600 hover:underline"
+                >
+                  Forgot password?
+                </a>
+              </div>
 
               <Button
                 type="submit"
@@ -212,9 +235,6 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 {isLogin ? "Sign In" : "Create Account"}
               </Button>
             </form>
-
-            
-
 
             <div className="mt-6 text-center">
               <p className="text-gray-600">
