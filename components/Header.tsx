@@ -18,7 +18,7 @@ import { useWishlist } from "@/contexts/WishlistContext";
 import { CartSidebar } from "./CartSidebar";
 import { AuthModal } from "./AuthModal";
 import { useSession } from "next-auth/react";
-import Logo from "@/public/logo-white.png";
+import Logo from "@/public/VarietyVibesLogo-white.png";
 import Image from "next/image";
 
 export function Header() {
@@ -81,8 +81,8 @@ export function Header() {
 
   return (
     <>
-      <header className="bg-[#0042ad] text-white sticky top-0 z-40">
-        <div className="bg-white w-full py-3 px-10 hidden md:block">
+      <header className="bg-[#b74d80e0] text-white sticky top-0 z-40">
+        {/* <div className="bg-white w-full py-3 px-10 hidden md:block">
           <div className="container mx-auto px-6 hidden md:block">
             <div className="flex items-center justify-between text-sm text-black">
               <div className="">
@@ -92,7 +92,7 @@ export function Header() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between h-16">
