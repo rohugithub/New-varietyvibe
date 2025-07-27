@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn, getSession } from "next-auth/react";
 import Image from "next/image";
-import Logo from "@/public/logo-white.png";
+import Logo from "@/public/VarietyVibesLogo-white.png";
 import { useToast } from "@/hooks/use-toast"; // ✅ Corrected path
 
 interface AuthModalProps {

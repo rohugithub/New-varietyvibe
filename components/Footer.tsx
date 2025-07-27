@@ -11,7 +11,7 @@ import {
   Mail,
   MapPin,
 } from "lucide-react";
-import Logo from "@/public/logo-white.png";
+import Logo from "@/public/VarietyVibesLogo-white.png";
 import Image from "next/image";
 import PhonePe from "@/public/Payment-icons/PhonePe.png";
 import Cash from "@/public/Payment-icons/cash.png";
