@@ -9,11 +9,11 @@ import { ShowHeader } from "@/components/ShowHeader"; // ⬅️ new
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Grow your business on inoxsecure",
+  title: "Variety Vibes - Your Online Shopping Destination",
   description:
     "It is a local search‑engine platform. You can search for businesses and skilled artisans around you and buy daily‑use items.",
   icons: {
-    icon: "/fav.ico",
+    icon: "/favicon.jpg",
   },
 };
 

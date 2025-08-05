@@ -4,6 +4,8 @@ import { HeroSection } from "@/components/hero-section";
 import FeatuedSection from "@/components/features-section";
 import HomeServicesSection from "@/components/Services";
 import { ElectronicsBannerSection } from "@/components/Electronics-banner";
+import Newtestimonial from "@/components/Newtestimonial";
+import { Button } from "@/components/ui/button";
 import PromoSection from "@/components/ServiceImage";
 import MegaSale from "@/components/MegaSale";
 
@@ -26,57 +28,66 @@ export default function HomePage() {
         {/* Featured Electronics */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-[#0042adef] mb-4">
-                Electronics
+            <div className="text-start mb-12">
+              <h2 className="text-3xl sm:text-5xl text-[#B74D80] font-light tracking-tight leading-tight text-left">
+                Machine Zone
               </h2>
-              <p className="text-gray-600">
-                Explore our range of TVs, audio systems, and smart devices
+              <p className="text-gray-800 text-md max-w-2xl text-left">
+                Latest Electronics & Technology
               </p>
             </div>
-            <CategoryCarousel category="electronics" showAll />
+            <CategoryCarousel category="machinezone" showAll />
           </div>
+          {/* <div className="text-center">
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="bg-[#B74D80] text-sm hover:bg-[#b74d80af] text-white hover:text-white"
+            >
+              <a href="">View All Products</a>
+            </Button>
+          </div> */}
         </section>
 
         <ElectronicsBannerSection />
         {/* Featured Home Appliances */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-orange-500 mb-4">
-                Home Appliances
+              <h2 className="text-3xl sm:text-5xl text-[#B74D80] font-light tracking-tight leading-tight text-left">
+                Home Furnishing
               </h2>
-              <p className="text-gray-600">
-                Discover kitchen and home appliances to make your life easier
+              <p className="text-gray-800 text-md max-w-2xl text-left">
+                Premium Furniture & Home Decor
               </p>
             </div>
-            <CategoryCarousel category="appliances" showAll />
+            <CategoryCarousel category="Homefurnishing" showAll />
           </div>
         </section>
 
-        {/* Featured IT Products */}
-        <section className="py-16 bg-gray-50">
+        {/* Featured Books */}
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-orange-500 mb-4">
-                IT Products
+              <h2 className="text-3xl sm:text-5xl text-[#B74D80] font-light tracking-tight leading-tight text-left">
+                Books
               </h2>
-              <p className="text-gray-600">
-                Discover best solutions for your IT needs
+              <p className="text-gray-800 text-md max-w-2xl text-left">
+                Knowledge & Entertainment
               </p>
             </div>
-            <CategoryCarousel category="it-products" showAll />
+            <CategoryCarousel category="books" showAll />
           </div>
         </section>
 
-        {/* Service Image */}
-        <PromoSection />
+        {/* New Testimonial */}
+        {/* <Newtestimonial /> */}
+
         {/* Services Section */}
-        <HomeServicesSection />
-        <MegaSale />
 
         {/* Trending */}
-        <section className="py-16 bg-white">
+        {/* <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-[#0042adef] mb-4">
@@ -88,7 +99,7 @@ export default function HomePage() {
             </div>
             <CategoryCarousel category="electronics" showAll />
           </div>
-        </section>
+        </section> */}
 
         {/* Featured Section */}
         <FeatuedSection />

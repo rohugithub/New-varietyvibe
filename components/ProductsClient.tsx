@@ -32,9 +32,9 @@ export function ProductsClient({
   });
   const [pagination, setPagination] = useState({
     page: 1,
-    limit: 12,
+    limit: 20,
     total: initialProducts.length,
-    pages: Math.ceil(initialProducts.length / 12),
+    pages: Math.ceil(initialProducts.length / 20),
   });
 
   // Update the applyFilters function to include pagination

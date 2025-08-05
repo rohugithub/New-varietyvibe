@@ -18,8 +18,8 @@ import { useWishlist } from "@/contexts/WishlistContext";
 import { CartSidebar } from "./CartSidebar";
 import { AuthModal } from "./AuthModal";
 import { useSession } from "next-auth/react";
-import Logo from "@/public/VarietyVibesLogo-white.png";
 import Image from "next/image";
+import Logo from "@/public/VarietyVibesLogo-white.png"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -81,7 +81,7 @@ export function Header() {
 
   return (
     <>
-      <header className="bg-[#b74d80e0] text-white sticky top-0 z-40">
+      <header className="bg-[#b74d80] text-white sticky top-0 z-40">
         {/* <div className="bg-white w-full py-3 px-10 hidden md:block">
           <div className="container mx-auto px-6 hidden md:block">
             <div className="flex items-center justify-between text-sm text-black">
@@ -128,7 +128,7 @@ export function Header() {
                 variant="ghost"
                 size="icon"
                 onClick={handleCartClick}
-                className="relative text-white hover:bg-blue-600 hover:scale-105 transition-all duration-200"
+                className="relative text-white hover:bg-[#d8689e9a] hover:scale-105 transition-all duration-200"
               >
                 <ShoppingCart className="h-5 w-5" />
                 {cartState.itemCount > 0 && (
@@ -148,7 +148,7 @@ export function Header() {
                   size="icon"
                   className="relative text-white hover:bg-blue-600"
                 >
-                  <Heart className="h-5 w-5" />
+                  <Heart className="h-10 w-10" />
                   {wishlistState.itemCount > 0 && (
                     <Badge className="absolute -top-2 -right-2 bg-red-500 text-white text-xs min-w-[20px] h-5 flex items-center justify-center rounded-full">
                       {wishlistState.itemCount}

@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     const maxPrice = searchParams.get("maxPrice")
     const search = searchParams.get("search")
     const page = Number.parseInt(searchParams.get("page") || "1")
-    const limit = Number.parseInt(searchParams.get("limit") || "12")
+    const limit = Number.parseInt(searchParams.get("limit") || "20")
   
     const query: any = { status: "active" }
 

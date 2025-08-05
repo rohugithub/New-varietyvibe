@@ -7,7 +7,7 @@ import { ResizableSidebar } from "@/components/resizable-sidebar";
 import { SidebarProvider } from "@/components/sidebar-context";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/public/logo-white.png";
+import Logo from "@/public/VarietyVibesLogo-white.png";
 export default async function DashboardLayout({
   children,
 }: {
@@ -23,7 +23,7 @@ export default async function DashboardLayout({
     <SidebarProvider>
       <div className="flex min-h-screen flex-col">
         <header className="sticky top-0 z-40 border-b bg-background">
-          <div className="flex h-16 items-center justify-between px-4 bg-blue-600">
+          <div className="flex h-16 items-center justify-between px-4 bg-[#b74d80e0]">
             <div className="flex items-center gap-2 ">
               <MobileSidebar />
               <Link href="/dashboard" className="hidden sm:inline-block">
